@@ -1,0 +1,13 @@
+{
+  "name": "inaisec-landing-page",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone static landing page for InaiSec.",
+  "scripts": {
+    "start": "npx serve . -l 4173",
+    "serve": "npx serve . -l 4173"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

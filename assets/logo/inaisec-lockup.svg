@@ -1,0 +1,15 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="22 0 220 74" width="440" height="148" role="img" aria-label="InaiSec">
+  <defs>
+    <radialGradient id="il-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#18bbde" stop-opacity="0.65"></stop>
+      <stop offset="1" stop-color="#18bbde" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <ellipse cx="50" cy="20" rx="22" ry="16" fill="url(#il-glow)"></ellipse>
+  <rect x="34" y="32" width="12" height="38" rx="6" fill="#12253a"></rect>
+  <rect x="24" y="66" width="32" height="4" rx="2" fill="#12253a" fill-opacity="0.7"></rect>
+  <circle cx="44" cy="20" r="8" fill="#18bbde"></circle>
+  <circle cx="42" cy="17" r="2.5" fill="#ffffff" fill-opacity="0.8"></circle>
+  <text x="58" y="70" font-family="Manrope, &#39;Manrope Fallback&#39;, -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, sans-serif" font-weight="800" font-size="52" letter-spacing="-2.34" fill="#12253a">naiSec</text>
+</svg>
