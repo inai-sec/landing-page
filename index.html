@@ -25,8 +25,7 @@
     (function () {
       var requestedTheme = new URLSearchParams(window.location.search).get("theme");
       var storedTheme = localStorage.getItem("inaisec-theme");
-      var preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-      var theme = requestedTheme === "light" || requestedTheme === "dark" ? requestedTheme : storedTheme || preferredTheme;
+      var theme = requestedTheme === "light" || requestedTheme === "dark" ? requestedTheme : storedTheme || "dark";
       document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
