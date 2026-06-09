@@ -11,6 +11,8 @@ npx serve . -l 4173
 
 Then open `http://localhost:4173`.
 
+Alternate marketing-page redesign: `http://localhost:4173/marketing.html`.
+
 ## Recommended deployment
 
 Use **Vercel** first. It is the lowest-friction fit for this page:
