@@ -1,6 +1,6 @@
 # InaiSec
 
-InaiSec is the identity-first IR layer for everything after an alert is confirmed. From security incident to disclosure-ready in minutes.
+InaiSec is the identity-first IR layer for everything after an alert is confirmed. From incident to who to notify.
 
 ## Positioning
 
@@ -9,25 +9,42 @@ InaiSec picks up where detection stops. It collects evidence, traces compromised
 ## What InaiSec does for an investigation
 
 - Pulls the evidence needed for an active investigation from the systems involved, on demand.
-- Traces every identity, role, session, and system touched by the compromised credential.
+- Traces the identities, roles, sessions, and systems touched by the compromised credential.
 - Maps blast radius: which systems, which data, which customers, which jurisdictions.
 - Generates obligation timers and notification packets aligned with the regulations that apply.
-- Keeps every step audit-logged and ready for legal, executive, and regulator review.
+- Keeps every call to customer systems audit-logged and ready for legal, executive, and regulator review.
 
 ## Outcomes
 
-- Hours of manual evidence stitching collapse into minutes.
+- Manual evidence stitching collapses into automated retrieval during the investigation.
 - Blast radius is known during the investigation, not after.
 - Legal and the CISO get disclosure-ready findings in stream with the investigation.
 - Credentials used during retrieval are read-only, scoped to the active case, and revocable at any time.
 
+## What is built today
+
+Phase 1 runs today: working software, not a roadmap.
+
+- Evidence collection on demand from cloud, SaaS, identity, and data systems, with no setup work per system.
+- Credential-to-impact investigation: the accounts, sessions, systems, and data a compromised credential touched.
+- Notification readiness across 14 regulations (10 US state breach statutes plus GDPR, SEC, DORA, NIS2) with deadline countdowns.
+- Case management with views for analysts and CISOs.
+- Read-only, revocable, fully logged access to customer systems. The LLM never sees customer credentials.
+- An analyst dashboard: cases, timelines, and blast radius in one view.
+
+Containment is Phase 2 and is not built yet.
+
+## Research
+
+- Product design grounded in primary research: 20 IR practitioner interviews and a competitive analysis of 12 IR platforms.
+
 ## Founder
 
-Kishore Fernando. Founding security engineer at Databricks (2019–2025), where he built the multi-cloud SIEM and IR infrastructure that ran security operations through hypergrowth and was foundational to FedRAMP High and DoD IL5 authorizations. Previously Sr. Manager, Security Software Engineering at Capital One (2014–2019); co-inventor of 4 security patents. LinkedIn: https://www.linkedin.com/in/kishore-p-fernando
+Kishore Fernando. Founding security engineer at Databricks (2019–2025), where he built the multi-cloud SIEM and IR infrastructure that ran security operations through hypergrowth and was foundational to FedRAMP High and DoD IL5 authorizations. Previously Sr. Manager, Security Software Engineering at Capital One (2014–2019). Co-inventor of 4 security patents from prior roles. LinkedIn: https://www.linkedin.com/in/kishore-p-fernando
 
 ## Design partner program
 
-InaiSec is seeking 3 to 5 paid design partners running real identity investigations. Read-only access to IdP and 2-3 cloud or SaaS systems in exchange for direct founder contact, roadmap influence, and founding-partner commercial terms.
+InaiSec is seeking 3 to 5 paid design partners running real credential investigations on the built Phase 1 platform, against the systems they already use. Design partners get scoped, read-only, revocable access arrangements, direct founder contact, and the chance to shape the product as it is built. InaiSec asks for real or tabletop credential investigations to run together, a recurring feedback session, and candor about what works and what does not.
 
 ## Contact
 

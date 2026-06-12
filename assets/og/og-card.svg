@@ -42,12 +42,12 @@
   <text x="80" y="280" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="20" font-weight="700" letter-spacing="2.4" fill="#a8a299" text-transform="uppercase">IDENTITY-FIRST INCIDENT RESPONSE</text>
 
   <!-- Main headline -->
-  <text x="80" y="370" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="72" letter-spacing="-3.6" fill="url(#title-grad)">From security incident to</text>
-  <text x="80" y="450" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="72" letter-spacing="-3.6" fill="url(#title-grad)">disclosure-ready in minutes.</text>
+  <text x="80" y="370" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="72" letter-spacing="-3.6" fill="url(#title-grad)">From incident</text>
+  <text x="80" y="450" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="72" letter-spacing="-3.6" fill="url(#title-grad)">to who to notify.</text>
 
   <!-- Sub copy -->
-  <text x="80" y="520" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="500" font-size="26" fill="#c8c3b9">The identity-first IR layer that bridges</text>
-  <text x="80" y="555" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="500" font-size="26" fill="#c8c3b9">threat detection to disclosure.</text>
+  <text x="80" y="520" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="500" font-size="26" fill="#c8c3b9">The identity-first IR layer for everything after</text>
+  <text x="80" y="555" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="500" font-size="26" fill="#c8c3b9">an alert is confirmed.</text>
 
   <!-- Footer accent line -->
   <rect x="80" y="595" width="40" height="3" rx="1.5" fill="#3dcae6"/>

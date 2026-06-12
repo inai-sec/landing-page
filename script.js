@@ -14,8 +14,10 @@
   window.addEventListener("scroll", updateHeader, { passive: true });
 
   const updateThemeControl = () => {
-    if (!themeToggle) return;
     const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    const themeMeta = document.getElementById("meta-theme-color");
+    if (themeMeta) themeMeta.setAttribute("content", currentTheme === "light" ? "#eef4fa" : "#0e1118");
+    if (!themeToggle) return;
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
     themeToggle.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
   };
