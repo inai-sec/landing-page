@@ -1,35 +1,68 @@
 # InaiSec
 
-InaiSec is the identity-first IR layer for everything after an alert is confirmed. From security incident to disclosure-ready in minutes.
+InaiSec is the incident room for everything after detection. From incident to who to notify:
+on-demand evidence retrieval, blast-radius analysis, and breach-notification readiness — with a
+person approving every decision that matters.
 
 ## Positioning
 
-InaiSec picks up where detection stops. It collects evidence, traces compromised credentials across cloud, SaaS, identity, and data systems, maps blast radius, and prepares disclosure-ready notification evidence. Investigation tools collect logs. Compliance tools tell you who to notify after the fact. InaiSec converges both during the investigation.
+Detection tools confirm that an incident is real. InaiSec runs the work after that point: it
+retrieves evidence from the systems a compromised credential touched, maps the blast radius
+(systems, data, customers, jurisdictions), and drafts who must be notified under which law.
+Humans approve every high-risk decision; the platform keeps the defensible record.
 
 ## What InaiSec does for an investigation
 
-- Pulls the evidence needed for an active investigation from the systems involved, on demand.
-- Traces every identity, role, session, and system touched by the compromised credential.
-- Maps blast radius: which systems, which data, which customers, which jurisdictions.
-- Generates obligation timers and notification packets aligned with the regulations that apply.
-- Keeps every step audit-logged and ready for legal, executive, and regulator review.
+- Retrieves evidence on demand, read-only, from Okta, GitHub, Microsoft Entra ID, Google
+  Workspace, AWS CloudTrail, and Snowflake, plus a configurable connector for custom APIs.
+  Retrieval plans are reviewed and approved by an analyst before they run.
+- Builds the timeline and blast radius: identity resolution, session threading, anomaly and gap
+  markers, credential-to-impact mapping with confirmed/potential confidence levels. Unknown
+  counts render as "pending", never zero.
+- Assesses notification obligations deterministically — a versioned, legally-reviewed rules
+  engine, not an LLM. Four regulations are active today: California Civ. Code §1798.82, New York
+  SHIELD §899-aa, EU GDPR Article 33, and SEC Form 8-K Item 1.05. Jurisdictions outside coverage
+  are flagged as explicit gaps with "obtain local counsel" guidance — never silently dropped.
+- Runs countdown timers only where a statute sets one (GDPR 72 hours; SEC 4 business days from
+  the materiality determination). Where the law says "most expedient time", no countdown is
+  invented.
+- Keeps every step audit-logged: determinations recorded under authenticated principals in
+  append-only tables, a hash-chained case activity log, and an audit entry for every call to a
+  customer system.
 
-## Outcomes
+## Architecture commitments
 
-- Hours of manual evidence stitching collapse into minutes.
-- Blast radius is known during the investigation, not after.
-- Legal and the CISO get disclosure-ready findings in stream with the investigation.
-- Credentials used during retrieval are read-only, scoped to the active case, and revocable at any time.
+- No data lake: evidence is collected at investigation time and purged on case close with a
+  verifiable purge manifest. Logs are never pre-ingested or continuously indexed.
+- The LLM never sees customer credentials. Credentials live in a scoped, encrypted vault
+  (AES-256-GCM), read-only, with revocation that halts in-flight retrievals.
+- The notification engine contains no LLM: same facts in, same obligations out, with citations.
+- Humans own accountable decisions: scope, retrieval approval, impact, materiality, disclosure
+  posture, and communications are explicit human decision checkpoints. InaiSec never dispatches
+  notifications; counsel approves, your team sends, InaiSec records.
+- Containment is deliberately out of scope (Phase 2) and will never be LLM-generated.
+- All regulatory output is decision support, not legal advice.
 
 ## Founder
 
-Kishore Fernando. Founding security engineer at Databricks (2019–2025), where he built the multi-cloud SIEM and IR infrastructure that ran security operations through hypergrowth and was foundational to FedRAMP High and DoD IL5 authorizations. Previously Sr. Manager, Security Software Engineering at Capital One (2014–2019); co-inventor of 4 security patents. LinkedIn: https://www.linkedin.com/in/kishore-p-fernando
+Kishore Fernando. A decade of security infrastructure — first at Capital One, then at
+Databricks as a founding security engineer, where he built the multi-cloud SIEM and IR
+infrastructure that ran security operations through hypergrowth and underpinned Databricks'
+FedRAMP High and DoD IL5 authorizations. Co-inventor of 4 security patents from prior roles.
+LinkedIn: https://www.linkedin.com/in/kishore-p-fernando
 
 ## Design partner program
 
-InaiSec is seeking 3 to 5 paid design partners running real identity investigations. Read-only access to IdP and 2-3 cloud or SaaS systems in exchange for direct founder contact, roadmap influence, and founding-partner commercial terms.
+InaiSec is recruiting 3 to 5 paid design partners: security teams at B2B SaaS, fintech, data,
+or health-tech companies (roughly 500–10,000 people) that hold customer data. The program is a
+staged trust ladder — tabletop session (no production credentials) → sanitized recent-incident
+pilot → read-only real-credential pilot after security readiness gates. Partners get working
+sessions on their own incident, direct founder access, influence over launch connectors and
+workflow, and founding-partner terms. The primary ask: book a 45-minute Incident Room Review
+and bring one incident where impact was hard to determine.
 
 ## Contact
 
 hello@inaisec.ai
+founder@inaisec.ai (direct to the founder)
 https://inaisec.ai

@@ -55,10 +55,14 @@ For Amplify Hosting:
 
 ## Production form note
 
-The current form opens a prefilled email draft to the founder. Before paid traffic, replace it with one of:
+The form POSTs to `/api/contact` (Vercel serverless function, `api/contact.js`) which forwards
+via Resend. Required environment variables in the Vercel project: `RESEND_API_KEY`,
+`CONTACT_FROM`, `CONTACT_TO`. The hidden `website` field is a honeypot — do not rename it.
 
-- Vercel Function writing to Loops, HubSpot, Airtable, or a CRM
-- Formspree or Basin
-- AWS Lambda + API Gateway + SES or DynamoDB
+## Assets
 
-Keep the visible fields minimal: work email and short context.
+- Fonts are self-hosted in `assets/fonts/` (Manrope variable + IBM Plex Mono, OFL-licensed) —
+  no Google Fonts request at runtime.
+- Design tokens mirror `inaisec-design-system/project/colors_and_type.css` (warm charcoal dark
+  default, light theme via the header toggle, persisted to localStorage key `inaisec-theme`).
+- OG card lives in `assets/og/` (`og-render.html` regenerates `og-card.png` at 1200×630).
