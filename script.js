@@ -57,29 +57,6 @@
     });
   }
 
-  // Hero deadline board: the GDPR clock ticks; clocks without a statutory
-  // anchor stay honest and never tick. Static under reduced motion.
-  const countdown = document.querySelector("[data-countdown]");
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (countdown && !reducedMotion) {
-    let remaining = parseInt(countdown.getAttribute("data-countdown"), 10);
-    if (Number.isFinite(remaining)) {
-      const render = () => {
-        const h = Math.floor(remaining / 3600);
-        const m = Math.floor((remaining % 3600) / 60);
-        const s = remaining % 60;
-        countdown.textContent = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-      };
-      render();
-      setInterval(() => {
-        if (remaining > 0) {
-          remaining -= 1;
-          render();
-        }
-      }, 1000);
-    }
-  }
-
   if (form) {
     const submit = form.querySelector("[data-submit]");
     const submitLabel = form.querySelector("[data-submit-label]");

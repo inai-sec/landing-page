@@ -1,68 +1,55 @@
 # InaiSec
 
-InaiSec is the incident room for everything after detection. From incident to who to notify:
-on-demand evidence retrieval, blast-radius analysis, and breach-notification readiness — with a
-person approving every decision that matters.
+InaiSec is the incident room for the stretch after detection: when a security team knows an
+incident is real, but still needs to prove what happened, what was touched, what is unknown,
+who owns the next call, and which notification decisions need accountable human sign-off.
 
 ## Positioning
 
-Detection tools confirm that an incident is real. InaiSec runs the work after that point: it
-retrieves evidence from the systems a compromised credential touched, maps the blast radius
-(systems, data, customers, jurisdictions), and drafts who must be notified under which law.
-Humans approve every high-risk decision; the platform keeps the defensible record.
+Detection tools confirm that something happened. InaiSec focuses on the next room: evidence,
+impact, decision ownership, and the defensible record. It is designed for identity-driven,
+SaaS, cloud, and data incidents where impact is hard to prove and the answer is scattered
+across teams, systems, and memory.
 
-## What InaiSec does for an investigation
+## First review output
 
-- Retrieves evidence on demand, read-only, from Okta, GitHub, Microsoft Entra ID, Google
-  Workspace, AWS CloudTrail, and Snowflake, plus a configurable connector for custom APIs.
-  Retrieval plans are reviewed and approved by an analyst before they run.
-- Builds the timeline and blast radius: identity resolution, session threading, anomaly and gap
-  markers, credential-to-impact mapping with confirmed/potential confidence levels. Unknown
-  counts render as "pending", never zero.
-- Assesses notification obligations deterministically — a versioned, legally-reviewed rules
-  engine, not an LLM. Four regulations are active today: California Civ. Code §1798.82, New York
-  SHIELD §899-aa, EU GDPR Article 33, and SEC Form 8-K Item 1.05. Jurisdictions outside coverage
-  are flagged as explicit gaps with "obtain local counsel" guidance — never silently dropped.
-- Runs countdown timers only where a statute sets one (GDPR 72 hours; SEC 4 business days from
-  the materiality determination). Where the law says "most expedient time", no countdown is
-  invented.
-- Keeps every step audit-logged: determinations recorded under authenticated principals in
-  append-only tables, a hash-chained case activity log, and an audit entry for every call to a
-  customer system.
+The first design-partner review is a working session around one incident, not a product tour.
+The intended output is:
 
-## Architecture commitments
-
-- No data lake: evidence is collected at investigation time and purged on case close with a
-  verifiable purge manifest. Logs are never pre-ingested or continuously indexed.
-- The LLM never sees customer credentials. Credentials live in a scoped, encrypted vault
-  (AES-256-GCM), read-only, with revocation that halts in-flight retrievals.
-- The notification engine contains no LLM: same facts in, same obligations out, with citations.
-- Humans own accountable decisions: scope, retrieval approval, impact, materiality, disclosure
-  posture, and communications are explicit human decision checkpoints. InaiSec never dispatches
-  notifications; counsel approves, your team sends, InaiSec records.
-- Containment is deliberately out of scope (Phase 2) and will never be LLM-generated.
-- All regulatory output is decision support, not legal advice.
-
-## Founder
-
-Kishore Fernando. A decade of security infrastructure — first at Capital One, then at
-Databricks as a founding security engineer, where he built the multi-cloud SIEM and IR
-infrastructure that ran security operations through hypergrowth and underpinned Databricks'
-FedRAMP High and DoD IL5 authorizations. Co-inventor of 4 security patents from prior roles.
-LinkedIn: https://www.linkedin.com/in/kishore-p-fernando
+- Evidence map: systems, logs, owners, and known gaps.
+- Impact questions: identities, applications, data paths, and customer questions marked as
+  confirmed, possible, disputed, or unknown.
+- Decision record: who needs to approve scope, impact, notification posture, and customer
+  language.
+- Partner plan: whether to stop after the review, run a tabletop, or shape a sanitized pilot.
 
 ## Design partner program
 
-InaiSec is recruiting 3 to 5 paid design partners: security teams at B2B SaaS, fintech, data,
-or health-tech companies (roughly 500–10,000 people) that hold customer data. The program is a
-staged trust ladder — tabletop session (no production credentials) → sanitized recent-incident
-pilot → read-only real-credential pilot after security readiness gates. Partners get working
-sessions on their own incident, direct founder access, influence over launch connectors and
-workflow, and founding-partner terms. The primary ask: book a 45-minute Incident Room Review
-and bring one incident where impact was hard to determine.
+InaiSec is recruiting design partners: security and incident response leaders at customer-data
+companies who have handled credential, SaaS, cloud, or data incidents where scope and impact
+were difficult to defend.
+
+The first conversation needs no production credentials. A tabletop, recent incident, or
+sanitized case is enough. The goal is to map the evidence questions, missing systems, decision
+owners, and what an Incident Room would need to prove for that team. A good fit is a team that
+owns incident response for customer-data systems and has felt ambiguity around scope, impact,
+or notification posture.
+
+## What InaiSec is not
+
+- It does not replace SIEM, XDR, containment, or human approval.
+- It does not provide legal advice.
+- It does not require production credentials for the first review.
+- It does not claim full regulatory or product scope on the landing page.
+
+## Founder
+
+Kishore Fernando built security infrastructure at Capital One and Databricks, including IR and
+SIEM tooling for a fast-growing, regulated environment. InaiSec is being shaped with design
+partners rather than behind a closed roadmap.
 
 ## Contact
 
 hello@inaisec.ai
-founder@inaisec.ai (direct to the founder)
+founder@inaisec.ai
 https://inaisec.ai
