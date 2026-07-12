@@ -1,7 +1,9 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=1200, initial-scale=1">
+  <title>InaiSec social card</title>
   <style>
     @font-face {
       font-family: "Manrope";
@@ -9,98 +11,148 @@
       font-weight: 200 800;
       src: url("../fonts/manrope-200-800-latin.woff2") format("woff2");
     }
+
     @font-face {
       font-family: "IBM Plex Mono";
       font-style: normal;
-      font-weight: 600;
-      src: url("../fonts/ibmplexmono-600-latin.woff2") format("woff2");
+      font-weight: 500;
+      src: url("../fonts/ibmplexmono-500-latin.woff2") format("woff2");
     }
+
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: #0e1118; }
+
+    html, body {
+      width: 1200px;
+      height: 630px;
+      margin: 0;
+      overflow: hidden;
+      background: #071019;
+    }
+
     .card {
       width: 1200px;
       height: 630px;
       position: relative;
       overflow: hidden;
-      background:
-        radial-gradient(circle at 85% 10%, rgba(61, 202, 230, 0.14), transparent 55%),
-        radial-gradient(circle at 10% 95%, rgba(148, 144, 240, 0.10), transparent 55%),
-        #0e1118;
-      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: #f0ece6;
-      padding: 70px 80px 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding: 54px 66px 48px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      background: #071019;
+      color: #f1f4f6;
+      font-family: "Manrope", system-ui, sans-serif;
     }
-    .top, .body, .foot { position: relative; z-index: 1; }
-    .logo { display: flex; align-items: center; }
+
+    .ambient {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 58%;
+      opacity: 0.08;
+    }
+
+    .top,
+    .body,
+    .foot {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 188px;
+      height: auto;
+    }
+
+    .body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(410px, 0.92fr);
+      align-items: center;
+      gap: 42px;
+    }
+
     .eyebrow {
-      font-family: 'IBM Plex Mono', ui-monospace, monospace;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      color: #a8a299;
-      text-transform: uppercase;
-      margin: 0 0 26px;
-    }
-    .headline {
-      font-size: 68px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.04;
-      margin: 0 0 30px;
-      max-width: 1020px;
-      color: #f0ece6;
-    }
-    .headline .setup {
-      display: block;
-      color: #7d7770;
-    }
-    .sub {
-      font-size: 27px;
+      margin: 0 0 22px;
+      color: #58def6;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 14px;
       font-weight: 500;
-      color: #c8c3b9;
-      line-height: 1.4;
-      max-width: 960px;
-      margin: 0;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
-    .accent {
-      width: 48px;
-      height: 4px;
-      border-radius: 2px;
-      background: #3dcae6;
+
+    .headline {
+      max-width: 650px;
+      margin: 0;
+      font-size: 61px;
+      font-weight: 480;
+      letter-spacing: -0.045em;
+      line-height: 1.01;
+    }
+
+    .headline span {
+      display: block;
+    }
+
+    .headline .point {
+      color: #a9b4bd;
+    }
+
+    .sub {
+      max-width: 610px;
+      margin: 25px 0 0;
+      color: #a4b0b9;
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .visual {
+      width: 100%;
+      height: auto;
+      mix-blend-mode: screen;
+    }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 18px;
+      border-top: 1px solid rgba(190, 208, 220, 0.2);
+      color: #74838f;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+    }
+
+    .signal {
+      width: 64px;
+      height: 2px;
+      background: #2bd2f3;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="top">
-      <div class="logo">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="22 0 220 74" width="240" height="80" role="img" aria-label="InaiSec">
-          <defs>
-            <radialGradient id="il-glow" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0" stop-color="#3dcae6" stop-opacity="0.65"/>
-              <stop offset="1" stop-color="#3dcae6" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <ellipse cx="50" cy="20" rx="22" ry="16" fill="url(#il-glow)"/>
-          <rect x="34" y="32" width="12" height="38" rx="6" fill="#f0ece6"/>
-          <rect x="24" y="66" width="32" height="4" rx="2" fill="#f0ece6" fill-opacity="0.7"/>
-          <circle cx="44" cy="20" r="8" fill="#3dcae6"/>
-          <circle cx="42" cy="17" r="2.5" fill="#ffffff" fill-opacity="0.8"/>
-          <text x="58" y="70" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="52" letter-spacing="-2.34" fill="#f0ece6">naiSec</text>
-        </svg>
+  <main class="card" aria-label="InaiSec social preview">
+    <img class="ambient" src="../visuals/ambient-grid.webp" alt="">
+    <header class="top">
+      <img class="logo" src="../logo/inaisec-lockup-dark.svg" alt="InaiSec">
+    </header>
+
+    <section class="body">
+      <div>
+        <p class="eyebrow">For the part after detection</p>
+        <h1 class="headline">
+          <span>The alert is clear.</span>
+          <span class="point">The business answer isn&rsquo;t.</span>
+        </h1>
+        <p class="sub">Bring one hard incident. Compare notes with the founder. No production access.</p>
       </div>
-    </div>
-    <div class="body">
-      <p class="eyebrow">Identity-first incident response</p>
-      <h1 class="headline"><span class="setup">Detection found the incident.</span>It did not tell you who to notify.</h1>
-      <p class="sub">The incident room for everything after detection — evidence on demand, blast radius, and who to notify, with a person approving every decision that matters.</p>
-    </div>
-    <div class="foot">
-      <div class="accent"></div>
-    </div>
-  </div>
+      <img class="visual" src="../visuals/handoff-convergence.webp" alt="Four response handoffs converging into a shared decision">
+    </section>
+
+    <footer class="foot">
+      <div class="signal" aria-hidden="true"></div>
+      <span>inaisec.ai</span>
+    </footer>
+  </main>
 </body>
 </html>

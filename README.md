@@ -1,6 +1,6 @@
 # InaiSec Landing Page
 
-Standalone static marketing page for investors, grant reviewers, and design partners.
+Standalone, outcome-led marketing page for prospective design partners.
 
 ## Local preview
 
@@ -65,4 +65,7 @@ via Resend. Required environment variables in the Vercel project: `RESEND_API_KE
   no Google Fonts request at runtime.
 - Design tokens mirror `inaisec-design-system/project/colors_and_type.css` (warm charcoal dark
   default, light theme via the header toggle, persisted to localStorage key `inaisec-theme`).
+- Purposeful motion uses native CSS and IntersectionObserver, with a complete
+  `prefers-reduced-motion` fallback and no animation dependency.
+- Custom visual assets live in `assets/visuals/` and are delivered as compressed WebP files.
 - OG card lives in `assets/og/` (`og-render.html` regenerates `og-card.png` at 1200×630).

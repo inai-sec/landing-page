@@ -1,52 +1,46 @@
 # InaiSec
 
-InaiSec is the incident room for the stretch after detection: when a security team knows an
-incident is real, but still needs to prove what happened, what was touched, what is unknown,
-who owns the next call, and which notification decisions need accountable human sign-off.
+InaiSec is working with security leaders on the difficult stretch after detection: when an
+incident is real, the evidence is fragmented across systems and teams, and the next business
+decision has to be clear enough to defend.
 
 ## Positioning
 
-Detection tools confirm that something happened. InaiSec focuses on the next room: evidence,
-impact, decision ownership, and the defensible record. It is designed for identity-driven,
-SaaS, cloud, and data incidents where impact is hard to prove and the answer is scattered
-across teams, systems, and memory.
+The public story is outcome-led. InaiSec does not use the landing page to declare a finished
+platform, broad integrations, automated legal conclusions, or full regulatory coverage.
 
-## First review output
+The problem being explored is cross-functional decision readiness during serious incidents:
 
-The first design-partner review is a working session around one incident, not a product tour.
-The intended output is:
+- Clarity: known, unknown, disputed, and still missing are visible.
+- Alignment: security, leadership, counsel, and customer teams work from one incident story.
+- Ownership: the next decision has a person, an evidence basis, and a reason.
+- Defensibility: the record still makes sense when customers, a board, or counsel asks why.
 
-- Evidence map: systems, logs, owners, and known gaps.
-- Impact questions: identities, applications, data paths, and customer questions marked as
-  confirmed, possible, disputed, or unknown.
-- Decision record: who needs to approve scope, impact, notification posture, and customer
-  language.
-- Partner plan: whether to stop after the review, run a tabletop, or shape a sanitized pilot.
+## First conversation
 
-## Design partner program
+The first step is a 30-minute founder conversation, not a product tour. A tabletop, realistic
+scenario, or sanitized incident is enough. No production access is required.
 
-InaiSec is recruiting design partners: security and incident response leaders at customer-data
-companies who have handled credential, SaaS, cloud, or data incidents where scope and impact
-were difficult to defend.
+The conversation compares where the incident story fragmented, which decisions carried the
+most risk, and whether a deeper design-partner working session would be useful.
 
-The first conversation needs no production credentials. A tabletop, recent incident, or
-sanitized case is enough. The goal is to map the evidence questions, missing systems, decision
-owners, and what an Incident Room would need to prove for that team. A good fit is a team that
-owns incident response for customer-data systems and has felt ambiguity around scope, impact,
-or notification posture.
+## Design partners
 
-## What InaiSec is not
+InaiSec is looking for security and incident-response leaders at customer-data companies who
+have handled incidents where scope, impact, ownership, or customer communication was difficult
+to defend.
 
-- It does not replace SIEM, XDR, containment, or human approval.
-- It does not provide legal advice.
-- It does not require production credentials for the first review.
-- It does not claim full regulatory or product scope on the landing page.
+## Boundaries
+
+- InaiSec does not replace detection, containment, counsel, or human approval.
+- InaiSec does not provide legal advice.
+- No production credentials are needed for a first conversation.
+- Public copy avoids unsupported product, regulatory, performance, and integration claims.
 
 ## Founder
 
-Kishore Fernando built security infrastructure at Capital One and Databricks, including IR and
-SIEM tooling for a fast-growing, regulated environment. InaiSec is being shaped with design
-partners rather than behind a closed roadmap.
+Kishore Fernando built security infrastructure at Capital One and Databricks. InaiSec is being
+shaped through direct conversations with practitioners and prospective design partners.
 
 ## Contact
 
