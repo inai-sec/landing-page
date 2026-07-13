@@ -2379,29 +2379,9 @@ h3 {
 /* --- HUMAN TOUCH ENHANCEMENTS --- */
 
 /* 1. Subtle Ambient Glow in the background */
-html[data-theme="dark"] body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: radial-gradient(circle at 50% -20%, rgba(46, 203, 227, 0.08) 0%, rgba(14, 17, 24, 0) 60%);
-  pointer-events: none;
-  z-index: -1;
-}
 
-html[data-theme="light"] body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: radial-gradient(circle at 50% -20%, rgba(46, 203, 227, 0.12) 0%, rgba(249, 250, 251, 0) 60%);
-  pointer-events: none;
-  z-index: -1;
-}
+
+
 
 /* 2. Soft, organic bouncy hover states */
 .tension-card, .outcome-row, .pressure-item {
@@ -2455,46 +2435,18 @@ html[data-theme="light"] {
   --text-muted: #5e6673;
 }
 
-/* --- VISUAL POLISH & ALIGNMENT FIXES --- */
+/* --- ALIGNMENT & SPACING FIXES --- */
 
-/* 1. Page Dividers & Spacing */
 .section {
-  min-height: 100vh; /* Make each section fill the screen */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 120px 0 !important; /* Equal spacing */
+  padding: 140px 0 !important;
 }
 
-/* Ensure sections alternate with a visible divider */
 .section-band {
   border-top: 1px solid var(--border-strong, rgba(255,255,255,0.05));
   border-bottom: 1px solid var(--border-strong, rgba(255,255,255,0.05));
   background: var(--bg-surface, rgba(255,255,255,0.02));
 }
 
-/* 2. Grid Background */
-html[data-theme="dark"] body {
-  background-color: #0e1118 !important;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px) !important;
-  background-size: 64px 64px !important;
-}
-
-html[data-theme="light"] body {
-  background-color: #f9fafb !important;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px) !important;
-  background-size: 64px 64px !important;
-}
-
-/* Remove the organic radial glow that conflicted with the grid */
-html[data-theme="dark"] body::before,
-html[data-theme="light"] body::before {
-  display: none !important;
-}
-
-/* 3. Problem Section - Tension Grid */
 .tension-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr) !important;
@@ -2503,11 +2455,10 @@ html[data-theme="light"] body::before {
 }
 .tension-card {
   padding: 32px 24px !important;
-  height: auto !important; /* Prevent boxes from being 'toooooo big' vertically */
+  height: auto !important;
   min-height: 0 !important;
 }
 
-/* 4. Outcomes Section - Offer Layout */
 .offer-layout {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
@@ -2518,6 +2469,7 @@ html[data-theme="light"] body::before {
   display: flex !important;
   flex-direction: column !important;
   gap: 24px !important;
+  align-items: flex-start !important;
 }
 .offer-visual {
   justify-self: end !important;
@@ -2528,13 +2480,12 @@ html[data-theme="light"] body::before {
   border-radius: 16px !important;
   box-shadow: 0 24px 80px rgba(0,0,0,0.2) !important;
 }
-/* Fix hover highlight overflow in outcomes */
 .outcome-row {
-  margin: 0 !important; /* Remove negative margin that caused overflow */
+  margin: 0 !important;
   padding: 16px 20px !important;
+  width: 100% !important;
 }
 
-/* 5. Why Now Section - Pressure Grid */
 .pressure-grid {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
@@ -2547,7 +2498,6 @@ html[data-theme="light"] body::before {
   padding: 32px 24px !important;
 }
 
-/* 6. Founder Section */
 .founder-layout {
   display: flex !important;
   align-items: center !important;
@@ -2559,6 +2509,7 @@ html[data-theme="light"] body::before {
   display: flex !important;
   flex-direction: column !important;
   gap: 24px !important;
+  align-items: flex-start !important;
 }
 .founder-photo {
   flex-shrink: 0 !important;
@@ -2570,30 +2521,68 @@ html[data-theme="light"] body::before {
   border-radius: 12px !important;
 }
 
-/* 7. Mobile/Responsive Expansion */
 @media (max-width: 1024px) {
-  .tension-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .offer-layout, .founder-layout {
-    grid-template-columns: 1fr !important;
-    flex-direction: column !important;
-  }
-  .founder-photo {
-    width: 100% !important;
-    max-width: 500px !important;
-  }
-  .offer-visual {
-    justify-self: center !important;
-  }
+  .tension-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .offer-layout, .founder-layout { grid-template-columns: 1fr !important; flex-direction: column !important; }
+  .founder-photo { width: 100% !important; max-width: 500px !important; }
+  .offer-visual { justify-self: center !important; }
 }
 
 @media (max-width: 768px) {
-  .section {
-    min-height: auto !important;
-    padding: 80px 0 !important;
-  }
-  .tension-grid, .pressure-grid {
-    grid-template-columns: 1fr !important;
-  }
+  .section { min-height: auto !important; padding: 80px 0 !important; }
+  .tension-grid, .pressure-grid { grid-template-columns: 1fr !important; }
+}
+
+/* --- HUMAN TOUCH ENHANCEMENTS (RE-APPLIED) --- */
+
+/* Soft, organic bouncy hover states */
+.tension-card, .outcome-row, .pressure-item {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, background-color 0.4s ease !important;
+}
+
+.tension-card:hover {
+  transform: translateY(-6px) rotate(-0.5deg) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25), 0 0 30px rgba(46, 203, 227, 0.08) !important;
+}
+
+.outcome-row:hover {
+  transform: translateX(8px) scale(1.02) !important;
+}
+
+.pressure-item:hover {
+  transform: translateY(-4px) rotate(0.5deg) !important;
+}
+
+/* Subtle hand-drawn border effect on some elements */
+.tension-card {
+  border-radius: 16px 14px 18px 15px !important; /* Slightly imperfect radius */
+}
+
+/* Soft Text Highlight / Marker effect for emphasis */
+.hero-lede strong, .section-copy strong {
+  position: relative;
+  font-weight: 600;
+  z-index: 1;
+}
+.hero-lede strong::after, .section-copy strong::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -2%;
+  width: 104%;
+  height: 30%;
+  background: rgba(46, 203, 227, 0.2);
+  z-index: -1;
+  border-radius: 2px;
+  transform: rotate(-1deg);
+}
+
+/* Softer text colors - less harsh contrast */
+html[data-theme="dark"] {
+  --text: #e2e4e8;
+  --text-muted: #949ba6;
+}
+html[data-theme="light"] {
+  --text: #1a1e26;
+  --text-muted: #5e6673;
 }
