@@ -3,31 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>InaiSec — The business answer after detection</title>
-  <meta name="description" content="When a serious incident crosses systems and teams, the business answer gets harder to defend. Talk through one hard incident with InaiSec founder Kishore Fernando.">
+  <title>InaiSec — Picks up where detection stops</title>
+  <meta name="description" content="InaiSec is the identity-first IR layer for everything after an alert is confirmed: evidence, credential tracing, blast radius, and notification readiness.">
   <meta id="meta-theme-color" name="theme-color" content="#071019">
   <link rel="canonical" href="https://inaisec.ai/">
 
-  <meta property="og:title" content="InaiSec — The business answer after detection">
-  <meta property="og:description" content="Bring one hard incident. Compare where the facts fragmented and what made the next decision difficult.">
+  <meta property="og:title" content="InaiSec — Picks up where detection stops">
+  <meta property="og:description" content="Identity-first incident response for the work after an alert is confirmed.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://inaisec.ai/">
   <meta property="og:site_name" content="InaiSec">
-  <meta property="og:image" content="https://inaisec.ai/assets/og/og-card.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://inaisec.ai/assets/og/og-card-v2.png">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:alt" content="InaiSec — The alert is clear. The business answer isn't.">
+  <meta property="og:image:alt" content="InaiSec — Picks up where detection stops">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://inaisec.ai/assets/og/og-card.png">
-  <meta name="twitter:image:alt" content="InaiSec — The alert is clear. The business answer isn't.">
+  <meta name="twitter:image" content="https://inaisec.ai/assets/og/og-card-v2.png">
+  <meta name="twitter:image:alt" content="InaiSec — Picks up where detection stops">
 
   <link rel="icon" type="image/svg+xml" href="./assets/logo/inaisec-mark.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/logo/favicon-32.png">
   <link rel="apple-touch-icon" href="./assets/logo/apple-touch-icon.png">
   <link rel="preload" href="./assets/fonts/manrope-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./assets/fonts/ibmplexmono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="./assets/visuals/option-1-signal-map.png" as="image" type="image/png">
 
   <script>
     (function () {
@@ -40,10 +39,10 @@
         : storedTheme || "dark";
       document.documentElement.setAttribute("data-theme", theme);
       var meta = document.currentScript.parentNode.querySelector("#meta-theme-color");
-      if (meta) meta.setAttribute("content", theme === "light" ? "#edf2f7" : "#071019");
+      if (meta) meta.setAttribute("content", theme === "light" ? "#eef4fa" : "#071019");
     })();
   </script>
-  <link rel="stylesheet" href="./styles.css?v=20260710-option1">
+  <link rel="stylesheet" href="./styles.css?v=20260713-content">
 
   <script type="application/ld+json">
   {
@@ -51,7 +50,7 @@
     "@type": "Organization",
     "name": "InaiSec",
     "url": "https://inaisec.ai",
-    "description": "InaiSec helps security leaders make better decisions in the difficult stretch after detection.",
+    "description": "InaiSec is the identity-first IR layer for everything after an alert is confirmed.",
     "founder": {
       "@type": "Person",
       "name": "Kishore Prabakaran Fernando",
@@ -84,123 +83,205 @@
       </button>
 
       <div class="nav-links" id="site-menu" data-nav-menu>
+        <a href="#problem">Problem</a>
         <a href="#outcomes">Outcomes</a>
-        <a href="#how-it-works">How it works</a>
+        <a href="#why-now">Why now</a>
         <a href="#founder">Founder</a>
         <details class="nav-faq" data-nav-faq>
           <summary>FAQ</summary>
           <div class="faq-popover">
-            <p><strong>What should I bring?</strong> One real, realistic, or sanitized incident.</p>
-            <p><strong>Do you need access?</strong> No production credentials or integrations.</p>
-            <p><strong>Is this legal advice?</strong> No. InaiSec supports decisions; it does not replace counsel.</p>
+            <p><strong>What should I bring?</strong> A realistic tabletop or a non-identifying incident story.</p>
+            <p><strong>Do you need access?</strong> Not for the first conversation or tabletop.</p>
+            <p><strong>Is this legal advice?</strong> No. InaiSec supports the decision record; it does not replace counsel.</p>
           </div>
         </details>
         <button class="theme-toggle" type="button" aria-label="Switch to light theme" data-theme-toggle>
-          <img src="./assets/icons/theme-sun.svg" alt="" aria-hidden="true">
+          <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5A7 7 0 1 0 20.5 14.5Z"></path>
+          </svg>
         </button>
-        <a class="btn btn-small btn-primary" href="#contact">Talk through one hard incident</a>
+        <a class="btn btn-small btn-primary" href="#join">Join design partner program</a>
       </div>
     </nav>
   </header>
 
   <main id="main">
     <section class="hero shell" id="top" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow hero-enter hero-enter-1">For the part after detection</p>
-        <h1 id="hero-title" class="hero-enter hero-enter-2">
-          <span>The alert is clear.</span>
-          <span class="hero-point">The business<br>answer isn&rsquo;t.</span>
+      <div class="hero-copy hero-enter hero-enter-1">
+        <p class="eyebrow">Identity-first incident response</p>
+        <h1 id="hero-title">
+          <span class="title-desktop">Picks up where detection stops.</span>
+          <span class="title-mobile">Picks up<br>where<br>detection<br>stops.</span>
         </h1>
-        <p class="hero-lede hero-enter hero-enter-3">
-          When a serious incident crosses identity, cloud,<br>
-          customer data, and counsel, the evidence<br>
-          fragments&mdash;and the next decision gets harder<br>
-          to defend.
+        <p class="hero-lede">
+          InaiSec is the identity-first IR layer for everything after an alert is confirmed:
+          collect evidence, trace the compromised credential, map blast radius, and prepare who
+          must be notified.
         </p>
-        <div class="hero-actions hero-enter hero-enter-4">
-          <a class="btn btn-primary" href="#contact">Talk through one hard incident</a>
+        <div class="hero-actions" aria-label="Primary actions">
+          <a class="btn btn-primary" href="#join">
+            <span>Join design partner program</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
         </div>
-        <p class="trust-line hero-enter hero-enter-4">
-          30 minutes with the founder &middot; tabletop or<br>
-          sanitized &middot; no production access
+        <p class="hero-trust">
+          Built by a founding security engineer from Databricks. Previously Capital One.
+          Co-inventor of 4 security patents.
         </p>
       </div>
 
-      <figure class="signal-figure hero-enter hero-enter-3">
-        <div class="signal-stage" data-signal-stage>
-          <img
-            class="signal-base"
-            src="./assets/visuals/option-1-signal-map.png"
-            alt="Incident response, leadership, legal, and customer evidence converging into shared facts, unknowns, ownership, and a decision"
-            width="450"
-            height="358"
-            data-signal-map
-          >
+      <aside class="hero-stage hero-enter hero-enter-3" aria-label="Incident response workflow preview">
+        <div class="case-card">
+          <div class="case-card-top">
+            <div>
+              <p class="eyebrow">Live investigation</p>
+              <h2>
+                <span>Compromised identity</span>
+                <span>to notification packet</span>
+              </h2>
+            </div>
+            <span class="pill pill-red">Investigating</span>
+          </div>
+          <div class="case-flow">
+            <div class="flow-node">
+              <span class="node-id">01</span>
+              <strong>Alert confirmed</strong>
+              <small>Detection says the event is real.</small>
+            </div>
+            <div class="flow-line"></div>
+            <div class="flow-node flow-node-active">
+              <span class="node-id">02</span>
+              <strong>Identity traced</strong>
+              <small>Okta, AWS, Snowflake, and SaaS activity stitched live.</small>
+            </div>
+            <div class="flow-line"></div>
+            <div class="flow-node flow-node-next">
+              <span class="node-id">03</span>
+              <strong>Disclosure ready</strong>
+              <small>Jurisdictions, timers, customers, and evidence packet.</small>
+            </div>
+          </div>
         </div>
-      </figure>
+      </aside>
     </section>
 
-    <section class="outcomes section" id="outcomes" aria-labelledby="outcomes-title">
-      <div class="signal-rule" aria-hidden="true"><span></span></div>
-      <div class="shell outcomes-intro">
-        <h2 id="outcomes-title">One incident.<br>Four versions of the truth.</h2>
-        <p>
-          Every team sees part of it. None have all of it.<br>
-          Decisions made in that gap create risk,<br>
-          delay, and exposure.
-        </p>
+    <section class="problem section" id="problem" aria-labelledby="problem-title">
+      <div class="shell problem-layout" data-reveal>
+        <div>
+          <p class="eyebrow">The problem</p>
+          <h2 id="problem-title">One incident.<br>Four versions of the truth.</h2>
+        </div>
+        <div>
+          <p class="section-copy">
+            Detection can confirm that an alert is real. It rarely answers what the business needs to decide next. Analysts still pull evidence from identity, cloud, SaaS, tickets, and notes; leadership, counsel, and customer teams enter the conversation with only part of the story.
+          </p>
+          <p class="section-copy problem-follow-up">By the time those views meet, the next call often has to be made before the picture is complete.</p>
+        </div>
       </div>
+      <div class="shell tension-grid" data-reveal>
+        <article class="tension-card">
+          <span class="tension-index">01</span>
+          <h3>Evidence</h3>
+          <p>What do we know, and what is still missing or disputed?</p>
+        </article>
+        <article class="tension-card">
+          <span class="tension-index">02</span>
+          <h3>Impact</h3>
+          <p>What could this mean for systems, customers, and the business?</p>
+        </article>
+        <article class="tension-card">
+          <span class="tension-index">03</span>
+          <h3>Decision</h3>
+          <p>Who owns the next call, and what evidence is enough to make it?</p>
+        </article>
+        <article class="tension-card">
+          <span class="tension-index">04</span>
+          <h3>Record</h3>
+          <p>Can we explain why we made that call later?</p>
+        </article>
+      </div>
+    </section>
 
-      <div class="shell outcome-grid" id="how-it-works" aria-label="Business outcomes">
-        <article class="outcome">
-          <img class="outcome-icon" src="./assets/icons/clarity-approved.png" alt="" aria-hidden="true">
-          <h3>Clarity</h3>
-          <span class="outcome-accent" aria-hidden="true"></span>
-          <p>We turn fragments into a shared<br>picture: what happened,<br>what we know, and what<br>remains unknown.</p>
-          <p class="outcome-result">Outcome: confidence in the facts</p>
-          <span class="outcome-tail" aria-hidden="true"></span>
+    <section class="offer section" id="outcomes" aria-labelledby="outcomes-title">
+      <div class="shell offer-layout">
+        <div class="offer-copy" data-reveal>
+          <p class="eyebrow">What we&rsquo;re building around</p>
+          <h2 id="outcomes-title">Make the next decision easier to stand behind.</h2>
+          <p class="section-copy">
+            InaiSec is being shaped with security leaders around the point where a technical investigation becomes a business decision. The goal is not another alerting surface. It is a shared incident story that helps the people in the room move with more confidence.
+          </p>
+          <div class="outcome-rows" aria-label="The outcomes InaiSec is being shaped around">
+            <article class="outcome-row">
+              <img src="./assets/icons/clarity-approved.png" alt="" aria-hidden="true">
+              <div><h3>Clarity</h3><p>Make what is known, missing, stale, or disputed visible.</p></div>
+            </article>
+            <article class="outcome-row">
+              <img src="./assets/icons/alignment-approved.png" alt="" aria-hidden="true">
+              <div><h3>Alignment</h3><p>Give security, leadership, counsel, and customer teams one incident story to work from.</p></div>
+            </article>
+            <article class="outcome-row">
+              <img src="./assets/icons/ownership-approved.png" alt="" aria-hidden="true">
+              <div><h3>Ownership</h3><p>Make the next decision, its owner, and its evidence basis explicit.</p></div>
+            </article>
+            <article class="outcome-row">
+              <img src="./assets/icons/defensibility-approved.png" alt="" aria-hidden="true">
+              <div><h3>Defensibility</h3><p>Leave a record that explains why the call was made when it was.</p></div>
+            </article>
+          </div>
+          <p class="boundary-line">This work is meant to support detection, containment, counsel, and human approval—not replace them.</p>
+        </div>
+        <figure class="offer-visual" data-reveal>
+          <img src="./assets/visuals/handoff-convergence.webp" alt="Multiple incident-response perspectives converging into a shared decision">
+        </figure>
+      </div>
+    </section>
+
+    <section class="why-now section" id="why-now" aria-labelledby="why-now-title">
+      <div class="shell why-now-layout" data-reveal>
+        <div>
+          <p class="eyebrow">Why now</p>
+          <h2 id="why-now-title">The clock starts before the picture is complete.</h2>
+        </div>
+        <div>
+          <p class="section-copy">
+            A single credential incident can now cross identity, cloud, SaaS, data, customer operations, and counsel in hours. AI and automation can accelerate the gathering of facts, but they do not carry the accountability for a customer, legal, or business decision.
+          </p>
+          <p class="section-copy why-now-follow-up">The people accountable for the next move still need shared evidence, clear ownership, and a record they can explain.</p>
+        </div>
+      </div>
+      <div class="shell pressure-grid" data-reveal>
+        <article class="pressure-item">
+          <span>01</span>
+          <h3>More surface area</h3>
+          <p>One incident rarely stays in one system or one team.</p>
         </article>
-        <article class="outcome">
-          <img class="outcome-icon" src="./assets/icons/alignment-approved.png" alt="" aria-hidden="true">
-          <h3>Alignment</h3>
-          <span class="outcome-accent" aria-hidden="true"></span>
-          <p>We align incident, leadership,<br>and legal on the same<br>understanding and the<br>next right move.</p>
-          <p class="outcome-result">Outcome: one team, one direction</p>
-          <span class="outcome-tail" aria-hidden="true"></span>
+        <article class="pressure-item">
+          <span>02</span>
+          <h3>More automated input</h3>
+          <p>Faster findings do not automatically create a clearer decision.</p>
         </article>
-        <article class="outcome">
-          <img class="outcome-icon" src="./assets/icons/ownership-approved.png" alt="" aria-hidden="true">
-          <h3>Ownership</h3>
-          <span class="outcome-accent" aria-hidden="true"></span>
-          <p>We define who owns each<br>decision and the evidence<br>needed to move it forward.</p>
-          <p class="outcome-result">Outcome: clear ownership, clean handoffs</p>
-          <span class="outcome-tail" aria-hidden="true"></span>
-        </article>
-        <article class="outcome">
-          <img class="outcome-icon" src="./assets/icons/defensibility-approved.png" alt="" aria-hidden="true">
-          <h3>Defensibility</h3>
-          <span class="outcome-accent" aria-hidden="true"></span>
-          <p>We shape the record and<br>rationale so you can<br>stand behind the call<br>you make.</p>
-          <p class="outcome-result">Outcome: decisions you can defend</p>
-          <span class="outcome-tail" aria-hidden="true"></span>
+        <article class="pressure-item">
+          <span>03</span>
+          <h3>More scrutiny</h3>
+          <p>Customers, leadership, and counsel need to understand the reasoning, not just the result.</p>
         </article>
       </div>
     </section>
 
     <section class="founder section" id="founder" aria-labelledby="founder-title">
-      <div class="shell founder-layout">
+      <div class="shell founder-layout" data-reveal>
         <div class="founder-copy">
-          <p class="eyebrow eyebrow-violet">Founder-led</p>
-          <h2 id="founder-title">Let&rsquo;s talk about<br>one hard incident.</h2>
+          <p class="eyebrow eyebrow-violet">About the founder</p>
+          <h2 id="founder-title">&ldquo;Built by a practitioner.&rdquo;</h2>
           <p>
-            I&rsquo;m Kishore Fernando. I started InaiSec to help security<br>
-            leaders make better decisions in the part after detection&mdash;<br>
-            where the business, legal, and technical realities collide.
+            Across more than a decade of security engineering at Capital One and Databricks, including building the multi-cloud SIEM and IR infrastructure that ran through Databricks&rsquo; hypergrowth, one pattern stayed constant: IR teams doing world-class work on top of fragmented evidence and manual correlation.
           </p>
           <p>
-            Bring me one incident that&rsquo;s still open in your head.<br>
-            I&rsquo;ll listen, ask better questions, and share what I&rsquo;d do<br>
-            in your shoes.
+            InaiSec is built for that gap. It provides the speed and precision of automated identity tracing combined with the flexibility required for complex, modern environments.
           </p>
           <div class="founder-signoff">
             <img class="founder-signature" src="./assets/founder/kishore-signature.png" alt="Kishore">
@@ -215,35 +296,75 @@
       </div>
     </section>
 
-    <section class="contact section" id="contact" aria-labelledby="contact-title">
-      <div class="shell contact-layout">
-        <div class="contact-copy">
-          <h2 id="contact-title">Bring the incident<br>you still think about.</h2>
-          <p>Start a first conversation. No decks. No access.<br>Just a clear head and a useful discussion.</p>
+    <section class="program section" id="join" aria-labelledby="join-title">
+      <div class="shell program-heading" data-reveal>
+        <p class="eyebrow">Join the design partner program</p>
+        <h2 id="join-title">Help shape the IR platform that should exist.</h2>
+        <p class="section-copy">
+          InaiSec is looking for 3 to 5 paid design partners running real investigations against the systems they already use. Send a short note with your role, company, current IR tools, and the incidents you want InaiSec to help scope.
+        </p>
+      </div>
+      <div class="shell program-layout" data-reveal>
+        <div class="partner-benefits">
+          <h3>Design partners get</h3>
+          <ul class="benefit-list">
+            <li>Full blast radius in minutes, not days</li>
+            <li>One surface for cases, evidence, and communication</li>
+            <li>Shape the product as it is built</li>
+          </ul>
         </div>
-
-        <form class="contact-form" data-contact-form novalidate>
-          <label for="email">Work email</label>
-          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="name@company.com" required>
-
-          <label for="message">What's top of mind?</label>
-          <textarea id="message" name="message" rows="2" minlength="10" maxlength="4000" placeholder="A few lines about the incident and what&#10;you&rsquo;re trying to decide." required></textarea>
-
-          <div class="honeypot" aria-hidden="true">
-            <label for="website">Website</label>
-            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-          </div>
-
-          <button class="btn btn-primary btn-submit" type="submit" data-submit>
-            <span data-submit-label>Talk through one hard incident</span>
+        <form class="contact-form partner-form" data-contact-form novalidate>
+          <label>
+            Work email
+            <input name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+          </label>
+          <label>
+            What should we look at together?
+            <textarea name="message" rows="4" placeholder="We investigate credential incidents across Okta, AWS, Snowflake..." required minlength="10"></textarea>
+          </label>
+          <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-primary" type="submit" data-submit>
+            <span data-submit-label>Contact us</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
-          <p class="trust-line form-trust">
-            <span>30 minutes with the founder</span>
-            <span>tabletop or sanitized</span>
-            <span>no production access</span>
-          </p>
           <p class="form-status" id="form-status" data-form-status role="status" aria-live="polite"></p>
         </form>
+      </div>
+    </section>
+
+    <section class="faq section" id="faq" aria-labelledby="faq-title">
+      <div class="shell faq-layout" data-reveal>
+        <div class="faq-intro">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Straight answers before we talk.</h2>
+          <p class="section-copy">A first conversation should make the next step clearer, not ask you to take a leap of faith.</p>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>Is this another AI SOC or detection tool?</summary>
+            <p>No. Detection matters, but this conversation starts once a signal is confirmed and people need to align on facts, impact, ownership, and the next decision.</p>
+          </details>
+          <details>
+            <summary>Do we have to replace our existing stack?</summary>
+            <p>No. InaiSec is not a replacement for detection, containment, counsel, or human approval.</p>
+          </details>
+          <details>
+            <summary>Do you need our data or production credentials?</summary>
+            <p>Not for a first conversation or tabletop. A spoken, non-identifying incident story or realistic scenario is enough; we do not ask for a data upload or production access.</p>
+          </details>
+          <details>
+            <summary>Is this legal advice?</summary>
+            <p>No. The focus is a clearer decision record and better cross-functional coordination. Legal conclusions remain with your counsel.</p>
+          </details>
+          <details>
+            <summary>Who is this most useful for?</summary>
+            <p>Security and incident-response leaders at customer-data companies who have lived an incident where scope, impact, ownership, or customer communication was hard to defend.</p>
+          </details>
+          <details>
+            <summary>What does a design partner do?</summary>
+            <p>If there is a fit after the first conversation, we may invite you to a deeper working session around a realistic tabletop. The purpose is to shape the workflow and decide together whether a paid design partnership makes sense.</p>
+          </details>
+        </div>
       </div>
     </section>
   </main>
@@ -251,13 +372,14 @@
   <footer class="site-footer">
     <div class="shell footer-layout">
       <p>&copy; 2026 InaiSec, Inc. All rights reserved.</p>
-      <div class="footer-links" aria-label="Legal information">
+      <div class="footer-links" aria-label="Footer links">
+        <a href="mailto:hello@inaisec.ai">Contact</a>
         <span>Privacy</span>
         <span>Terms</span>
       </div>
     </div>
   </footer>
 
-  <script src="./script.js?v=20260710-option1" defer></script>
+  <script src="./script.js?v=20260713-content" defer></script>
 </body>
 </html>

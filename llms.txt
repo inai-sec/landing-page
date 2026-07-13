@@ -1,13 +1,14 @@
 # InaiSec
 
-InaiSec is working with security leaders on the difficult stretch after detection: when an
-incident is real, the evidence is fragmented across systems and teams, and the next business
-decision has to be clear enough to defend.
+InaiSec is the identity-first incident-response layer for the work after an alert is confirmed:
+collect evidence, trace the compromised credential, map blast radius, and prepare who must be
+notified.
 
 ## Positioning
 
-The public story is outcome-led. InaiSec does not use the landing page to declare a finished
-platform, broad integrations, automated legal conclusions, or full regulatory coverage.
+The public story combines this product direction with the business outcome: after detection,
+the incident evidence is fragmented across systems and teams, and the next business decision
+has to be clear enough to defend.
 
 The problem being explored is cross-functional decision readiness during serious incidents:
 
@@ -18,29 +19,27 @@ The problem being explored is cross-functional decision readiness during serious
 
 ## First conversation
 
-The first step is a 30-minute founder conversation, not a product tour. A tabletop, realistic
-scenario, or sanitized incident is enough. No production access is required.
-
-The conversation compares where the incident story fragmented, which decisions carried the
-most risk, and whether a deeper design-partner working session would be useful.
+The landing page invites prospective design partners to contact InaiSec with their role,
+company, current IR tools, and the incidents they want help scoping.
 
 ## Design partners
 
-InaiSec is looking for security and incident-response leaders at customer-data companies who
-have handled incidents where scope, impact, ownership, or customer communication was difficult
-to defend.
+InaiSec is looking for 3 to 5 paid design partners running real investigations against the
+systems they already use. The stated partner benefits are full blast radius in minutes rather
+than days, one surface for cases, evidence, and communication, and a chance to shape the
+product as it is built.
 
 ## Boundaries
 
 - InaiSec does not replace detection, containment, counsel, or human approval.
 - InaiSec does not provide legal advice.
-- No production credentials are needed for a first conversation.
-- Public copy avoids unsupported product, regulatory, performance, and integration claims.
 
 ## Founder
 
-Kishore Fernando built security infrastructure at Capital One and Databricks. InaiSec is being
-shaped through direct conversations with practitioners and prospective design partners.
+Kishore Fernando has more than a decade of security engineering experience at Capital One and
+Databricks, including multi-cloud SIEM and incident-response infrastructure through Databricks'
+hypergrowth. The landing page describes InaiSec as bringing automated identity tracing to
+complex, modern environments.
 
 ## Contact
 

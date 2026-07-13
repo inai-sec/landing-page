@@ -10,6 +10,7 @@
   const signalMap = document.querySelector("[data-signal-map]");
   const form = document.querySelector("[data-contact-form]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
 
   const updateHeader = () => {
     if (header) header.classList.toggle("is-scrolled", window.scrollY > 12);
@@ -22,7 +23,7 @@
     const theme = root.getAttribute("data-theme") || "dark";
     const nextTheme = theme === "dark" ? "light" : "dark";
     if (themeToggle) themeToggle.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
-    if (themeMeta) themeMeta.setAttribute("content", theme === "light" ? "#edf2f7" : "#071019");
+    if (themeMeta) themeMeta.setAttribute("content", theme === "light" ? "#eef4fa" : "#071019");
   };
 
   updateThemeControl();
@@ -62,7 +63,7 @@
     });
 
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 680 && navMenu.classList.contains("is-open")) closeNavigation();
+      if (window.innerWidth > 1080 && navMenu.classList.contains("is-open")) closeNavigation();
     });
   }
 
@@ -88,6 +89,28 @@
   };
 
   enableMotion();
+
+  const enableReveals = () => {
+    if (!revealItems.length || reducedMotion.matches) return;
+
+    if (!("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-revealed"));
+      return;
+    }
+
+    root.classList.add("reveal-ready");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -32px" });
+
+    revealItems.forEach((item) => observer.observe(item));
+  };
+
+  enableReveals();
 
   if (!form) return;
 
