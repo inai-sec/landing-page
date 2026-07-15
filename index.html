@@ -87,14 +87,7 @@
         <a href="#outcomes">Outcomes</a>
         <a href="#why-now">Why now</a>
         <a href="#founder">Founder</a>
-        <details class="nav-faq" data-nav-faq>
-          <summary>FAQ</summary>
-          <div class="faq-popover">
-            <p><strong>What should I bring?</strong> A realistic tabletop or a non-identifying incident story.</p>
-            <p><strong>Do you need access?</strong> Not for the first conversation or tabletop.</p>
-            <p><strong>Is this legal advice?</strong> No. InaiSec supports the decision record; it does not replace counsel.</p>
-          </div>
-        </details>
+        <a href="#faq">FAQ</a>
         <button class="theme-toggle" type="button" aria-label="Switch to light theme" data-theme-toggle>
           <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="4"></circle>
@@ -169,7 +162,7 @@
       </aside>
     </section>
 
-    <section class="problem section" id="problem" aria-labelledby="problem-title">
+    <section class="problem section section-band" id="problem" aria-labelledby="problem-title">
       <div class="shell problem-layout" data-reveal>
         <div>
           <p class="eyebrow">The problem</p>
@@ -207,35 +200,35 @@
     </section>
 
     <section class="offer section" id="outcomes" aria-labelledby="outcomes-title">
-      <div class="shell offer-layout">
-        <div class="offer-copy" data-reveal>
-          <p class="eyebrow">What we&rsquo;re building around</p>
-          <h2 id="outcomes-title">Make the next decision easier to stand behind.</h2>
-          <p class="section-copy">
-            InaiSec is being shaped with security leaders around the point where a technical investigation becomes a business decision. The goal is not another alerting surface. It is a shared incident story that helps the people in the room move with more confidence.
-          </p>
-          <div class="outcome-rows" aria-label="The outcomes InaiSec is being shaped around">
+      <div class="shell offer-intro section-head section-head-centered" data-reveal>
+        <p class="eyebrow">What we&rsquo;re building around</p>
+        <h2 id="outcomes-title">Make the next decision easier to stand behind.</h2>
+        <p class="section-copy">
+          InaiSec is being shaped with security leaders around the point where a technical investigation becomes a business decision. The goal is not another alerting surface. It is a shared incident story that helps the people in the room move with more confidence.
+        </p>
+      </div>
+      <div class="shell offer-body">
+        <div class="outcome-rows" data-reveal aria-label="The outcomes InaiSec is being shaped around">
             <article class="outcome-row">
-              <img src="./assets/icons/clarity-approved.png" alt="" aria-hidden="true">
+              <img src="./assets/icons/clarity.svg" alt="" aria-hidden="true">
               <div><h3>Clarity</h3><p>Make what is known, missing, stale, or disputed visible.</p></div>
             </article>
             <article class="outcome-row">
-              <img src="./assets/icons/alignment-approved.png" alt="" aria-hidden="true">
+              <img src="./assets/icons/alignment.svg" alt="" aria-hidden="true">
               <div><h3>Alignment</h3><p>Give security, leadership, counsel, and customer teams one incident story to work from.</p></div>
             </article>
             <article class="outcome-row">
-              <img src="./assets/icons/ownership-approved.png" alt="" aria-hidden="true">
+              <img src="./assets/icons/ownership.svg" alt="" aria-hidden="true">
               <div><h3>Ownership</h3><p>Make the next decision, its owner, and its evidence basis explicit.</p></div>
             </article>
             <article class="outcome-row">
-              <img src="./assets/icons/defensibility-approved.png" alt="" aria-hidden="true">
+              <img src="./assets/icons/defensibility.svg" alt="" aria-hidden="true">
               <div><h3>Defensibility</h3><p>Leave a record that explains why the call was made when it was.</p></div>
             </article>
-          </div>
-          <p class="boundary-line">This work is meant to support detection, containment, counsel, and human approval—not replace them.</p>
         </div>
         <figure class="offer-visual" data-reveal>
-          <img src="./assets/visuals/handoff-convergence.webp" alt="Multiple incident-response perspectives converging into a shared decision">
+          <img class="offer-visual-dark" src="./assets/visuals/handoff-convergence-transparent-v2.png" alt="IR, leadership, legal, and customer-impact perspectives converging into shared facts, unknowns, ownership, and a decision">
+          <img class="offer-visual-light" src="./assets/visuals/handoff-convergence-light-transparent-v2.png" alt="IR, leadership, legal, and customer-impact perspectives converging into shared facts, unknowns, ownership, and a decision">
         </figure>
       </div>
     </section>
@@ -273,45 +266,57 @@
     </section>
 
     <section class="founder section" id="founder" aria-labelledby="founder-title">
-      <div class="shell founder-layout" data-reveal>
-        <div class="founder-copy">
-          <p class="eyebrow eyebrow-violet">About the founder</p>
-          <h2 id="founder-title">&ldquo;Built by a practitioner.&rdquo;</h2>
-          <p>
-            Across more than a decade of security engineering at Capital One and Databricks, including building the multi-cloud SIEM and IR infrastructure that ran through Databricks&rsquo; hypergrowth, one pattern stayed constant: IR teams doing world-class work on top of fragmented evidence and manual correlation.
-          </p>
-          <p>
-            InaiSec is built for that gap. It provides the speed and precision of automated identity tracing combined with the flexibility required for complex, modern environments.
-          </p>
-          <div class="founder-signoff">
-            <img class="founder-signature" src="./assets/founder/kishore-signature.png" alt="Kishore">
-            <strong>Kishore Fernando</strong>
-            <span>Founder, InaiSec</span>
+      <div class="shell founder-centered" data-reveal>
+        <div class="section-head section-head-centered">
+          <p class="eyebrow">About the founder</p>
+          <h2 id="founder-title" class="founder-quote">&ldquo;Built by a practitioner.&rdquo;</h2>
+        </div>
+        <div class="founder-card-centered">
+          <img class="founder-photo" src="./assets/founder/kishore.jpg" alt="Kishore Fernando" width="96" height="96">
+          <div class="founder-meta">
+            <span class="founder-name-row">
+              <strong>Kishore Fernando</strong>
+              <a class="founder-link" href="https://www.linkedin.com/in/kishore-p-fernando" rel="noopener" target="_blank" aria-label="LinkedIn">
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.02h4.56V24H.22V8.02zM8.34 8.02h4.37v2.18h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v8.66h-4.56v-7.68c0-1.83-.03-4.18-2.55-4.18-2.55 0-2.94 1.99-2.94 4.05V24H8.34V8.02z" fill="currentColor"/>
+                </svg>
+              </a>
+            </span>
           </div>
         </div>
-
-        <figure class="founder-photo">
-          <img class="founder-photo-approved" src="./assets/founder/kishore-approved-frame.png" alt="Kishore Fernando, founder of InaiSec" width="369" height="326">
-        </figure>
+        <div class="founder-body-centered">
+          <p class="section-copy">
+            Across more than a decade of security engineering at Capital One and Databricks, including
+            building the multi-cloud SIEM and IR infrastructure that ran through Databricks&rsquo; hypergrowth,
+            one pattern stayed constant: IR teams doing world-class work on top of fragmented evidence
+            and manual correlation.
+          </p>
+          <p class="section-copy">
+            InaiSec is built for that gap. It provides the speed and precision of automated identity
+            tracing combined with the flexibility required for complex, modern environments.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section class="program section final-cta" id="join" aria-labelledby="join-title">
-      <div class="shell program-heading" data-reveal>
-        <p class="eyebrow">Join the design partner program</p>
-        <h2 id="join-title">Help shape the IR platform that should exist.</h2>
-        <p class="section-copy">
-          InaiSec is looking for 3 to 5 paid design partners running real investigations against the systems they already use. Send a short note with your role, company, current IR tools, and the incidents you want InaiSec to help scope.
-        </p>
-      </div>
+    <section class="program section section-band final-cta" id="join" aria-labelledby="join-title">
       <div class="shell program-layout" data-reveal>
-        <div class="partner-benefits">
-          <h3>Design partners get</h3>
-          <ul class="benefit-list">
-            <li>Full blast radius in minutes, not days</li>
-            <li>One surface for cases, evidence, and communication</li>
-            <li>Shape the product as it is built</li>
-          </ul>
+        <div class="program-copy">
+          <div class="program-heading">
+            <p class="eyebrow">Join the design partner program</p>
+            <h2 id="join-title">Help shape the IR platform that should exist.</h2>
+            <p class="section-copy">
+              InaiSec is looking for 3 to 5 paid design partners running real investigations against the systems they already use. Send a short note with your role, company, current IR tools, and the incidents you want InaiSec to help scope.
+            </p>
+          </div>
+          <div class="partner-benefits">
+            <h3>Design partners get</h3>
+            <ul class="benefit-list">
+              <li>Full blast radius in minutes, not days</li>
+              <li>One surface for cases, evidence, and communication</li>
+              <li>Shape the product as it is built</li>
+            </ul>
+          </div>
         </div>
         <form class="contact-form partner-form" data-contact-form novalidate>
           <label>
@@ -332,9 +337,9 @@
       </div>
     </section>
 
-    <section class="faq section section-band" id="faq" aria-labelledby="faq-title">
+    <section class="faq section" id="faq" aria-labelledby="faq-title">
       <div class="shell faq-layout" data-reveal>
-        <div class="faq-intro">
+        <div class="faq-intro section-head section-head-centered">
           <p class="eyebrow">FAQ</p>
           <h2 id="faq-title">Straight answers before we talk.</h2>
           <p class="section-copy">A first conversation should make the next step clearer, not ask you to take a leap of faith.</p>

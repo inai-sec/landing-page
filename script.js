@@ -4,7 +4,6 @@
   const navToggle = document.querySelector("[data-nav-toggle]");
   const navLabel = document.querySelector("[data-nav-label]");
   const navMenu = document.querySelector("[data-nav-menu]");
-  const navFaq = document.querySelector("[data-nav-faq]");
   const themeToggle = document.querySelector("[data-theme-toggle]");
   const themeMeta = document.querySelector("#meta-theme-color");
   const signalMap = document.querySelector("[data-signal-map]");
@@ -67,16 +66,8 @@
     });
   }
 
-  if (navFaq) {
-    document.addEventListener("click", (event) => {
-      if (!navFaq.open || navFaq.contains(event.target)) return;
-      navFaq.open = false;
-    });
-  }
-
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
-    if (navFaq && navFaq.open) navFaq.open = false;
     if (navMenu && navMenu.classList.contains("is-open")) closeNavigation(true);
   });
 
