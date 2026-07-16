@@ -103,6 +103,93 @@
 
   enableReveals();
 
+  const story = document.querySelector("[data-convergence-story]");
+  const storyArt = story?.querySelector("[data-story-art]");
+  const storyProblem = story?.querySelector("#problem");
+  const storyOutcomes = story?.querySelector("#outcomes");
+  const storyOutputs = Array.from(story?.querySelectorAll("[data-story-output]") || []);
+  const storyViewport = window.matchMedia("(min-width: 1081px) and (min-height: 920px)");
+  let storyFrame = 0;
+
+  const clampUnit = (value) => Math.min(1, Math.max(0, value));
+  const smoothStep = (value) => {
+    const t = clampUnit(value);
+    return t * t * (3 - (2 * t));
+  };
+
+  const resetStory = () => {
+    if (!story) return;
+    story.classList.remove("is-outcome-state");
+    story.style.removeProperty("--story-reveal");
+    story.style.removeProperty("--story-tilt");
+    story.style.removeProperty("--story-shift");
+    story.style.removeProperty("--story-scale");
+    storyOutputs.forEach((label) => {
+      label.style.removeProperty("opacity");
+      label.style.removeProperty("transform");
+    });
+  };
+
+  const setStoryMode = () => {
+    if (!story) return;
+    const supportsSticky = CSS.supports("position", "sticky");
+    const supportsMask = CSS.supports("mask-image", "linear-gradient(#000, transparent)")
+      || CSS.supports("-webkit-mask-image", "linear-gradient(#000, transparent)");
+    const enabled = supportsSticky && supportsMask && storyViewport.matches && !reducedMotion.matches;
+    story.classList.toggle("is-scroll-enhanced", enabled);
+    if (!enabled) resetStory();
+  };
+
+  const renderStory = () => {
+    storyFrame = 0;
+    if (!story || !storyArt || !storyProblem || !storyOutcomes || !story.classList.contains("is-scroll-enhanced")) return;
+
+    const headerHeight = header?.getBoundingClientRect().height || 76;
+    const problemRect = storyProblem.getBoundingClientRect();
+    const outcomesRect = storyOutcomes.getBoundingClientRect();
+    const panelTravel = Math.max(1, outcomesRect.top - problemRect.top);
+    const progress = clampUnit((headerHeight - problemRect.top) / panelTravel);
+
+    const build = smoothStep((progress - 0.16) / 0.68);
+    const depth = smoothStep((progress - 0.48) / 0.42);
+    const reveal = 53 + (build * 51);
+
+    story.style.setProperty("--story-reveal", `${reveal.toFixed(2)}%`);
+    story.style.setProperty("--story-tilt", `${(-3.2 * depth).toFixed(3)}deg`);
+    story.style.setProperty("--story-shift", `${(-5 * depth).toFixed(2)}px`);
+    story.style.setProperty("--story-scale", (1 + (0.008 * depth)).toFixed(4));
+    story.classList.toggle("is-outcome-state", progress >= 0.58);
+
+    storyOutputs.forEach((label, index) => {
+      const amount = smoothStep((progress - (0.60 + (index * 0.055))) / 0.16);
+      label.style.opacity = amount.toFixed(3);
+      label.style.transform = `translate3d(${((1 - amount) * 14).toFixed(2)}px, 0, 0)`;
+    });
+  };
+
+  const scheduleStory = () => {
+    if (!storyFrame) storyFrame = requestAnimationFrame(renderStory);
+  };
+
+  if (story) {
+    setStoryMode();
+    scheduleStory();
+    window.addEventListener("scroll", scheduleStory, { passive: true });
+    window.addEventListener("resize", () => {
+      setStoryMode();
+      scheduleStory();
+    }, { passive: true });
+    window.addEventListener("pageshow", scheduleStory);
+    storyViewport.addEventListener("change", () => {
+      setStoryMode();
+      scheduleStory();
+    });
+    reducedMotion.addEventListener("change", () => {
+      setStoryMode();
+      scheduleStory();
+    });
+  }
+
   if (!form) return;
 
   const submit = form.querySelector("[data-submit]");

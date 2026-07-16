@@ -162,90 +162,142 @@
       </aside>
     </section>
 
-    <section class="problem section section-band" id="problem" aria-labelledby="problem-title">
-      <div class="shell problem-layout" data-reveal>
-        <div>
-          <p class="eyebrow">The problem</p>
-          <h2 id="problem-title">The alert is confirmed. The forensic picture is not.</h2>
-        </div>
-        <div>
-          <p class="section-copy">
-            SIEM, XDR, EDR, and AI SOC tools can confirm suspicious activity. They do not show where a compromised credential traveled, which roles and sessions it used, or which systems, data, and customers are now in scope. Investigators still have to pull and correlate that evidence while the incident is active.
-          </p>
-          <p class="section-copy problem-follow-up">Every new fact can change containment, customer impact, disclosure, and ownership. The forensic picture has to keep pace with the incident&mdash;not arrive after the consequential decisions are made.</p>
-        </div>
-      </div>
-      <div class="shell point-grid tension-grid" data-reveal>
-        <article class="point-card tension-card">
-          <span class="tension-index step-index">01</span>
-          <h3 class="point-title">Trace</h3>
-          <p class="point-copy">Where did the compromised credential go, and what did it touch?</p>
-        </article>
-        <article class="point-card tension-card">
-          <span class="tension-index step-index">02</span>
-          <h3 class="point-title">Scope</h3>
-          <p class="point-copy">Which systems, data, customers, and jurisdictions may be affected?</p>
-        </article>
-        <article class="point-card tension-card">
-          <span class="tension-index step-index">03</span>
-          <h3 class="point-title">Decision</h3>
-          <p class="point-copy">Who owns the next call, and what evidence is enough to make it?</p>
-        </article>
-        <article class="point-card tension-card">
-          <span class="tension-index step-index">04</span>
-          <h3 class="point-title">Record</h3>
-          <p class="point-copy">Can we explain what we knew, when we knew it, and why we acted?</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="offer section" id="outcomes" aria-labelledby="outcomes-title">
-      <div class="shell offer-intro section-head section-head-centered" data-reveal>
-        <p class="eyebrow">What we&rsquo;re building for</p>
-        <h2 id="outcomes-title">Know the blast radius while the incident is still live.</h2>
-        <p class="section-copy">
-          InaiSec brings identity-first forensics into the response itself. It pulls case-scoped evidence on demand, follows identities, roles, sessions, and systems across the stack, and keeps scope and unknowns current as the investigation moves. Security, leadership, counsel, and customer teams work from the same live picture.
-        </p>
-      </div>
-      <div class="shell offer-body">
-        <div class="outcome-rows" data-reveal aria-label="The outcomes InaiSec is being shaped around">
-            <article class="outcome-row">
-              <img src="./assets/icons/clarity.svg" alt="" aria-hidden="true">
-              <div><h3 class="point-title">Clarity</h3><p class="point-copy">See the identity path, affected systems and data, missing evidence, and disputed facts as the investigation changes.</p></div>
-            </article>
-            <article class="outcome-row">
-              <img src="./assets/icons/alignment.svg" alt="" aria-hidden="true">
-              <div><h3 class="point-title">Alignment</h3><p class="point-copy">Give security, leadership, counsel, and customer teams one current investigation record.</p></div>
-            </article>
-            <article class="outcome-row">
-              <img src="./assets/icons/ownership.svg" alt="" aria-hidden="true">
-              <div><h3 class="point-title">Ownership</h3><p class="point-copy">Tie each investigative and business decision to an owner, evidence basis, and next action.</p></div>
-            </article>
-            <article class="outcome-row">
-              <img src="./assets/icons/defensibility.svg" alt="" aria-hidden="true">
-              <div><h3 class="point-title">Defensibility</h3><p class="point-copy">Preserve what was known, what changed, and why each call was made.</p></div>
-            </article>
-        </div>
-        <figure class="offer-visual convergence-visual" data-reveal>
-          <div class="convergence-canvas" aria-hidden="true">
-            <img src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="lazy" decoding="async">
-            <div class="convergence-input-labels">
-              <span>Identity</span>
-              <span>Cloud</span>
-              <span>SaaS</span>
-              <span>Data</span>
+    <div class="forensic-story" data-convergence-story>
+      <section class="problem section section-band story-panel" id="problem" aria-labelledby="problem-title">
+        <div class="shell story-copy">
+          <div class="problem-layout" data-reveal>
+            <div>
+              <p class="eyebrow">The problem</p>
+              <h2 id="problem-title">The alert is confirmed. The forensic picture is not.</h2>
             </div>
-            <div class="convergence-output-labels">
-              <span>Timeline</span>
-              <span>Scope</span>
-              <span>Unknowns</span>
-              <span>Decision</span>
+            <div>
+              <p class="section-copy">
+                SIEM, XDR, EDR, and AI SOC tools can confirm suspicious activity. They do not show where a compromised credential traveled, which roles and sessions it used, or which systems, data, and customers are now in scope. Investigators still have to pull and correlate that evidence while the incident is active.
+              </p>
+              <p class="section-copy problem-follow-up">Every new fact can change containment, customer impact, disclosure, and ownership. The forensic picture has to keep pace with the incident&mdash;not arrive after the consequential decisions are made.</p>
             </div>
           </div>
-          <figcaption class="sr-only">Identity, cloud, SaaS, and data evidence converge into a live timeline, scope, unknowns, and a decision.</figcaption>
-        </figure>
+          <div class="point-grid tension-grid" data-reveal>
+            <article class="point-card tension-card">
+              <span class="tension-index step-index">01</span>
+              <h3 class="point-title">Trace</h3>
+              <p class="point-copy">Where did the compromised credential go, and what did it touch?</p>
+            </article>
+            <article class="point-card tension-card">
+              <span class="tension-index step-index">02</span>
+              <h3 class="point-title">Scope</h3>
+              <p class="point-copy">Which systems, data, customers, and jurisdictions may be affected?</p>
+            </article>
+            <article class="point-card tension-card">
+              <span class="tension-index step-index">03</span>
+              <h3 class="point-title">Decision</h3>
+              <p class="point-copy">Who owns the next call, and what evidence is enough to make it?</p>
+            </article>
+            <article class="point-card tension-card">
+              <span class="tension-index step-index">04</span>
+              <h3 class="point-title">Record</h3>
+              <p class="point-copy">Can we explain what we knew, when we knew it, and why we acted?</p>
+            </article>
+          </div>
+          <figure class="offer-visual convergence-visual story-inline-visual story-inline-visual-fragmented" aria-hidden="true">
+            <div class="convergence-canvas">
+              <img class="story-diagram-art" src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="eager" decoding="async">
+              <div class="convergence-input-labels">
+                <span>Identity</span>
+                <span>Cloud</span>
+                <span>SaaS</span>
+                <span>Data</span>
+              </div>
+              <div class="convergence-output-labels" aria-hidden="true">
+                <span>Timeline</span>
+                <span>Scope</span>
+                <span>Unknowns</span>
+                <span>Decision</span>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="offer section story-panel" id="outcomes" aria-labelledby="outcomes-title">
+        <div class="shell story-copy">
+          <div class="offer-intro section-head section-head-centered" data-reveal>
+            <p class="eyebrow">What we&rsquo;re building for</p>
+            <h2 id="outcomes-title">Know the blast radius while the incident is still live.</h2>
+            <p class="section-copy">
+              InaiSec brings identity-first forensics into the response itself. It pulls case-scoped evidence on demand, follows identities, roles, sessions, and systems across the stack, and keeps scope and unknowns current as the investigation moves. Security, leadership, counsel, and customer teams work from the same live picture.
+            </p>
+          </div>
+          <div class="offer-body">
+            <div class="outcome-rows" data-reveal aria-label="The outcomes InaiSec is being shaped around">
+              <article class="outcome-row">
+                <img src="./assets/icons/clarity.svg" alt="" aria-hidden="true">
+                <div><h3 class="point-title">Clarity</h3><p class="point-copy">See the identity path, affected systems and data, missing evidence, and disputed facts as the investigation changes.</p></div>
+              </article>
+              <article class="outcome-row">
+                <img src="./assets/icons/alignment.svg" alt="" aria-hidden="true">
+                <div><h3 class="point-title">Alignment</h3><p class="point-copy">Give security, leadership, counsel, and customer teams one current investigation record.</p></div>
+              </article>
+              <article class="outcome-row">
+                <img src="./assets/icons/ownership.svg" alt="" aria-hidden="true">
+                <div><h3 class="point-title">Ownership</h3><p class="point-copy">Tie each investigative and business decision to an owner, evidence basis, and next action.</p></div>
+              </article>
+              <article class="outcome-row">
+                <img src="./assets/icons/defensibility.svg" alt="" aria-hidden="true">
+                <div><h3 class="point-title">Defensibility</h3><p class="point-copy">Preserve what was known, what changed, and why each call was made.</p></div>
+              </article>
+            </div>
+            <figure class="offer-visual convergence-visual story-inline-visual story-inline-visual-complete" data-reveal>
+              <div class="convergence-canvas" aria-hidden="true">
+                <img src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+                <div class="convergence-input-labels">
+                  <span>Identity</span>
+                  <span>Cloud</span>
+                  <span>SaaS</span>
+                  <span>Data</span>
+                </div>
+                <div class="convergence-output-labels">
+                  <span>Timeline</span>
+                  <span>Scope</span>
+                  <span>Unknowns</span>
+                  <span>Decision</span>
+                </div>
+              </div>
+              <figcaption class="sr-only">Identity, cloud, SaaS, and data evidence converge into a live timeline, scope, unknowns, and a decision.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <div class="story-visual-rail" aria-hidden="true">
+        <div class="story-visual-sticky">
+          <figure class="offer-visual convergence-visual story-convergence">
+            <div class="story-visual-meta">
+              <p class="eyebrow">Live forensic picture</p>
+              <span class="story-state-chip">
+                <span class="story-state-fragmented">Tracing evidence</span>
+                <span class="story-state-resolved">Blast radius current</span>
+              </span>
+            </div>
+            <div class="convergence-canvas">
+              <img class="story-diagram-art" data-story-art src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="eager" decoding="async">
+              <div class="convergence-input-labels">
+                <span>Identity</span>
+                <span>Cloud</span>
+                <span>SaaS</span>
+                <span>Data</span>
+              </div>
+              <div class="convergence-output-labels">
+                <span data-story-output>Timeline</span>
+                <span data-story-output>Scope</span>
+                <span data-story-output>Unknowns</span>
+                <span data-story-output>Decision</span>
+              </div>
+            </div>
+          </figure>
+        </div>
       </div>
-    </section>
+    </div>
 
     <section class="why-now section section-band" id="why-now" aria-labelledby="why-now-title">
       <div class="shell why-now-layout" data-reveal>
