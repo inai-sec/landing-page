@@ -1591,12 +1591,30 @@ h3 {
     justify-self: start;
   }
 
+.offer-kicker {
+  margin-top: 30px;
+}
+
+.offer-kicker strong {
+  color: var(--text);
+  font-weight: 650;
+}
+
 .offer-visual img {
   width: 100%;
   height: auto;
   min-height: 390px;
   object-fit: cover;
   object-position: center;
+}
+
+.offer-kicker {
+  margin-top: 30px;
+}
+
+.offer-kicker strong {
+  color: var(--text);
+  font-weight: 650;
 }
 
 .offer-visual img {
@@ -2234,7 +2252,16 @@ h3 {
     padding-right: 0;
   }
 
-  .offer-visual img {
+  .offer-kicker {
+  margin-top: 30px;
+}
+
+.offer-kicker strong {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.offer-visual img {
     min-height: 0;
   }
 
@@ -2544,6 +2571,15 @@ figure {
   box-shadow: none;
 }
 
+.offer-kicker {
+  margin-top: 30px;
+}
+
+.offer-kicker strong {
+  color: var(--text);
+  font-weight: 650;
+}
+
 .offer-visual img {
   display: block;
   width: 100%;
@@ -2556,18 +2592,30 @@ figure {
 .convergence-canvas {
   position: relative;
   aspect-ratio: 3 / 2;
+  perspective: 860px;
+  perspective-origin: 74% 50%;
   isolation: isolate;
 }
 
-.convergence-canvas > img {
+.convergence-plane {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(0, 0, 0) rotateY(0deg);
+  transform-origin: 46% 50%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.convergence-plane > img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-html[data-theme="light"] .convergence-canvas > img {
+html[data-theme="light"] .convergence-plane > img {
   filter: brightness(0.62) saturate(1.3) contrast(1.15);
 }
 
@@ -2578,11 +2626,13 @@ html[data-theme="light"] .convergence-canvas > img {
   z-index: 1;
   pointer-events: none;
   font-family: var(--font-mono);
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
   line-height: 1.2;
   text-transform: uppercase;
+  transform-style: preserve-3d;
+  transform-origin: 46% 50%;
+  backface-visibility: hidden;
+  text-rendering: geometricPrecision;
+  font-variant-ligatures: none;
 }
 
 .convergence-input-labels span,
@@ -2593,7 +2643,16 @@ html[data-theme="light"] .convergence-canvas > img {
 
 .convergence-input-labels span {
   left: 3.8%;
-  color: var(--text);
+  color: color-mix(in srgb, var(--text) 82%, var(--purple) 18%);
+}
+
+.convergence-input-labels {
+  font-size: clamp(0.6rem, 0.68vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: 0.065em;
+  opacity: var(--story-input-opacity, 1);
+  transform: translate3d(0, 0, var(--story-input-z, 0px)) rotateY(var(--story-input-tilt, 0deg));
+  text-shadow: 0 0 8px color-mix(in srgb, var(--purple) 14%, transparent);
 }
 
 .convergence-input-labels span:nth-child(1) { top: 4.5%; }
@@ -2606,8 +2665,16 @@ html[data-theme="light"] .convergence-canvas > img {
   width: max-content;
   min-width: 0;
   padding-bottom: 5px;
-  border-bottom: 1px solid color-mix(in srgb, var(--cyan) 55%, transparent);
-  color: var(--cyan);
+  border-bottom: 1px solid color-mix(in srgb, var(--cyan) 72%, transparent);
+  color: color-mix(in srgb, var(--cyan) 78%, white 22%);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--cyan) 24%, transparent);
+}
+
+.convergence-output-labels {
+  font-size: clamp(0.98rem, 1.04vw, 1.08rem);
+  font-weight: 500;
+  letter-spacing: 0.075em;
+  transform: translate3d(0, 0, var(--story-output-z, 0px)) rotateY(var(--story-output-tilt, 0deg));
 }
 
 .convergence-output-labels span:nth-child(1) { top: 11%; }
@@ -2618,6 +2685,15 @@ html[data-theme="light"] .convergence-canvas > img {
 html[data-theme="light"] .convergence-output-labels span {
   border-bottom-color: color-mix(in srgb, #087c98 55%, transparent);
   color: #087c98;
+  text-shadow: none;
+}
+
+html[data-theme="light"] .convergence-input-labels span {
+  color: #4f5966;
+}
+
+html[data-theme="light"] .convergence-input-labels {
+  text-shadow: none;
 }
 
 .sr-only {
@@ -3114,9 +3190,16 @@ main > section[id] {
   visibility: hidden;
 }
 
-.story-inline-visual-complete .convergence-canvas {
-  transform: perspective(1400px) rotateY(-2deg) scale(0.995);
-  transform-origin: 50% 50%;
+.story-inline-visual-complete .convergence-plane {
+  transform: translate3d(1px, 0, -4px) rotateY(-7deg);
+}
+
+.story-inline-visual-complete {
+  --story-input-tilt: -8.5deg;
+  --story-input-z: -22px;
+  --story-input-opacity: 0.84;
+  --story-output-tilt: 0.75deg;
+  --story-output-z: 28px;
 }
 
 @media (min-width: 981px) {
@@ -3135,9 +3218,9 @@ main > section[id] {
     display: grid;
     grid-template-columns:
       minmax(20px, 1fr)
-      minmax(0, 500px)
-      clamp(48px, 6vw, 84px)
-      minmax(420px, 596px)
+      minmax(0, 556px)
+      clamp(40px, 4vw, 48px)
+      minmax(420px, 576px)
       minmax(20px, 1fr);
     isolation: isolate;
   }
@@ -3147,9 +3230,9 @@ main > section[id] {
     display: grid;
     grid-template-columns:
       minmax(20px, 1fr)
-      minmax(0, 500px)
-      clamp(48px, 6vw, 84px)
-      minmax(420px, 596px)
+      minmax(0, 556px)
+      clamp(40px, 4vw, 48px)
+      minmax(420px, 576px)
       minmax(20px, 1fr);
     align-items: center;
     min-height: calc(100svh - 76px);
@@ -3205,7 +3288,7 @@ main > section[id] {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    margin: 0 2.5% 16px 3.8%;
+    margin: 0 2.5% 4px 3.8%;
   }
 
   .story-state-chip {
@@ -3254,8 +3337,18 @@ main > section[id] {
   }
 
   .story-convergence .convergence-canvas {
-    transform: perspective(1300px) rotateY(var(--story-tilt, 0deg)) translate3d(var(--story-shift, 0px), 0, 0) scale(var(--story-scale, 1));
-    transform-origin: 50% 50%;
+    perspective: 860px;
+    perspective-origin: 74% 50%;
+  }
+
+  .story-convergence .convergence-plane {
+    transform: translate3d(var(--story-shift, 0px), 0, var(--story-depth-z, 0px)) rotateY(var(--story-tilt, 0deg));
+    transform-origin: 46% 50%;
+    will-change: transform;
+  }
+
+  .story-convergence .convergence-input-labels,
+  .story-convergence .convergence-output-labels {
     will-change: transform;
   }
 
@@ -3388,17 +3481,59 @@ main > section[id] {
     font-size: 0.78rem;
   }
 
-  .story-inline-visual-complete .convergence-canvas {
-    transform: perspective(1100px) rotateY(-1.25deg) scale(0.99);
+  .story-inline-visual-complete .convergence-input-labels,
+  .story-inline-visual-complete .convergence-output-labels {
+    letter-spacing: 0.05em;
+  }
+
+  .story-inline-visual-complete .convergence-input-labels {
+    --story-input-tilt: -3deg;
+    --story-input-z: -8px;
+    --story-input-opacity: 0.9;
+    font-size: 0.66rem;
+  }
+
+  .story-inline-visual-complete .convergence-output-labels {
+    --story-output-tilt: 0.5deg;
+    --story-output-z: 12px;
+    font-size: 0.9rem;
+  }
+
+  .story-inline-visual-complete .convergence-input-labels span:nth-child(1) { top: 2%; }
+  .story-inline-visual-complete .convergence-input-labels span:nth-child(2) { top: 25%; }
+  .story-inline-visual-complete .convergence-input-labels span:nth-child(3) { top: 50%; }
+  .story-inline-visual-complete .convergence-input-labels span:nth-child(4) { top: 75%; }
+
+  .story-inline-visual-complete .convergence-output-labels span:nth-child(1) { top: 8%; }
+  .story-inline-visual-complete .convergence-output-labels span:nth-child(2) { top: 31%; }
+  .story-inline-visual-complete .convergence-output-labels span:nth-child(3) { top: 59%; }
+  .story-inline-visual-complete .convergence-output-labels span:nth-child(4) { top: 82%; }
+
+  .story-inline-visual-complete .convergence-plane {
+    transform: translate3d(0.5px, 0, -2px) rotateY(-3.4deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .story-inline-visual-complete .convergence-canvas {
+  .story-inline-visual-complete .convergence-plane {
     transform: none;
+  }
+
+  .story-inline-visual-complete .convergence-input-labels,
+  .story-inline-visual-complete .convergence-output-labels {
+    transform: none;
+    opacity: 1;
   }
 
   .story-diagram-art {
     will-change: auto;
+  }
+}
+
+@media (forced-colors: active), (prefers-contrast: more) {
+  .convergence-plane,
+  .convergence-input-labels,
+  .convergence-output-labels {
+    transform: none !important;
   }
 }

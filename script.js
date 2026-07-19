@@ -116,6 +116,10 @@
     const t = clampUnit(value);
     return t * t * (3 - (2 * t));
   };
+  const smootherStep = (value) => {
+    const t = clampUnit(value);
+    return t * t * t * ((t * ((t * 6) - 15)) + 10);
+  };
 
   const resetStory = () => {
     if (!story) return;
@@ -123,7 +127,12 @@
     story.style.removeProperty("--story-reveal");
     story.style.removeProperty("--story-tilt");
     story.style.removeProperty("--story-shift");
-    story.style.removeProperty("--story-scale");
+    story.style.removeProperty("--story-depth-z");
+    story.style.removeProperty("--story-input-tilt");
+    story.style.removeProperty("--story-input-z");
+    story.style.removeProperty("--story-input-opacity");
+    story.style.removeProperty("--story-output-tilt");
+    story.style.removeProperty("--story-output-z");
     storyOutputs.forEach((label) => {
       label.style.removeProperty("opacity");
       label.style.removeProperty("transform");
@@ -151,19 +160,24 @@
     const progress = clampUnit((headerHeight - problemRect.top) / panelTravel);
 
     const build = smoothStep((progress - 0.16) / 0.68);
-    const depth = smoothStep((progress - 0.48) / 0.42);
+    const depth = smootherStep((progress - 0.18) / 0.58);
     const reveal = 53 + (build * 51);
 
     story.style.setProperty("--story-reveal", `${reveal.toFixed(2)}%`);
-    story.style.setProperty("--story-tilt", `${(-3.2 * depth).toFixed(3)}deg`);
-    story.style.setProperty("--story-shift", `${(-5 * depth).toFixed(2)}px`);
-    story.style.setProperty("--story-scale", (1 + (0.008 * depth)).toFixed(4));
+    story.style.setProperty("--story-tilt", `${(-9.6 * depth).toFixed(3)}deg`);
+    story.style.setProperty("--story-shift", `${(1 * depth).toFixed(2)}px`);
+    story.style.setProperty("--story-depth-z", `${(-6 * depth).toFixed(2)}px`);
+    story.style.setProperty("--story-input-tilt", `${(-8.5 * depth).toFixed(3)}deg`);
+    story.style.setProperty("--story-input-z", `${(-22 * depth).toFixed(2)}px`);
+    story.style.setProperty("--story-input-opacity", (1 - (0.16 * depth)).toFixed(3));
+    story.style.setProperty("--story-output-tilt", `${(0.75 * depth).toFixed(3)}deg`);
+    story.style.setProperty("--story-output-z", `${(28 * depth).toFixed(2)}px`);
     story.classList.toggle("is-outcome-state", progress >= 0.58);
 
     storyOutputs.forEach((label, index) => {
       const amount = smoothStep((progress - (0.60 + (index * 0.055))) / 0.16);
       label.style.opacity = amount.toFixed(3);
-      label.style.transform = `translate3d(${((1 - amount) * 14).toFixed(2)}px, 0, 0)`;
+      label.style.transform = `translate3d(${((1 - amount) * 12).toFixed(2)}px, 0, 0)`;
     });
   };
 

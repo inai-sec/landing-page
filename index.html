@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>InaiSec — Picks up where detection stops</title>
-  <meta name="description" content="Identity-first incident forensics that pulls evidence on demand, traces compromised access across cloud and SaaS, and maps blast radius during the investigation.">
+  <title>InaiSec · Picks up where detection stops</title>
+  <meta name="description" content="When a credential is compromised, InaiSec opens an incident room: evidence pulled on demand from Okta, GitHub, AWS, and Snowflake, blast radius mapped live, and every disclosure call made by a human, on the record.">
   <meta id="meta-theme-color" name="theme-color" content="#0e1118">
   <link rel="canonical" href="https://inaisec.ai/">
 
-  <meta property="og:title" content="InaiSec — Picks up where detection stops">
-  <meta property="og:description" content="Pull evidence, trace compromised access, and map blast radius while the incident is still active.">
+  <meta property="og:title" content="InaiSec · Picks up where detection stops">
+  <meta property="og:description" content="Trace a compromised credential to customer impact while the incident is still live. Humans make the calls. The record holds up later.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://inaisec.ai/">
   <meta property="og:site_name" content="InaiSec">
@@ -17,10 +17,10 @@
   <meta property="og:image:width" content="1731">
   <meta property="og:image:height" content="909">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:alt" content="InaiSec — Picks up where detection stops">
+  <meta property="og:image:alt" content="InaiSec · Picks up where detection stops">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://inaisec.ai/assets/og/og-card-v2.png">
-  <meta name="twitter:image:alt" content="InaiSec — Picks up where detection stops">
+  <meta name="twitter:image:alt" content="InaiSec · Picks up where detection stops">
 
   <link rel="icon" type="image/svg+xml" href="./assets/logo/inaisec-mark.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/logo/favicon-32.png">
@@ -42,7 +42,7 @@
       if (meta) meta.setAttribute("content", theme === "light" ? "#f9fafb" : "#0e1118");
     })();
   </script>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=depth10">
 
   <script type="application/ld+json">
   {
@@ -111,9 +111,9 @@
           <span class="title-mobile">Picks up<br>where<br>detection<br>stops.</span>
         </h1>
         <p class="hero-lede">
-          InaiSec pulls evidence and traces compromised access while the incident is still active.
-          Follow identities, roles, sessions, and systems across cloud, SaaS, and data; establish
-          blast radius; and prepare the next response and disclosure decisions from one live investigation.
+          Your stack confirms the credential was compromised. InaiSec shows what it reached: every
+          role, session, system, and customer touched, while the incident is still moving. One live
+          investigation, from first alert to a disclosure-ready record.
         </p>
         <div class="hero-actions" aria-label="Primary actions">
           <a class="btn btn-primary" href="#join">
@@ -122,7 +122,7 @@
           </a>
         </div>
         <p class="hero-trust">
-          Built by a founding security engineer from Databricks. Previously Capital One.
+          Built by a founding security engineer at Databricks. Previously Capital One.
           Co-inventor of 4 security patents.
         </p>
       </div>
@@ -167,52 +167,54 @@
         <div class="shell story-copy">
           <div class="problem-layout" data-reveal>
             <div>
-              <p class="eyebrow">The problem</p>
-              <h2 id="problem-title">The alert is confirmed. The forensic picture is not.</h2>
+              <p class="eyebrow">After the alert</p>
+              <h2 id="problem-title">Detection is instrumented. What happens next is not.</h2>
             </div>
             <div>
               <p class="section-copy">
-                SIEM, XDR, EDR, and AI SOC tools can confirm suspicious activity. They do not show where a compromised credential traveled, which roles and sessions it used, or which systems, data, and customers are now in scope. Investigators still have to pull and correlate that evidence while the incident is active.
+                Your stack can tell you a credential was compromised. It can't tell you where that identity went, which roles and sessions it used, what data it touched, or which customers are now in scope. So the response falls back on log exports, a spreadsheet timeline, tickets, Slack, and someone's memory. The clock keeps running the whole time.
               </p>
-              <p class="section-copy problem-follow-up">Every new fact can change containment, customer impact, disclosure, and ownership. The forensic picture has to keep pace with the incident&mdash;not arrive after the consequential decisions are made.</p>
+              <p class="section-copy problem-follow-up">A security leader we interviewed called impact scoping &ldquo;a wild goose chase.&rdquo; They weren&rsquo;t wrong. The picture has to keep pace with the incident, not arrive after the big calls are already made.</p>
             </div>
           </div>
           <div class="point-grid tension-grid" data-reveal>
             <article class="point-card tension-card">
               <span class="tension-index step-index">01</span>
-              <h3 class="point-title">Trace</h3>
-              <p class="point-copy">Where did the compromised credential go, and what did it touch?</p>
+              <h3 class="point-title">Evidence gap</h3>
+              <p class="point-copy">What has been checked? What's missing, stale, or actually trustworthy?</p>
             </article>
             <article class="point-card tension-card">
               <span class="tension-index step-index">02</span>
-              <h3 class="point-title">Scope</h3>
-              <p class="point-copy">Which systems, data, customers, and jurisdictions may be affected?</p>
+              <h3 class="point-title">Impact gap</h3>
+              <p class="point-copy">Which systems, data classes, and customers were actually affected?</p>
             </article>
             <article class="point-card tension-card">
               <span class="tension-index step-index">03</span>
-              <h3 class="point-title">Decision</h3>
-              <p class="point-copy">Who owns the next call, and what evidence is enough to make it?</p>
+              <h3 class="point-title">Decision gap</h3>
+              <p class="point-copy">Which calls need an accountable human, and who owns each one?</p>
             </article>
             <article class="point-card tension-card">
               <span class="tension-index step-index">04</span>
-              <h3 class="point-title">Record</h3>
-              <p class="point-copy">Can we explain what we knew, when we knew it, and why we acted?</p>
+              <h3 class="point-title">Record gap</h3>
+              <p class="point-copy">What can you defend later to counsel, customers, and regulators?</p>
             </article>
           </div>
           <figure class="offer-visual convergence-visual story-inline-visual story-inline-visual-fragmented" aria-hidden="true">
             <div class="convergence-canvas">
-              <img class="story-diagram-art" src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="eager" decoding="async">
-              <div class="convergence-input-labels">
-                <span>Identity</span>
-                <span>Cloud</span>
-                <span>SaaS</span>
-                <span>Data</span>
+              <div class="convergence-plane">
+                <img class="story-diagram-art" src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="lazy" decoding="async">
               </div>
-              <div class="convergence-output-labels" aria-hidden="true">
-                <span>Timeline</span>
-                <span>Scope</span>
-                <span>Unknowns</span>
-                <span>Decision</span>
+              <div class="convergence-input-labels">
+                <span>Evidence in hand</span>
+                <span>Evidence on demand</span>
+                <span>Identity trail</span>
+                <span>Open questions</span>
+              </div>
+              <div class="convergence-output-labels">
+                <span>Verified timeline</span>
+                <span>Blast radius</span>
+                <span>Known unknowns</span>
+                <span>Decision record</span>
               </div>
             </div>
           </figure>
@@ -222,48 +224,51 @@
       <section class="offer section story-panel" id="outcomes" aria-labelledby="outcomes-title">
         <div class="shell story-copy">
           <div class="offer-intro section-head section-head-centered" data-reveal>
-            <p class="eyebrow">What we&rsquo;re building for</p>
-            <h2 id="outcomes-title">Know the blast radius while the incident is still live.</h2>
+            <p class="eyebrow">The Incident Room</p>
+            <h2 id="outcomes-title">One live picture, from compromised credential to customer impact.</h2>
             <p class="section-copy">
-              InaiSec brings identity-first forensics into the response itself. It pulls case-scoped evidence on demand, follows identities, roles, sessions, and systems across the stack, and keeps scope and unknowns current as the investigation moves. Security, leadership, counsel, and customer teams work from the same live picture.
+              The moment an incident is confirmed, InaiSec opens an incident room. It pulls case-scoped evidence on demand from the systems you already run. Nothing is pre-ingested and there is no data lake. It traces the identity across roles, sessions, and systems, then keeps blast radius, unknowns, and disclosure posture current as the facts change. Security, leadership, counsel, and customer teams all work in the same room.
             </p>
           </div>
           <div class="offer-body">
             <div class="outcome-rows" data-reveal aria-label="The outcomes InaiSec is being shaped around">
               <article class="outcome-row">
                 <img src="./assets/icons/clarity.svg" alt="" aria-hidden="true">
-                <div><h3 class="point-title">Clarity</h3><p class="point-copy">See the identity path, affected systems and data, missing evidence, and disputed facts as the investigation changes.</p></div>
+                <div><h3 class="point-title">Evidence, coordinated</h3><p class="point-copy">Every source checked, missing, or stale is visible. Every artifact carries provenance.</p></div>
               </article>
               <article class="outcome-row">
                 <img src="./assets/icons/alignment.svg" alt="" aria-hidden="true">
-                <div><h3 class="point-title">Alignment</h3><p class="point-copy">Give security, leadership, counsel, and customer teams one current investigation record.</p></div>
+                <div><h3 class="point-title">Impact, mapped</h3><p class="point-copy">Systems, data classes, customers, and jurisdictions. Confirmed versus potential, kept honest.</p></div>
               </article>
               <article class="outcome-row">
                 <img src="./assets/icons/ownership.svg" alt="" aria-hidden="true">
-                <div><h3 class="point-title">Ownership</h3><p class="point-copy">Tie each investigative and business decision to an owner, evidence basis, and next action.</p></div>
+                <div><h3 class="point-title">Decisions, owned</h3><p class="point-copy">Containment, customer impact, and disclosure routed to named humans with the evidence attached.</p></div>
               </article>
               <article class="outcome-row">
                 <img src="./assets/icons/defensibility.svg" alt="" aria-hidden="true">
-                <div><h3 class="point-title">Defensibility</h3><p class="point-copy">Preserve what was known, what changed, and why each call was made.</p></div>
+                <div><h3 class="point-title">Record, defensible</h3><p class="point-copy">What was known, when, and why each call was made. Ready for counsel, customers, and regulators.</p></div>
               </article>
             </div>
+            <p class="section-copy offer-kicker" data-reveal><strong>Agents move the work forward. Humans approve the decisions that matter.</strong></p>
             <figure class="offer-visual convergence-visual story-inline-visual story-inline-visual-complete" data-reveal>
               <div class="convergence-canvas" aria-hidden="true">
-                <img src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+                <div class="convergence-plane">
+                  <img src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+                </div>
                 <div class="convergence-input-labels">
-                  <span>Identity</span>
-                  <span>Cloud</span>
-                  <span>SaaS</span>
-                  <span>Data</span>
+                  <span>Evidence in hand</span>
+                  <span>Evidence on demand</span>
+                  <span>Identity trail</span>
+                  <span>Open questions</span>
                 </div>
                 <div class="convergence-output-labels">
-                  <span>Timeline</span>
-                  <span>Scope</span>
-                  <span>Unknowns</span>
-                  <span>Decision</span>
+                  <span>Verified timeline</span>
+                  <span>Blast radius</span>
+                  <span>Known unknowns</span>
+                  <span>Decision record</span>
                 </div>
               </div>
-              <figcaption class="sr-only">Identity, cloud, SaaS, and data evidence converge into a live timeline, scope, unknowns, and a decision.</figcaption>
+              <figcaption class="sr-only">Evidence already in hand and evidence collected on demand converge into a verified timeline, blast radius, known unknowns, and a defensible decision record.</figcaption>
             </figure>
           </div>
         </div>
@@ -276,22 +281,24 @@
               <p class="eyebrow">Live forensic picture</p>
               <span class="story-state-chip">
                 <span class="story-state-fragmented">Tracing evidence</span>
-                <span class="story-state-resolved">Blast radius current</span>
+                <span class="story-state-resolved">Packet current</span>
               </span>
             </div>
             <div class="convergence-canvas">
-              <img class="story-diagram-art" data-story-art src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="eager" decoding="async">
+              <div class="convergence-plane" data-story-art>
+                <img class="story-diagram-art" src="./assets/visuals/decision-convergence-v3.png" alt="" width="1536" height="1024" loading="eager" decoding="async">
+              </div>
               <div class="convergence-input-labels">
-                <span>Identity</span>
-                <span>Cloud</span>
-                <span>SaaS</span>
-                <span>Data</span>
+                <span>Evidence in hand</span>
+                <span>Evidence on demand</span>
+                <span>Identity trail</span>
+                <span>Open questions</span>
               </div>
               <div class="convergence-output-labels">
-                <span data-story-output>Timeline</span>
-                <span data-story-output>Scope</span>
-                <span data-story-output>Unknowns</span>
-                <span data-story-output>Decision</span>
+                <span data-story-output>Verified timeline</span>
+                <span data-story-output>Blast radius</span>
+                <span data-story-output>Known unknowns</span>
+                <span data-story-output>Decision record</span>
               </div>
             </div>
           </figure>
@@ -303,35 +310,35 @@
       <div class="shell why-now-layout" data-reveal>
         <div>
           <p class="eyebrow">Why now</p>
-          <h2 id="why-now-title">The regulatory clock starts before the picture is complete.</h2>
+          <h2 id="why-now-title">The missing layer is not another agent.</h2>
         </div>
         <div>
           <p class="section-copy">
-            Credential incidents can cross identity, cloud, SaaS, and data in hours. Regulatory and customer-response clocks can begin before scope is stable. Pulling logs and reconstructing identity activity after the fact is too late for decisions being made now.
+            Most intrusions no longer drop malware. They log in. A stolen credential can cross identity, cloud, SaaS, and data before your first meeting of the day ends. CrowdStrike puts average breakout time at 29 minutes.
           </p>
-          <p class="section-copy why-now-follow-up">AI can speed evidence collection and correlation. Accountable people still need current facts, explicit unknowns, clear ownership, and a traceable basis for the next move.</p>
+          <p class="section-copy why-now-follow-up">Response is going agentic at the same time. AI SOC analysts, SOAR automation, copilots. The work gets faster, but no single agent owns the chain from evidence to customer impact to a legal decision. What's missing is the layer above the stack where the evidence converges and a human signs the call. That's the layer we're building.</p>
         </div>
       </div>
       <div class="shell point-grid pressure-grid" data-reveal>
         <article class="point-card pressure-item">
           <span class="pressure-index step-index">01</span>
-          <h3 class="point-title">More surface area</h3>
-          <p class="point-copy">One credential can traverse identity, cloud, SaaS, and data.</p>
+          <h3 class="point-title">Identity-first attacks</h3>
+          <p class="point-copy">Stolen credentials, not malware. Breakout in minutes, spread in hours.</p>
         </article>
         <article class="point-card pressure-item">
           <span class="pressure-index step-index">02</span>
-          <h3 class="point-title">Machine-speed movement</h3>
-          <p class="point-copy">Identity activity can outpace manual collection and correlation.</p>
+          <h3 class="point-title">Agentic response</h3>
+          <p class="point-copy">More agents doing more of the work. None accountable for the whole chain.</p>
         </article>
         <article class="point-card pressure-item">
           <span class="pressure-index step-index">03</span>
-          <h3 class="point-title">Earlier decisions</h3>
-          <p class="point-copy">Containment, customer, and legal calls begin before scope is settled.</p>
+          <h3 class="point-title">Shorter windows</h3>
+          <p class="point-copy">GDPR gives 72 hours. The SEC gives four business days. Both start at confirmation.</p>
         </article>
         <article class="point-card pressure-item">
           <span class="pressure-index step-index">04</span>
-          <h3 class="point-title">Shorter regulatory clocks</h3>
-          <p class="point-copy">Disclosure timelines keep moving while the investigation is live.</p>
+          <h3 class="point-title">Accountability stays human</h3>
+          <p class="point-copy">Boards, customers, and regulators want a person on the record. That won't change.</p>
         </article>
       </div>
     </section>
@@ -357,14 +364,14 @@
         </div>
         <div class="founder-body-centered">
           <p class="section-copy">
-            Across more than a decade of security engineering at Capital One and Databricks, including
-            building the multi-cloud SIEM and IR infrastructure that ran through Databricks&rsquo; hypergrowth,
-            one pattern stayed constant: when identity was involved, teams still had to reconstruct
+            I spent a decade-plus building security infrastructure at Capital One and Databricks,
+            including the multi-cloud SIEM and IR stack that ran through Databricks&rsquo; hypergrowth.
+            One pattern never changed: when identity was involved, we were reconstructing
             attacker access across fragmented systems while containment and business decisions were already due.
           </p>
           <p class="section-copy">
-            InaiSec is built for that live investigative gap: the speed and precision of automated
-            identity tracing, with the flexibility and human judgment complex incidents require.
+            InaiSec is what I wanted in those rooms: automated identity tracing for speed,
+            human judgment for the calls that matter.
           </p>
         </div>
       </div>
@@ -375,9 +382,9 @@
         <div class="program-copy">
           <div class="program-heading">
             <p class="eyebrow">Join the design partner program</p>
-            <h2 id="join-title">Help shape identity forensics for live incidents.</h2>
+            <h2 id="join-title">Bring one incident. We&rsquo;ll trace it together.</h2>
             <p class="section-copy">
-              InaiSec is looking for 3 to 5 paid design partners running real credential investigations across identity, cloud, SaaS, and data. Bring a real or sanitized incident and the systems you already use. Together, we will test how on-demand evidence collection and identity tracing can make scope clear sooner.
+              We&rsquo;re looking for 3 to 5 paid design partners running real credential investigations. Bring a real or sanitized incident and the systems you already use. We&rsquo;ll show you how fast scope can get clear.
             </p>
           </div>
           <div class="partner-benefits">
@@ -442,7 +449,7 @@
     <div>
       <img class="footer-logo footer-logo-dark" src="./assets/logo/inaisec-lockup-dark.svg" alt="InaiSec">
       <img class="footer-logo footer-logo-light" src="./assets/logo/inaisec-lockup.svg" alt="InaiSec">
-      <p>Identity-first forensics during the incident&mdash;not after. Pull evidence on demand, trace compromised access, and establish blast radius while the response is still underway.</p>
+      <p>An incident room for credential breaches. Evidence pulled on demand, blast radius mapped live, decisions made by people and kept on the record.</p>
     </div>
     <div>
       <h2>Contact</h2>
@@ -461,7 +468,7 @@
     </div>
   </footer>
 
-  <script src="./script.js"></script>
+  <script src="./script.js?v=depth10"></script>
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
