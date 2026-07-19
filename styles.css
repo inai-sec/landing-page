@@ -3211,7 +3211,7 @@ main > section[id] {
   }
 }
 
-@media (min-width: 1081px) and (min-height: 920px) {
+@media (min-width: 1081px) and (min-height: 640px) {
   .forensic-story.is-scroll-enhanced {
     --story-reveal: 53%;
     position: relative;
@@ -3443,7 +3443,7 @@ main > section[id] {
   }
 }
 
-@media (max-width: 1080px), (max-height: 919px) {
+@media (max-width: 1080px), (max-height: 639px) {
   .story-visual-rail {
     display: none !important;
   }

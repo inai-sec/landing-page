@@ -108,7 +108,7 @@
   const storyProblem = story?.querySelector("#problem");
   const storyOutcomes = story?.querySelector("#outcomes");
   const storyOutputs = Array.from(story?.querySelectorAll("[data-story-output]") || []);
-  const storyViewport = window.matchMedia("(min-width: 1081px) and (min-height: 920px)");
+  const storyViewport = window.matchMedia("(min-width: 1081px) and (min-height: 640px)");
   let storyFrame = 0;
 
   const clampUnit = (value) => Math.min(1, Math.max(0, value));
