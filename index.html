@@ -14,8 +14,8 @@
   <meta property="og:url" content="https://inaisec.ai/">
   <meta property="og:site_name" content="InaiSec">
   <meta property="og:image" content="https://inaisec.ai/assets/og/og-card-v2.png">
-  <meta property="og:image:width" content="1731">
-  <meta property="og:image:height" content="909">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:alt" content="InaiSec · Picks up where detection stops">
   <meta name="twitter:card" content="summary_large_image">
@@ -42,7 +42,7 @@
       if (meta) meta.setAttribute("content", theme === "light" ? "#f9fafb" : "#0e1118");
     })();
   </script>
-  <link rel="stylesheet" href="./styles.css?v=depth10">
+  <link rel="stylesheet" href="./styles.css?v=dev-07-18-polish-13">
 
   <script type="application/ld+json">
   {
@@ -74,8 +74,8 @@
   <header class="site-header" data-header>
     <nav class="nav shell" aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="InaiSec home">
-        <img class="brand-logo brand-logo-dark" src="./assets/logo/inaisec-lockup-dark.svg" alt="InaiSec">
-        <img class="brand-logo brand-logo-light" src="./assets/logo/inaisec-lockup.svg" alt="InaiSec">
+        <img class="brand-logo brand-logo-dark" src="./assets/logo/inaisec-lockup-dark.svg" alt="InaiSec" width="134" height="34">
+        <img class="brand-logo brand-logo-light" src="./assets/logo/inaisec-lockup.svg" alt="InaiSec" width="134" height="34">
       </a>
 
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu" data-nav-toggle>
@@ -111,9 +111,8 @@
           <span class="title-mobile">Picks up<br>where<br>detection<br>stops.</span>
         </h1>
         <p class="hero-lede">
-          Your stack confirms the credential was compromised. InaiSec shows what it reached: every
-          role, session, system, and customer touched, while the incident is still moving. One live
-          investigation, from first alert to a disclosure-ready record.
+          InaiSec is the identity-first IR layer for everything after an alert is confirmed: collect
+          evidence, trace the compromised credential, map the blast radius, and identify who must be notified.
         </p>
         <div class="hero-actions" aria-label="Primary actions">
           <a class="btn btn-primary" href="#join">
@@ -172,9 +171,9 @@
             </div>
             <div>
               <p class="section-copy">
-                Your stack can tell you a credential was compromised. It can't tell you where that identity went, which roles and sessions it used, what data it touched, or which customers are now in scope. So the response falls back on log exports, a spreadsheet timeline, tickets, Slack, and someone's memory. The clock keeps running the whole time.
+                SIEM, XDR, EDR, and AI SOC tools can confirm suspicious activity. What comes next is still largely manual: tracing where a compromised credential traveled, which roles and sessions it used, and which systems, data, and customers are now in scope. Investigators must pull and correlate that evidence while the incident is still unfolding.
               </p>
-              <p class="section-copy problem-follow-up">A security leader we interviewed called impact scoping &ldquo;a wild goose chase.&rdquo; They weren&rsquo;t wrong. The picture has to keep pace with the incident, not arrive after the big calls are already made.</p>
+              <p class="section-copy problem-follow-up">Every new fact can change containment, customer impact, disclosure, and ownership. The forensic picture must keep pace with the incident, not arrive after the consequential decisions have been made.</p>
             </div>
           </div>
           <div class="point-grid tension-grid" data-reveal>
@@ -227,26 +226,26 @@
             <p class="eyebrow">The Incident Room</p>
             <h2 id="outcomes-title">One live picture, from compromised credential to customer impact.</h2>
             <p class="section-copy">
-              The moment an incident is confirmed, InaiSec opens an incident room. It pulls case-scoped evidence on demand from the systems you already run. Nothing is pre-ingested and there is no data lake. It traces the identity across roles, sessions, and systems, then keeps blast radius, unknowns, and disclosure posture current as the facts change. Security, leadership, counsel, and customer teams all work in the same room.
+              When an identity incident is unfolding, every team needs answers at once. Security is tracing access, leadership is weighing impact, and counsel and customer teams are preparing the next move. InaiSec gives them one incident room. It pulls case-scoped evidence on demand from the systems you already use, without pre-ingesting data or building another data lake. It traces the compromised identity across roles, sessions, and systems, then keeps the blast radius, unknowns, and disclosure posture current as the facts change.
             </p>
           </div>
           <div class="offer-body">
             <div class="outcome-rows" data-reveal aria-label="The outcomes InaiSec is being shaped around">
               <article class="outcome-row">
                 <img src="./assets/icons/clarity.svg" alt="" aria-hidden="true">
-                <div><h3 class="point-title">Evidence, coordinated</h3><p class="point-copy">Every source checked, missing, or stale is visible. Every artifact carries provenance.</p></div>
+                <div><h3 class="point-title">Clarity</h3><p class="point-copy">Every source checked, missing, or stale is visible. Every artifact carries provenance.</p></div>
               </article>
               <article class="outcome-row">
                 <img src="./assets/icons/alignment.svg" alt="" aria-hidden="true">
-                <div><h3 class="point-title">Impact, mapped</h3><p class="point-copy">Systems, data classes, customers, and jurisdictions. Confirmed versus potential, kept honest.</p></div>
+                <div><h3 class="point-title">Impact</h3><p class="point-copy">Systems, data classes, customers, and jurisdictions. Confirmed versus potential, kept honest.</p></div>
               </article>
               <article class="outcome-row">
                 <img src="./assets/icons/ownership.svg" alt="" aria-hidden="true">
-                <div><h3 class="point-title">Decisions, owned</h3><p class="point-copy">Containment, customer impact, and disclosure routed to named humans with the evidence attached.</p></div>
+                <div><h3 class="point-title">Decisions</h3><p class="point-copy">Containment, customer impact, and disclosure routed to named humans with the evidence attached.</p></div>
               </article>
               <article class="outcome-row">
                 <img src="./assets/icons/defensibility.svg" alt="" aria-hidden="true">
-                <div><h3 class="point-title">Record, defensible</h3><p class="point-copy">What was known, when, and why each call was made. Ready for counsel, customers, and regulators.</p></div>
+                <div><h3 class="point-title">Defensibility</h3><p class="point-copy">What was known, when, and why each call was made. Ready for counsel, customers, and regulators.</p></div>
               </article>
             </div>
             <p class="section-copy offer-kicker" data-reveal><strong>Agents move the work forward. Humans approve the decisions that matter.</strong></p>
@@ -310,13 +309,13 @@
       <div class="shell why-now-layout" data-reveal>
         <div>
           <p class="eyebrow">Why now</p>
-          <h2 id="why-now-title">The missing layer is not another agent.</h2>
+          <h2 id="why-now-title">The regulatory clock starts before the picture is complete.</h2>
         </div>
         <div>
           <p class="section-copy">
-            Most intrusions no longer drop malware. They log in. A stolen credential can cross identity, cloud, SaaS, and data before your first meeting of the day ends. CrowdStrike puts average breakout time at 29 minutes.
+            Credential incidents can cross identity, cloud, SaaS, and data in hours. Regulatory and customer-response clocks can begin before scope is stable. Pulling logs and reconstructing identity activity after the fact is too late for decisions being made now.
           </p>
-          <p class="section-copy why-now-follow-up">Response is going agentic at the same time. AI SOC analysts, SOAR automation, copilots. The work gets faster, but no single agent owns the chain from evidence to customer impact to a legal decision. What's missing is the layer above the stack where the evidence converges and a human signs the call. That's the layer we're building.</p>
+          <p class="section-copy why-now-follow-up">AI can speed evidence collection and correlation. Accountable people still need current facts, explicit unknowns, clear ownership, and a traceable basis for the next move.</p>
         </div>
       </div>
       <div class="shell point-grid pressure-grid" data-reveal>
@@ -328,12 +327,12 @@
         <article class="point-card pressure-item">
           <span class="pressure-index step-index">02</span>
           <h3 class="point-title">Agentic response</h3>
-          <p class="point-copy">More agents doing more of the work. None accountable for the whole chain.</p>
+          <p class="point-copy">Attackers and defenders are going agentic. Responders need agents that keep pace, with humans accountable for the decisions.</p>
         </article>
         <article class="point-card pressure-item">
           <span class="pressure-index step-index">03</span>
           <h3 class="point-title">Shorter windows</h3>
-          <p class="point-copy">GDPR gives 72 hours. The SEC gives four business days. Both start at confirmation.</p>
+          <p class="point-copy">Some regulatory clocks run for days, not weeks, and they can start before scope is stable.</p>
         </article>
         <article class="point-card pressure-item">
           <span class="pressure-index step-index">04</span>
@@ -364,14 +363,10 @@
         </div>
         <div class="founder-body-centered">
           <p class="section-copy">
-            I spent a decade-plus building security infrastructure at Capital One and Databricks,
-            including the multi-cloud SIEM and IR stack that ran through Databricks&rsquo; hypergrowth.
-            One pattern never changed: when identity was involved, we were reconstructing
-            attacker access across fragmented systems while containment and business decisions were already due.
+            Across more than a decade of security engineering at Capital One and Databricks, I built systems for high-stakes investigations, including the multi-cloud SIEM and incident response infrastructure that supported Databricks through hypergrowth. One pattern stayed constant: when identity was involved, teams still had to reconstruct attacker access across fragmented systems while they were already making containment and business decisions.
           </p>
           <p class="section-copy">
-            InaiSec is what I wanted in those rooms: automated identity tracing for speed,
-            human judgment for the calls that matter.
+            InaiSec is built for that live investigative gap: automated identity tracing for speed and precision, paired with the flexibility and human judgment complex incidents demand.
           </p>
         </div>
       </div>
@@ -396,7 +391,7 @@
             </ul>
           </div>
         </div>
-        <form class="contact-form partner-form" data-contact-form novalidate>
+        <form class="contact-form partner-form" action="/api/contact" method="post" data-contact-form>
           <label>
             Work email
             <input name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
@@ -407,10 +402,9 @@
           </label>
           <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn btn-primary" type="submit" data-submit>
-            <span data-submit-label>Talk through an incident</span>
+            <span data-submit-label>Join design partner program</span>
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
-          <p class="form-note">No production access or data upload needed for the first conversation.</p>
           <p class="form-status" id="form-status" data-form-status role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -447,9 +441,9 @@
 
   <footer class="footer shell">
     <div>
-      <img class="footer-logo footer-logo-dark" src="./assets/logo/inaisec-lockup-dark.svg" alt="InaiSec">
-      <img class="footer-logo footer-logo-light" src="./assets/logo/inaisec-lockup.svg" alt="InaiSec">
-      <p>An incident room for credential breaches. Evidence pulled on demand, blast radius mapped live, decisions made by people and kept on the record.</p>
+      <img class="footer-logo footer-logo-dark" src="./assets/logo/inaisec-lockup-dark.svg" alt="InaiSec" width="134" height="34">
+      <img class="footer-logo footer-logo-light" src="./assets/logo/inaisec-lockup.svg" alt="InaiSec" width="134" height="34">
+      <p>From security incident to disclosure-ready in minutes. InaiSec is the identity-first incident response layer bridging threat detection and disclosure.</p>
     </div>
     <div>
       <h2>Contact</h2>
@@ -468,10 +462,15 @@
     </div>
   </footer>
 
-  <script src="./script.js?v=depth10"></script>
+  <script src="./script.js?v=dev-07-18-ruled-2"></script>
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+      var analytics = document.createElement("script");
+      analytics.defer = true;
+      analytics.src = "/_vercel/insights/script.js";
+      document.body.appendChild(analytics);
+    }
   </script>
-  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

@@ -36,5 +36,6 @@ design-qa.md
 playwright-report/
 test-results/
 
-# Local tool workspace
+# Local tool workspaces and generated design snapshots
 .gemini/
+.superdesign/

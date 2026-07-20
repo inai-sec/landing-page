@@ -7,152 +7,227 @@
   <style>
     @font-face {
       font-family: "Manrope";
+      src: url("../fonts/manrope-200-800-latin.woff2") format("woff2");
       font-style: normal;
       font-weight: 200 800;
-      src: url("../fonts/manrope-200-800-latin.woff2") format("woff2");
     }
 
     @font-face {
       font-family: "IBM Plex Mono";
+      src: url("../fonts/ibmplexmono-500-latin.woff2") format("woff2");
       font-style: normal;
       font-weight: 500;
-      src: url("../fonts/ibmplexmono-500-latin.woff2") format("woff2");
     }
 
     *, *::before, *::after { box-sizing: border-box; }
 
-    html, body {
+    html,
+    body {
       width: 1200px;
       height: 630px;
       margin: 0;
       overflow: hidden;
-      background: #071019;
+      background: #0e1118;
     }
 
     .card {
+      display: grid;
       width: 1200px;
       height: 630px;
-      position: relative;
-      overflow: hidden;
-      padding: 54px 66px 48px;
-      display: grid;
       grid-template-rows: auto 1fr auto;
-      background: #071019;
-      color: #f1f4f6;
+      padding: 46px 60px 38px;
+      background: #0e1118;
+      color: #f0ece6;
       font-family: "Manrope", system-ui, sans-serif;
     }
 
-    .ambient {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 58%;
-      opacity: 0.08;
-    }
-
-    .top,
-    .body,
-    .foot {
-      position: relative;
-      z-index: 1;
-    }
-
     .logo {
-      width: 188px;
+      width: 152px;
       height: auto;
     }
 
     .body {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(410px, 0.92fr);
+      grid-template-columns: minmax(0, 1.08fr) minmax(400px, 0.92fr);
       align-items: center;
-      gap: 42px;
+      gap: 70px;
     }
 
-    .eyebrow {
-      margin: 0 0 22px;
-      color: #58def6;
+    .kicker,
+    .trace-head,
+    .trace-step,
+    .foot {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
     }
 
-    .headline {
+    .kicker {
+      margin: 0 0 18px;
+      color: #59d5ec;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
       max-width: 650px;
       margin: 0;
-      font-size: 61px;
-      font-weight: 480;
-      letter-spacing: -0.045em;
-      line-height: 1.01;
+      font-size: 66px;
+      font-weight: 770;
+      letter-spacing: -0.04em;
+      line-height: 0.94;
     }
 
-    .headline span {
+    h1 span {
       display: block;
-    }
-
-    .headline .point {
-      color: #a9b4bd;
+      color: #59d5ec;
     }
 
     .sub {
-      max-width: 610px;
-      margin: 25px 0 0;
-      color: #a4b0b9;
-      font-size: 20px;
-      line-height: 1.45;
+      max-width: 620px;
+      margin: 22px 0 0;
+      color: #c4beb5;
+      font-size: 16px;
+      line-height: 1.5;
     }
 
-    .visual {
-      width: 100%;
-      height: auto;
-      mix-blend-mode: screen;
+    .trace {
+      border-top: 1px solid rgba(226, 220, 210, 0.24);
+      border-bottom: 1px solid rgba(226, 220, 210, 0.24);
+    }
+
+    .trace-head {
+      display: flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: space-between;
+      color: #98928a;
+      font-size: 11px;
+    }
+
+    .trace-live {
+      color: #ed7c8d;
+    }
+
+    .trace-summary {
+      border-top: 1px solid rgba(226, 220, 210, 0.13);
+      padding: 20px 0 22px;
+    }
+
+    .trace-summary h2 {
+      max-width: 13ch;
+      margin: 0;
+      color: #f0ece6;
+      font-size: 28px;
+      font-weight: 740;
+      letter-spacing: -0.035em;
+      line-height: 1;
+    }
+
+    .trace-summary h2 span {
+      display: block;
+    }
+
+    .trace ol {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .trace ol::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 5px;
+      width: 1px;
+      background: rgba(226, 220, 210, 0.24);
+      content: "";
+    }
+
+    .trace li {
+      position: relative;
+      display: grid;
+      min-height: 70px;
+      grid-template-columns: 18px 30px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid rgba(226, 220, 210, 0.13);
+    }
+
+    .node {
+      z-index: 1;
+      width: 11px;
+      height: 11px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      background: #0e1118;
+    }
+
+    .complete { color: #68d2ad; }
+    .active { color: #59d5ec; }
+    .open { color: #e3bf66; }
+    .human { color: #f0ece6; }
+
+    .trace-step {
+      color: #98928a;
+      font-size: 10px;
+    }
+
+    .trace strong {
+      display: block;
+      color: #f0ece6;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .trace small {
+      display: block;
+      margin-top: 2px;
+      color: #98928a;
+      font-size: 10px;
+      line-height: 1.35;
     }
 
     .foot {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-top: 1px solid rgba(226, 220, 210, 0.13);
       padding-top: 18px;
-      border-top: 1px solid rgba(190, 208, 220, 0.2);
-      color: #74838f;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 12px;
+      color: #98928a;
+      font-size: 11px;
     }
 
-    .signal {
-      width: 64px;
-      height: 2px;
-      background: #2bd2f3;
+    .foot strong {
+      color: #c4beb5;
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
   <main class="card" aria-label="InaiSec social preview">
-    <img class="ambient" src="../visuals/ambient-grid.webp" alt="">
-    <header class="top">
+    <header>
       <img class="logo" src="../logo/inaisec-lockup-dark.svg" alt="InaiSec">
     </header>
 
     <section class="body">
       <div>
-        <p class="eyebrow">For the part after detection</p>
-        <h1 class="headline">
-          <span>The alert is clear.</span>
-          <span class="point">The business answer isn&rsquo;t.</span>
-        </h1>
-        <p class="sub">Bring one hard incident. Compare notes with the founder. No production access.</p>
+        <p class="kicker">Identity-first incident forensics</p>
+        <h1>Picks up where <span>detection stops.</span></h1>
+        <p class="sub">Your stack confirms the credential was compromised. InaiSec shows what it reached: every role, session, system, and customer touched, while the incident is still moving.</p>
       </div>
-      <img class="visual" src="../visuals/handoff-convergence.webp" alt="Four response handoffs converging into a shared decision">
+
+      <div class="trace" aria-label="Illustrative incident trace">
+        <div class="trace-head"><span>Active investigation</span><span class="trace-live">● Live</span></div>
+        <div class="trace-summary"><h2><span>Compromised identity</span> <span>to known blast radius</span></h2></div>
+        <ol>
+          <li class="complete"><span class="node"></span><span class="trace-step">01</span><span><strong>Alert confirmed</strong><small>Detection establishes a real incident.</small></span></li>
+          <li class="active"><span class="node"></span><span class="trace-step">02</span><span><strong>Identity traced</strong><small>Evidence pulled across the systems you already run.</small></span></li>
+          <li class="open"><span class="node"></span><span class="trace-step">03</span><span><strong>Blast radius mapped</strong><small>Systems, data, customers, and jurisdictions mapped live.</small></span></li>
+        </ol>
+      </div>
     </section>
 
-    <footer class="foot">
-      <div class="signal" aria-hidden="true"></div>
-      <span>inaisec.ai</span>
-    </footer>
+    <footer class="foot"><strong>Join the design partner program.</strong><span>inaisec.ai</span></footer>
   </main>
 </body>
 </html>
