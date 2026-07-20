@@ -3481,13 +3481,13 @@ main > section[id] {
     --story-input-tilt: -3deg;
     --story-input-z: -8px;
     --story-input-opacity: 0.9;
-    font-size: 0.66rem;
+    font-size: clamp(0.6rem, 2.5vw, 0.66rem);
   }
 
   .story-inline-visual-complete .convergence-output-labels {
     --story-output-tilt: 0.5deg;
     --story-output-z: 12px;
-    font-size: 0.9rem;
+    font-size: clamp(0.62rem, 2.8vw, 0.75rem);
   }
 
   .story-inline-visual-complete .convergence-input-labels span:nth-child(1) { top: 2%; }
@@ -3788,6 +3788,26 @@ html.text-scaled .convergence-output-labels {
   letter-spacing: 0.03em;
 }
 
+/* Preserve the in-diagram labels while giving enlarged-text users a fully
+   scalable equivalent that reads as an intentional figure caption. */
+html.text-scaled .story-visual-caption {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 18px 0 0 !important;
+  padding: 18px 0 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  clip-path: none;
+  white-space: normal !important;
+  border: 0 !important;
+  border-top: 1px solid var(--border-strong) !important;
+  color: var(--text-2);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
 html.text-scaled .nav-toggle {
   position: relative;
   z-index: 12;
@@ -4018,7 +4038,28 @@ html.text-scaled .contact-form .btn {
   }
 }
 
-/* Larger artifact labels become a two-column legend on narrow canvases. */
+/* The inline story replaces the sticky rail at tablet widths; keep its resolved
+   state centered instead of auto-flowing into an unbalanced second grid row. */
+@media (min-width: 981px) and (max-width: 1080px) {
+  .offer-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .offer-kicker {
+    width: min(660px, 100%);
+    justify-self: center;
+    text-align: center;
+  }
+
+  .story-inline-visual-complete {
+    width: min(660px, 100%);
+    max-width: 660px;
+    justify-self: center;
+  }
+}
+
+/* Keep the long form CTA contained on narrow canvases. */
 @media (max-width: 600px) {
   .contact-form .btn {
     gap: 8px;
@@ -4027,101 +4068,4 @@ html.text-scaled .contact-form .btn {
     line-height: 1.2;
     white-space: nowrap;
   }
-
-  .story-inline-visual .convergence-canvas {
-    width: 100%;
-    max-width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px 16px;
-    aspect-ratio: auto;
-  }
-
-  .story-inline-visual .convergence-plane {
-    position: relative;
-    inset: auto;
-    grid-column: 1 / -1;
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    transform: none;
-  }
-
-  .story-inline-visual .convergence-input-labels,
-  .story-inline-visual .convergence-output-labels {
-    position: relative;
-    inset: auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
-    font-size: var(--point-title-size);
-    font-weight: 700;
-    line-height: var(--point-title-line-height);
-    opacity: 1;
-    transform: none;
-  }
-
-  .story-inline-visual .convergence-input-labels span,
-  .story-inline-visual .convergence-output-labels span {
-    position: static;
-    width: auto;
-    padding: 0;
-    white-space: normal;
-  }
-
-  .story-inline-visual .convergence-output-labels span {
-    border-bottom: 0;
-  }
-
-  .story-inline-visual-fragmented .convergence-input-labels {
-    grid-column: 1 / -1;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .story-inline-visual-fragmented .convergence-output-labels {
-    display: none;
-  }
-}
-
-/* At enlarged root text, use a single-column legend at every viewport. */
-html.text-scaled .story-inline-visual .convergence-canvas {
-  width: 100%;
-  max-width: 100%;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 20px;
-  aspect-ratio: auto;
-}
-
-html.text-scaled .story-inline-visual .convergence-plane {
-  position: relative;
-  inset: auto;
-  grid-column: 1;
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  transform: none;
-}
-
-html.text-scaled .story-inline-visual .convergence-input-labels,
-html.text-scaled .story-inline-visual .convergence-output-labels {
-  position: relative;
-  inset: auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 12px;
-  font-size: var(--point-title-size);
-  opacity: 1;
-  transform: none;
-}
-
-html.text-scaled .story-inline-visual .convergence-input-labels span,
-html.text-scaled .story-inline-visual .convergence-output-labels span {
-  position: static;
-  width: auto;
-  padding: 0;
-  border-bottom: 0;
-  white-space: normal;
-}
-
-html.text-scaled .story-inline-visual-fragmented .convergence-output-labels {
-  display: none;
 }
