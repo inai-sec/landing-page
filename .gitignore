@@ -1,1 +1,41 @@
+# Operating-system files
 .DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local deployment and build output
+.vercel/
+dist/
+build/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Local browser and design-review artifacts
+audit/
+design-qa.md
+playwright-report/
+test-results/
+
+# Local tool workspaces and generated design snapshots
+.gemini/
+.superdesign/
