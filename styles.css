@@ -1564,10 +1564,16 @@ h3 {
   border-bottom: 1px solid var(--line);
 }
 
-.outcome-row img {
-  width: 37px;
-  height: 37px;
-  object-fit: contain;
+.outcome-index {
+  display: block;
+  padding-top: 0.2em;
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: var(--point-index-size);
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  letter-spacing: normal;
 }
 
 .outcome-row h3 {
@@ -2549,12 +2555,6 @@ figure {
   background: transparent;
 }
 
-.outcome-row img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-
 .outcome-row h3 {
   margin: 0 0 8px;
 }
@@ -3491,10 +3491,6 @@ html[data-theme="light"] .story-state-resolved {
     border: 0;
   }
 
-  .forensic-story.is-scroll-enhanced .outcome-row img {
-    width: 28px;
-    height: 28px;
-  }
 }
 
 @media (max-width: 1080px), (max-height: 639px) {
