@@ -1,14 +1,18 @@
 (() => {
   const root = document.documentElement;
+  const body = document.body;
   const header = document.querySelector("[data-header]");
+  const main = document.querySelector("main");
+  const footer = document.querySelector("footer");
   const navToggle = document.querySelector("[data-nav-toggle]");
   const navLabel = document.querySelector("[data-nav-label]");
   const navMenu = document.querySelector("[data-nav-menu]");
   const themeToggle = document.querySelector("[data-theme-toggle]");
   const themeMeta = document.querySelector("#meta-theme-color");
-  const signalMap = document.querySelector("[data-signal-map]");
   const form = document.querySelector("[data-contact-form]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const increasedContrast = window.matchMedia("(prefers-contrast: more)");
+  const forcedColors = window.matchMedia("(forced-colors: active)");
   const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
 
   const updateHeader = () => {
@@ -37,24 +41,39 @@
     });
   }
 
+  const setPageInert = (inert) => {
+    [main, footer].forEach((element) => {
+      if (element) element.inert = inert;
+    });
+  };
+
   const closeNavigation = (restoreFocus = false) => {
     if (!navToggle || !navMenu) return;
     navToggle.setAttribute("aria-expanded", "false");
     navToggle.setAttribute("aria-label", "Open navigation");
     navMenu.classList.remove("is-open");
-    document.body.classList.remove("nav-open");
+    body.classList.remove("nav-open");
+    setPageInert(false);
     if (navLabel) navLabel.textContent = "Menu";
     if (restoreFocus) navToggle.focus();
   };
 
+  const openNavigation = () => {
+    if (!navToggle || !navMenu) return;
+    navToggle.setAttribute("aria-expanded", "true");
+    navToggle.setAttribute("aria-label", "Close navigation");
+    navMenu.classList.add("is-open");
+    body.classList.add("nav-open");
+    setPageInert(true);
+    if (navLabel) navLabel.textContent = "Close";
+    const firstLink = navMenu.querySelector("a");
+    if (firstLink instanceof HTMLElement) firstLink.focus();
+  };
+
   if (navToggle && navMenu) {
     navToggle.addEventListener("click", () => {
-      const willOpen = navToggle.getAttribute("aria-expanded") !== "true";
-      navToggle.setAttribute("aria-expanded", String(willOpen));
-      navToggle.setAttribute("aria-label", willOpen ? "Close navigation" : "Open navigation");
-      navMenu.classList.toggle("is-open", willOpen);
-      document.body.classList.toggle("nav-open", willOpen);
-      if (navLabel) navLabel.textContent = willOpen ? "Close" : "Menu";
+      if (navToggle.getAttribute("aria-expanded") === "true") closeNavigation(true);
+      else openNavigation();
     });
 
     navMenu.addEventListener("click", (event) => {
@@ -63,20 +82,37 @@
 
     window.addEventListener("resize", () => {
       if (window.innerWidth > 1080 && navMenu.classList.contains("is-open")) closeNavigation();
-    });
+    }, { passive: true });
   }
 
   document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") return;
-    if (navMenu && navMenu.classList.contains("is-open")) closeNavigation(true);
+    if (!navMenu || !navToggle || !navMenu.classList.contains("is-open")) return;
+
+    if (event.key === "Escape") {
+      closeNavigation(true);
+      return;
+    }
+
+    if (event.key !== "Tab") return;
+    const focusable = [
+      navToggle,
+      ...navMenu.querySelectorAll("a[href], button:not([disabled])"),
+    ].filter((element) => element instanceof HTMLElement);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
   const enableMotion = () => {
     if (reducedMotion.matches) return;
-
-    const start = () => requestAnimationFrame(() => root.classList.add("motion-ready"));
-    if (!signalMap || signalMap.complete) start();
-    else signalMap.addEventListener("load", start, { once: true });
+    requestAnimationFrame(() => root.classList.add("motion-ready"));
   };
 
   enableMotion();
@@ -108,13 +144,23 @@
   const storyProblem = story?.querySelector("#problem");
   const storyOutcomes = story?.querySelector("#outcomes");
   const storyOutputs = Array.from(story?.querySelectorAll("[data-story-output]") || []);
-  const storyViewport = window.matchMedia("(min-width: 1081px) and (min-height: 920px)");
+  const storyViewport = window.matchMedia("(min-width: 1081px) and (min-height: 640px)");
   let storyFrame = 0;
+
+  const textIsScaled = () => {
+    const scaled = Number.parseFloat(getComputedStyle(root).fontSize) > 20;
+    root.classList.toggle("text-scaled", scaled);
+    return scaled;
+  };
 
   const clampUnit = (value) => Math.min(1, Math.max(0, value));
   const smoothStep = (value) => {
     const t = clampUnit(value);
     return t * t * (3 - (2 * t));
+  };
+  const smootherStep = (value) => {
+    const t = clampUnit(value);
+    return t * t * t * ((t * ((t * 6) - 15)) + 10);
   };
 
   const resetStory = () => {
@@ -123,7 +169,12 @@
     story.style.removeProperty("--story-reveal");
     story.style.removeProperty("--story-tilt");
     story.style.removeProperty("--story-shift");
-    story.style.removeProperty("--story-scale");
+    story.style.removeProperty("--story-depth-z");
+    story.style.removeProperty("--story-input-tilt");
+    story.style.removeProperty("--story-input-z");
+    story.style.removeProperty("--story-input-opacity");
+    story.style.removeProperty("--story-output-tilt");
+    story.style.removeProperty("--story-output-z");
     storyOutputs.forEach((label) => {
       label.style.removeProperty("opacity");
       label.style.removeProperty("transform");
@@ -135,7 +186,14 @@
     const supportsSticky = CSS.supports("position", "sticky");
     const supportsMask = CSS.supports("mask-image", "linear-gradient(#000, transparent)")
       || CSS.supports("-webkit-mask-image", "linear-gradient(#000, transparent)");
-    const enabled = supportsSticky && supportsMask && storyViewport.matches && !reducedMotion.matches;
+    const scaledText = textIsScaled();
+    const enabled = supportsSticky
+      && supportsMask
+      && storyViewport.matches
+      && !reducedMotion.matches
+      && !increasedContrast.matches
+      && !forcedColors.matches
+      && !scaledText;
     story.classList.toggle("is-scroll-enhanced", enabled);
     if (!enabled) resetStory();
   };
@@ -151,19 +209,24 @@
     const progress = clampUnit((headerHeight - problemRect.top) / panelTravel);
 
     const build = smoothStep((progress - 0.16) / 0.68);
-    const depth = smoothStep((progress - 0.48) / 0.42);
+    const depth = smootherStep((progress - 0.18) / 0.58);
     const reveal = 53 + (build * 51);
 
     story.style.setProperty("--story-reveal", `${reveal.toFixed(2)}%`);
-    story.style.setProperty("--story-tilt", `${(-3.2 * depth).toFixed(3)}deg`);
-    story.style.setProperty("--story-shift", `${(-5 * depth).toFixed(2)}px`);
-    story.style.setProperty("--story-scale", (1 + (0.008 * depth)).toFixed(4));
+    story.style.setProperty("--story-tilt", `${(-9.6 * depth).toFixed(3)}deg`);
+    story.style.setProperty("--story-shift", `${(1 * depth).toFixed(2)}px`);
+    story.style.setProperty("--story-depth-z", `${(-6 * depth).toFixed(2)}px`);
+    story.style.setProperty("--story-input-tilt", `${(-8.5 * depth).toFixed(3)}deg`);
+    story.style.setProperty("--story-input-z", `${(-22 * depth).toFixed(2)}px`);
+    story.style.setProperty("--story-input-opacity", (1 - (0.16 * depth)).toFixed(3));
+    story.style.setProperty("--story-output-tilt", `${(0.75 * depth).toFixed(3)}deg`);
+    story.style.setProperty("--story-output-z", `${(28 * depth).toFixed(2)}px`);
     story.classList.toggle("is-outcome-state", progress >= 0.58);
 
     storyOutputs.forEach((label, index) => {
       const amount = smoothStep((progress - (0.60 + (index * 0.055))) / 0.16);
       label.style.opacity = amount.toFixed(3);
-      label.style.transform = `translate3d(${((1 - amount) * 14).toFixed(2)}px, 0, 0)`;
+      label.style.transform = `translate3d(${((1 - amount) * 12).toFixed(2)}px, 0, 0)`;
     });
   };
 
@@ -188,20 +251,36 @@
       setStoryMode();
       scheduleStory();
     });
+    increasedContrast.addEventListener("change", () => {
+      setStoryMode();
+      scheduleStory();
+    });
+    forcedColors.addEventListener("change", () => {
+      setStoryMode();
+      scheduleStory();
+    });
+
+    new MutationObserver(() => {
+      setStoryMode();
+      scheduleStory();
+    }).observe(root, { attributes: true, attributeFilter: ["style"] });
   }
 
   if (!form) return;
+  form.noValidate = true;
 
   const submit = form.querySelector("[data-submit]");
   const submitLabel = form.querySelector("[data-submit-label]");
   const status = form.querySelector("[data-form-status]");
   const emailField = form.querySelector('[name="email"]');
   const messageField = form.querySelector('[name="message"]');
-  const defaultLabel = submitLabel ? submitLabel.textContent : "Talk through one hard incident";
+  const defaultLabel = submitLabel ? submitLabel.textContent : "Join design partner program";
+  let invalidOwner = null;
 
   const setStatus = (kind, text) => {
     if (!status) return;
-    status.dataset.kind = kind;
+    if (kind) status.dataset.kind = kind;
+    else delete status.dataset.kind;
     status.textContent = text || "";
   };
 
@@ -209,10 +288,16 @@
     if (!field) return;
     field.removeAttribute("aria-invalid");
     field.removeAttribute("aria-describedby");
+    if (invalidOwner === field) {
+      invalidOwner = null;
+      setStatus("", "");
+    }
   };
 
-  const markInvalid = (field) => {
+  const markInvalid = (field, message) => {
     if (!field) return;
+    invalidOwner = field;
+    setStatus("error", message);
     field.setAttribute("aria-invalid", "true");
     field.setAttribute("aria-describedby", "form-status");
     field.focus();
@@ -234,14 +319,12 @@
     };
 
     if (!payload.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
-      setStatus("error", "Please enter a valid work email.");
-      markInvalid(emailField);
+      markInvalid(emailField, "Please enter a valid work email.");
       return;
     }
 
     if (payload.message.length < 10) {
-      setStatus("error", "Add a sentence of context (at least 10 characters).");
-      markInvalid(messageField);
+      markInvalid(messageField, "Add a sentence of context (at least 10 characters).");
       return;
     }
 
@@ -252,7 +335,7 @@
     setStatus("pending", "Sending your note…");
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(form.action, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
