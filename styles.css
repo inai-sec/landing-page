@@ -3156,6 +3156,69 @@ main > section[id] {
   margin: clamp(48px, 6vw, 76px) auto 0;
 }
 
+.story-visual-caption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: center;
+  column-gap: 12px;
+  margin: 0 0 clamp(16px, 2.4vw, 22px);
+  font-family: var(--font-sans);
+  font-size: var(--point-title-size);
+  font-weight: 700;
+  line-height: var(--point-title-line-height);
+  letter-spacing: -0.02em;
+}
+
+.story-visual-caption-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  color: var(--text-2);
+  text-wrap: balance;
+}
+
+.story-visual-caption-label::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--purple);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--purple) 42%, transparent);
+}
+
+.story-visual-caption-state {
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.story-visual-caption-state-with-inaisec {
+  color: var(--accent-ink);
+}
+
+html[data-theme="light"] .story-visual-caption-state-with-inaisec,
+html[data-theme="light"] .story-state-resolved {
+  color: #087c98;
+}
+
+.story-inline-visual-complete .story-visual-caption-label::before {
+  background: var(--cyan);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--cyan) 42%, transparent);
+}
+
+@media (max-width: 360px) {
+  .story-visual-caption {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 6px;
+  }
+
+  .story-visual-caption-state {
+    justify-self: start;
+    padding-left: 19px;
+  }
+}
+
 .story-diagram-art {
   -webkit-mask-image: linear-gradient(
     90deg,
@@ -3287,6 +3350,7 @@ main > section[id] {
     flex: 0 0 154px;
     height: 30px;
     overflow: hidden;
+    opacity: 0;
     border: 1px solid var(--border-strong);
     border-radius: 999px;
     background: var(--button-bg);
@@ -3298,6 +3362,8 @@ main > section[id] {
     line-height: 28px;
     text-align: center;
     text-transform: uppercase;
+    transform: translate3d(0, 5px, 0);
+    transition: opacity 220ms ease, transform 220ms ease;
   }
 
   .story-state-chip > span {
@@ -3306,23 +3372,11 @@ main > section[id] {
     transition: opacity 220ms ease, transform 220ms ease, color 220ms ease;
   }
 
-  .story-state-fragmented {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
   .story-state-resolved {
-    opacity: 0;
-    transform: translate3d(0, 5px, 0);
     color: var(--accent-ink);
   }
 
-  .forensic-story.is-outcome-state .story-state-fragmented {
-    opacity: 0;
-    transform: translate3d(0, -5px, 0);
-  }
-
-  .forensic-story.is-outcome-state .story-state-resolved {
+  .forensic-story.is-outcome-state .story-state-chip {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
@@ -3788,9 +3842,11 @@ html.text-scaled .convergence-output-labels {
   letter-spacing: 0.03em;
 }
 
-/* Preserve the in-diagram labels while giving enlarged-text users a fully
-   scalable equivalent that reads as an intentional figure caption. */
-html.text-scaled .story-visual-caption {
+/* Preserve the short caption while giving enlarged-text users its full,
+   scalable description beneath it. */
+html.text-scaled .story-visual-description {
+  display: block;
+  grid-column: 1 / -1;
   position: static !important;
   width: auto !important;
   height: auto !important;
@@ -3805,7 +3861,9 @@ html.text-scaled .story-visual-caption {
   color: var(--text-2);
   font-family: var(--font-sans);
   font-size: 1rem;
+  font-weight: 400;
   line-height: 1.5;
+  letter-spacing: normal;
 }
 
 html.text-scaled .nav-toggle {
