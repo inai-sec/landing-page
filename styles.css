@@ -585,31 +585,6 @@ h3 {
   display: inline;
 }
 
-.pill {
-  flex: 0 0 auto;
-  max-width: 100%;
-  min-height: 30px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  padding: 0 11px;
-  border: 1px solid var(--border);
-  background: var(--button-bg);
-  color: var(--text-2);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-
-.pill-red {
-  border-color: rgba(232, 112, 128, 0.28);
-  background: var(--red-soft);
-  color: var(--red);
-}
-
 .case-flow {
   display: grid;
   gap: 12px;
@@ -667,6 +642,40 @@ h3 {
 .flow-node strong {
   min-width: 0;
   line-height: 1.2;
+}
+
+.flow-heading {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.flow-owner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-2);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.flow-owner::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.flow-owner-inaisec {
+  color: var(--accent-ink);
 }
 
 .flow-node small {
@@ -3606,30 +3615,6 @@ html[data-theme="light"] .story-state-resolved {
   border-bottom: 1px solid var(--border);
 }
 
-.case-card-top .pill-red {
-  min-height: 30px;
-  gap: 8px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  padding: 0;
-}
-
-.case-card-top .pill-red::before {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 10%, transparent);
-  content: "";
-  animation: ruled-live-pulse 2s ease-in-out infinite;
-}
-
-@keyframes ruled-live-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.42; }
-}
-
 .case-flow {
   gap: 0;
 }
@@ -3741,12 +3726,6 @@ html[data-theme="light"] .story-state-resolved {
 
   .faq-list p {
     padding-right: 30px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .case-card-top .pill-red::before {
-    animation: none;
   }
 }
 

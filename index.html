@@ -42,7 +42,7 @@
       if (meta) meta.setAttribute("content", theme === "light" ? "#f9fafb" : "#0e1118");
     })();
   </script>
-  <link rel="stylesheet" href="./styles.css?v=dev-07-18-polish-22">
+  <link rel="stylesheet" href="./styles.css?v=dev-07-18-polish-23">
 
   <script type="application/ld+json">
   {
@@ -136,24 +136,32 @@
                 <span>to known blast radius</span>
               </h2>
             </div>
-            <span class="pill pill-red">Live</span>
           </div>
           <div class="case-flow">
             <div class="flow-node">
               <span class="node-id step-index">01</span>
-              <strong>Alert confirmed</strong>
+              <div class="flow-heading">
+                <strong>Alert confirmed</strong>
+                <span class="flow-owner flow-owner-stack">Your detection stack</span>
+              </div>
               <small>Detection establishes a real incident.</small>
             </div>
             <div class="flow-line"></div>
             <div class="flow-node flow-node-active">
               <span class="node-id step-index">02</span>
-              <strong>Identity traced</strong>
+              <div class="flow-heading">
+                <strong>Identity traced</strong>
+                <span class="flow-owner flow-owner-inaisec">InaiSec</span>
+              </div>
               <small>Evidence pulled across Okta, AWS, Snowflake, and SaaS.</small>
             </div>
             <div class="flow-line"></div>
             <div class="flow-node flow-node-next">
               <span class="node-id step-index">03</span>
-              <strong>Blast radius mapped</strong>
+              <div class="flow-heading">
+                <strong>Blast radius mapped</strong>
+                <span class="flow-owner flow-owner-inaisec">InaiSec</span>
+              </div>
               <small>Systems, data, customers, and jurisdictions mapped live.</small>
             </div>
           </div>
