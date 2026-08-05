@@ -143,8 +143,12 @@ The installed design tools also provide repeatable source checks from the
 repository root:
 
 ```bash
-node .agents/skills/impeccable/scripts/context.mjs --target landing-page
-node .agents/skills/impeccable/scripts/detect.mjs --json \
+# Impeccable ships as a plugin (installed via /plugin). The vendored copy at
+# `.agents/skills/impeccable/` was removed 2026-08-04 (it had diverged from the
+# plugin). IMPECCABLE_SCRIPTS resolves the installed plugin's script directory.
+IMPECCABLE_SCRIPTS="$(dirname "$(find ~/.claude/plugins/cache/impeccable -name detect.mjs -path '*skills*' | sort | tail -1)")"
+node "$IMPECCABLE_SCRIPTS"/context.mjs --target landing-page
+node "$IMPECCABLE_SCRIPTS"/detect.mjs --json \
   landing-page/index.html landing-page/styles.css landing-page/script.js
 node --check landing-page/script.js
 ```
