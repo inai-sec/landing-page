@@ -575,14 +575,14 @@ h3 {
 }
 
 .case-card h2 {
-  max-width: 15ch;
+  max-width: 18ch;
   margin-top: 8px;
   font-size: clamp(1.7rem, 3vw, 2.55rem);
   letter-spacing: -0.04em;
 }
 
 .case-card h2 span {
-  display: inline;
+  display: block;
 }
 
 .case-flow {
@@ -3092,6 +3092,10 @@ html[data-theme="light"] .offer-visual-light {
   .case-card-top .pill {
     margin-top: 0;
   }
+
+  .case-card h2 {
+    line-height: 1.02;
+  }
 }
 
 /* Keep in-page navigation clear of the persistent header at every viewport. */
@@ -3976,6 +3980,28 @@ html.text-scaled .contact-form .btn {
   font-weight: 400;
   line-height: var(--point-copy-line-height);
   letter-spacing: normal;
+}
+
+/* The alert belongs to the detection stack; the next two stages are the
+   InaiSec-owned response. Reuse the product question-surface ground so that
+   ownership reads as one clear handoff without restoring card chrome. */
+.flow-node-active,
+.flow-node-next {
+  padding-inline: 16px;
+  background: var(--bg-muted);
+}
+
+.flow-node-active .step-index,
+.flow-node-active strong,
+.flow-node-next .step-index,
+.flow-node-next strong {
+  color: var(--accent-ink);
+  font-size: calc(var(--point-title-size) + 0.2rem);
+}
+
+.flow-node-active small,
+.flow-node-next small {
+  color: var(--text);
 }
 
 .convergence-input-labels,
