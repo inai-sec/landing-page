@@ -87,8 +87,8 @@ html[data-theme="dark"] {
   --point-title-size: 1.22rem;
   --point-title-line-height: 1.18;
   --point-copy-size: 1rem;
-  --point-copy-line-height: 1.58;
-  --section-copy-size: clamp(1.02rem, 1.45vw, 1.18rem);
+  --point-copy-line-height: 1.6;
+  --section-copy-size: clamp(1rem, 1.45vw, 1.125rem);
   --section-copy-line-height: 1.6;
 }
 
@@ -350,6 +350,10 @@ html[data-theme="light"] .footer-logo-light {
   height: 16px;
 }
 
+.theme-toggle-label {
+  display: none;
+}
+
 .theme-icon-moon {
   display: none;
 }
@@ -519,11 +523,11 @@ h3 {
 .hero-trust {
   margin: 18px 0 0;
   max-width: 56ch;
-  color: var(--text-3);
-  font-size: 1rem;
+  color: var(--text-2);
+  font-size: var(--point-copy-size);
   font-weight: 500;
   letter-spacing: 0.005em;
-  line-height: 1.55;
+  line-height: var(--point-copy-line-height);
 }
 
 .inline-cta {
@@ -575,14 +579,14 @@ h3 {
 }
 
 .case-card h2 {
-  max-width: 15ch;
+  max-width: 18ch;
   margin-top: 8px;
   font-size: clamp(1.7rem, 3vw, 2.55rem);
   letter-spacing: -0.04em;
 }
 
 .case-card h2 span {
-  display: inline;
+  display: block;
 }
 
 .case-flow {
@@ -790,7 +794,11 @@ h3 {
 .faq-list p,
 .footer p {
   color: var(--text-2);
-  line-height: 1.58;
+  line-height: var(--point-copy-line-height);
+}
+
+.footer p {
+  font-size: var(--point-copy-size);
 }
 
 .hp-field {
@@ -1126,8 +1134,8 @@ h3 {
   position: relative;
   padding-left: 26px;
   color: var(--text);
-  line-height: 1.55;
-  font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+  line-height: var(--section-copy-line-height);
+  font-size: var(--section-copy-size);
 }
 
 .benefit-list li::before {
@@ -1165,6 +1173,8 @@ h3 {
   cursor: pointer;
   padding-right: 32px;
   color: var(--text);
+  font-size: var(--section-copy-size);
+  line-height: var(--section-copy-line-height);
   font-weight: 800;
   letter-spacing: -0.015em;
   list-style: none;
@@ -1194,7 +1204,9 @@ h3 {
 
 .faq-list p {
   margin: 13px 0 0;
-  max-width: none;
+  max-width: 70ch;
+  font-size: var(--section-copy-size);
+  line-height: var(--section-copy-line-height);
 }
 
 .final-cta {
@@ -1964,7 +1976,6 @@ h3 {
 
   .hero-lede {
     max-width: 560px;
-    font-size: 0.9rem;
   }
 
   .hero-actions .btn {
@@ -2166,6 +2177,14 @@ h3 {
 
   .nav-links > a:not(.btn)::after {
     display: none;
+  }
+
+  .theme-toggle {
+    gap: 10px;
+  }
+
+  .theme-toggle-label {
+    display: inline;
   }
 
   .nav-links .btn {
@@ -2590,6 +2609,7 @@ figure {
 }
 
 .convergence-canvas {
+  --convergence-label-gap: clamp(10px, 1vw, 14px);
   position: relative;
   aspect-ratio: 3 / 2;
   perspective: 860px;
@@ -2643,6 +2663,8 @@ html[data-theme="light"] .convergence-plane > img {
 
 .convergence-input-labels span {
   left: 3.8%;
+  top: calc(var(--convergence-line-y) - var(--convergence-label-gap));
+  transform: translateY(-100%);
   color: color-mix(in srgb, var(--text) 82%, var(--purple) 18%);
 }
 
@@ -2651,14 +2673,16 @@ html[data-theme="light"] .convergence-plane > img {
   font-weight: 500;
   letter-spacing: 0.065em;
   opacity: var(--story-input-opacity, 1);
-  transform: translate3d(0, 0, var(--story-input-z, 0px)) rotateY(var(--story-input-tilt, 0deg));
+  transform: none;
   text-shadow: 0 0 8px color-mix(in srgb, var(--purple) 14%, transparent);
 }
 
-.convergence-input-labels span:nth-child(1) { top: 4.5%; }
-.convergence-input-labels span:nth-child(2) { top: 27.5%; }
-.convergence-input-labels span:nth-child(3) { top: 52.5%; }
-.convergence-input-labels span:nth-child(4) { top: 77.5%; }
+/* Line centers measured in the 1536 × 1024 artwork; anchor label bottoms to
+   their own line so font-size changes cannot collapse the breathing room. */
+.convergence-input-labels span:nth-child(1) { --convergence-line-y: 15.618%; }
+.convergence-input-labels span:nth-child(2) { --convergence-line-y: 37.160%; }
+.convergence-input-labels span:nth-child(3) { --convergence-line-y: 61.858%; }
+.convergence-input-labels span:nth-child(4) { --convergence-line-y: 84.281%; }
 
 .convergence-output-labels span {
   right: 0;
@@ -2965,12 +2989,6 @@ html[data-theme="light"] .offer-visual-light {
     font-size: clamp(2.65rem, 4vw, 3.25rem);
   }
 
-  .offer-intro .section-copy,
-  .faq-intro .section-copy {
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-
   .offer-body {
     gap: 36px;
   }
@@ -3091,6 +3109,10 @@ html[data-theme="light"] .offer-visual-light {
 
   .case-card-top .pill {
     margin-top: 0;
+  }
+
+  .case-card h2 {
+    line-height: 1.02;
   }
 }
 
@@ -3253,13 +3275,12 @@ html[data-theme="light"] .story-state-resolved {
   visibility: hidden;
 }
 
-.story-inline-visual-complete .convergence-plane {
+.story-inline-visual-complete .convergence-plane,
+.story-inline-visual-complete .convergence-input-labels {
   transform: translate3d(1px, 0, -4px) rotateY(-7deg);
 }
 
 .story-inline-visual-complete {
-  --story-input-tilt: -8.5deg;
-  --story-input-z: -22px;
   --story-input-opacity: 0.84;
   --story-output-tilt: 0.75deg;
   --story-output-z: 28px;
@@ -3395,7 +3416,8 @@ html[data-theme="light"] .story-state-resolved {
     perspective-origin: 74% 50%;
   }
 
-  .story-convergence .convergence-plane {
+  .story-convergence .convergence-plane,
+  .story-convergence .convergence-input-labels {
     transform: translate3d(var(--story-shift, 0px), 0, var(--story-depth-z, 0px)) rotateY(var(--story-tilt, 0deg));
     transform-origin: 46% 50%;
     will-change: transform;
@@ -3431,12 +3453,6 @@ html[data-theme="light"] .story-state-resolved {
 
   .forensic-story.is-scroll-enhanced .problem-layout h2 {
     max-width: 11ch;
-  }
-
-  .forensic-story.is-scroll-enhanced .problem-layout .section-copy,
-  .forensic-story.is-scroll-enhanced .offer-intro .section-copy {
-    font-size: 1rem;
-    line-height: 1.55;
   }
 
   .forensic-story.is-scroll-enhanced .point-grid {
@@ -3537,8 +3553,6 @@ html[data-theme="light"] .story-state-resolved {
   }
 
   .story-inline-visual-complete .convergence-input-labels {
-    --story-input-tilt: -3deg;
-    --story-input-z: -8px;
     --story-input-opacity: 0.9;
     font-size: clamp(0.6rem, 2.5vw, 0.66rem);
   }
@@ -3549,17 +3563,13 @@ html[data-theme="light"] .story-state-resolved {
     font-size: clamp(0.62rem, 2.8vw, 0.75rem);
   }
 
-  .story-inline-visual-complete .convergence-input-labels span:nth-child(1) { top: 2%; }
-  .story-inline-visual-complete .convergence-input-labels span:nth-child(2) { top: 25%; }
-  .story-inline-visual-complete .convergence-input-labels span:nth-child(3) { top: 50%; }
-  .story-inline-visual-complete .convergence-input-labels span:nth-child(4) { top: 75%; }
-
   .story-inline-visual-complete .convergence-output-labels span:nth-child(1) { top: 8%; }
   .story-inline-visual-complete .convergence-output-labels span:nth-child(2) { top: 31%; }
   .story-inline-visual-complete .convergence-output-labels span:nth-child(3) { top: 59%; }
   .story-inline-visual-complete .convergence-output-labels span:nth-child(4) { top: 82%; }
 
-  .story-inline-visual-complete .convergence-plane {
+  .story-inline-visual-complete .convergence-plane,
+  .story-inline-visual-complete .convergence-input-labels {
     transform: translate3d(0.5px, 0, -2px) rotateY(-3.4deg);
   }
 }
@@ -3748,7 +3758,7 @@ h2 {
 @media (max-width: 540px) {
   .hero h1 {
     max-width: none;
-    font-size: clamp(3.2rem, 15.5vw, 4.5rem);
+    font-size: clamp(2.6rem, 13vw, 4.5rem);
     line-height: 0.93;
   }
 }
@@ -3912,6 +3922,14 @@ html.text-scaled .nav-links .btn {
   white-space: normal;
 }
 
+html.text-scaled .theme-toggle {
+  gap: 10px;
+}
+
+html.text-scaled .theme-toggle-label {
+  display: inline;
+}
+
 html.text-scaled .contact-form .btn {
   height: auto;
   min-height: 52px;
@@ -3976,6 +3994,28 @@ html.text-scaled .contact-form .btn {
   font-weight: 400;
   line-height: var(--point-copy-line-height);
   letter-spacing: normal;
+}
+
+/* The alert belongs to the detection stack; the next two stages are the
+   InaiSec-owned response. Reuse the product question-surface ground so that
+   ownership reads as one clear handoff without restoring card chrome. */
+.flow-node-active,
+.flow-node-next {
+  padding-inline: 16px;
+  background: var(--bg-muted);
+}
+
+.flow-node-active .step-index,
+.flow-node-active strong,
+.flow-node-next .step-index,
+.flow-node-next strong {
+  color: var(--accent-ink);
+  font-size: calc(var(--point-title-size) + 0.2rem);
+}
+
+.flow-node-active small,
+.flow-node-next small {
+  color: var(--text);
 }
 
 .convergence-input-labels,
@@ -4051,6 +4091,20 @@ html.text-scaled .contact-form .btn {
 .contact-form .form-status:empty {
   min-height: 0;
   margin: 0;
+}
+
+.form-fallback {
+  margin: 0;
+  color: var(--text-2);
+  font-size: var(--section-copy-size);
+  line-height: var(--section-copy-line-height);
+}
+
+.form-fallback a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
 }
 
 .contact-form input::placeholder,

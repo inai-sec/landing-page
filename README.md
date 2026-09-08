@@ -30,7 +30,7 @@ development environment or a preview deployment when testing form delivery.
 | `vercel.json` | Vercel routing and response-header configuration. |
 | `assets/` | Logos, local fonts, founder imagery, icons, and social-preview assets. |
 | `assets/og/og-render.html` | Editable source for the 1200×630 social card. |
-| `assets/og/og-card-v2.png` | Generated Open Graph and X/Twitter preview image. |
+| `assets/og/og-card-v5.png` | Generated Open Graph and X/Twitter preview image. |
 
 ## Design direction
 
@@ -70,6 +70,13 @@ Workflow steps, convergence labels, and form controls reuse the same title/body
 tokens as the authored `Evidence gap` entries, including a stacked label legend
 when the inline convergence figure becomes too narrow for overlay text.
 
+Narrative paragraphs, FAQ answers, and design-partner benefits share the same
+responsive prose token: 16–18px at the default root size, with 1.6 line height.
+Compact card descriptions and supporting/footer text use 16px with the same
+line-height ratio. Sticky scenes and short viewports must not independently
+shrink section prose. The Incident Room bridge is a separate paragraph with
+only “InaiSec” bolded.
+
 ### Content contract
 
 The section order and narrative spine intentionally follow the authored
@@ -83,6 +90,23 @@ with current wording reflecting approved browser annotations:
 5. Founder
 6. Design partner program
 7. FAQ and footer
+
+The September 8, 2026 copy pass uses “Trace the incident. Understand the
+impact.” as the hero. It names security incidents and potentially affected
+customers, centers the Problem section on reconstructing scattered evidence,
+and embeds response questions in the four existing Outcomes points. The
+Why-now headline is “Decisions can’t wait for the final report.” The footer
+describes evidence, customer impact, open questions, and decisions without a
+disclosure-speed promise. Primary CTA wording, section order, and sticky
+choreography remain as authored. The phone headline size accommodates the
+approved wording without clipping.
+
+The follow-up credibility review aligns `llms.txt` with the page's qualified
+claims about evidence, potential customer impact, uncertainty, and human
+decisions. It removes exhaustive coverage, speed, and disclosure-readiness
+promises from that summary. The social card uses `og-card-v5.png`, the approved
+hero paragraph's opening sentence, and the landing page's current workflow copy
+and ownership labels. The sitemap records the September 8, 2026 page modification date.
 
 Accessibility behavior, the form contract, metadata, and analytics loading
 remain the implementation layer around that presentation. During visual-only
@@ -107,6 +131,8 @@ redesign decisions and evidence are recorded in [design-qa.md](design-qa.md).
 
 `api/contact.js` accepts `POST` requests, validates email syntax and message
 length, applies a honeypot check, and sends plain-text email through Resend.
+HTML field limits, client validation, and the handler cap email at 254
+characters and the message at 4,000; messages require at least 10 characters.
 Configure these variables in the Vercel project:
 
 - `RESEND_API_KEY`: Resend API key.
@@ -114,8 +140,36 @@ Configure these variables in the Vercel project:
 - `CONTACT_TO`: destination inbox.
 
 The form must retain visible labels, inline error text, a real pending state,
-and an unambiguous success state. The public `hello@inaisec.ai` link remains the
-fallback when delivery is unavailable.
+and an unambiguous success state. A send failure reveals a clickable
+`hello@inaisec.ai` email alternative immediately below the status message. The
+footer email link remains available. Both are manual alternatives; the form
+does not automatically send through the visitor's email app.
+
+### Contact rate limit: deferred deployment step
+
+The handler and `vercel.json` do not activate a rate limit. During deployment,
+configure this rule in the Vercel project's Firewall:
+
+| Setting | Value |
+| --- | --- |
+| Rule name | `contact-form-rate-limit` |
+| Conditions, both required | Request Path equals `/api/contact`; Request Method equals `POST` |
+| Action and strategy | Rate Limit; Fixed Window |
+| Window and limit | 600 seconds; 5 requests |
+| Counting key | IP Address |
+| Over-limit action | Default (429) |
+
+Inspect Log mode first to assess shared-network traffic; it does not block.
+To enforce, select Default (429), Save Rule, Review Changes, and Publish.
+Fixed Window is available on all plans; 600 seconds fits Hobby/Pro limits.
+Counters are regional, so this is not a global email-quota guarantee.
+[Vercel rate-limit documentation](https://vercel.com/docs/vercel-firewall/vercel-waf/rate-limiting).
+
+After activation, verify from one network using an invalid email and short
+message: requests should receive validation errors before the threshold and
+429 above it, without sending mail. Retry after the window resets and confirm
+the UI offers waiting or the manual email alternative. Do not assume the WAF
+returns a `Retry-After` header. This rule has not been activated or tested here.
 
 ## Deployment
 
@@ -137,14 +191,21 @@ Before publishing, review at 375, 768, 1024, and 1440 CSS pixels and verify:
   JavaScript disabled;
 - long headings, form errors, pending, success, and delivery failure states;
 - metadata, canonical URL, production links, and a 1200×630 social preview;
+- consistency between visible claims and `llms.txt`, founder attribution,
+  structured-data identity, and the sitemap modification date;
+- the exported social card at feed size, including its headline and short lede;
 - form delivery in a Vercel preview with all three Resend variables configured.
 
 The installed design tools also provide repeatable source checks from the
 repository root:
 
 ```bash
-node .agents/skills/impeccable/scripts/context.mjs --target landing-page
-node .agents/skills/impeccable/scripts/detect.mjs --json \
+# Impeccable ships as a plugin (installed via /plugin). The vendored copy at
+# `.agents/skills/impeccable/` was removed 2026-08-04 (it had diverged from the
+# plugin). IMPECCABLE_SCRIPTS resolves the installed plugin's script directory.
+IMPECCABLE_SCRIPTS="$(dirname "$(find ~/.claude/plugins/cache/impeccable -name detect.mjs -path '*skills*' | sort | tail -1)")"
+node "$IMPECCABLE_SCRIPTS"/context.mjs --target landing-page
+node "$IMPECCABLE_SCRIPTS"/detect.mjs --json \
   landing-page/index.html landing-page/styles.css landing-page/script.js
 node --check landing-page/script.js
 ```
