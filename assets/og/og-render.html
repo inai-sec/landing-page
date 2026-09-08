@@ -103,17 +103,13 @@
       font-size: 11px;
     }
 
-    .trace-live {
-      color: #ed7c8d;
-    }
-
     .trace-summary {
       border-top: 1px solid rgba(226, 220, 210, 0.13);
       padding: 20px 0 22px;
     }
 
     .trace-summary h2 {
-      max-width: 13ch;
+      max-width: 100%;
       margin: 0;
       color: #f0ece6;
       font-size: 28px;
@@ -179,6 +175,20 @@
       line-height: 1.35;
     }
 
+    .trace-heading {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px 8px;
+    }
+
+    .trace-owner {
+      color: #98928a;
+      font-size: 10px;
+    }
+
+    .trace-owner-inaisec { color: #59d5ec; }
+
     .trace small {
       display: block;
       margin-top: 2px;
@@ -212,22 +222,22 @@
     <section class="body">
       <div>
         <p class="kicker">Identity-first incident forensics</p>
-        <h1>Picks up where <span>detection stops.</span></h1>
-        <p class="sub">Your stack confirms the credential was compromised. InaiSec shows what it reached: every role, session, system, and customer touched, while the incident is still moving.</p>
+        <h1>Trace the incident. <span>Understand the impact.</span></h1>
+        <p class="sub">When a credential is compromised, InaiSec helps you trace where it was used and which systems and customers may be affected.</p>
       </div>
 
-      <div class="trace" aria-label="Illustrative incident trace">
-        <div class="trace-head"><span>Active investigation</span><span class="trace-live">● Live</span></div>
+      <div class="trace" aria-label="Incident response workflow preview">
+        <div class="trace-head"><span>Active investigation</span></div>
         <div class="trace-summary"><h2><span>Compromised identity</span> <span>to known blast radius</span></h2></div>
         <ol>
-          <li class="complete"><span class="node"></span><span class="trace-step">01</span><span><strong>Alert confirmed</strong><small>Detection establishes a real incident.</small></span></li>
-          <li class="active"><span class="node"></span><span class="trace-step">02</span><span><strong>Identity traced</strong><small>Evidence pulled across the systems you already run.</small></span></li>
-          <li class="open"><span class="node"></span><span class="trace-step">03</span><span><strong>Blast radius mapped</strong><small>Systems, data, customers, and jurisdictions mapped live.</small></span></li>
+          <li class="complete"><span class="node"></span><span class="trace-step">01</span><span><span class="trace-heading"><strong>Alert confirmed</strong><span class="trace-owner">Your detection stack</span></span><small>Detection establishes a real incident.</small></span></li>
+          <li class="active"><span class="node"></span><span class="trace-step">02</span><span><span class="trace-heading"><strong>Identity traced</strong><span class="trace-owner trace-owner-inaisec">InaiSec</span></span><small>Evidence pulled across identity providers, cloud, and SaaS.</small></span></li>
+          <li class="open"><span class="node"></span><span class="trace-step">03</span><span><span class="trace-heading"><strong>Blast radius mapped</strong><span class="trace-owner trace-owner-inaisec">InaiSec</span></span><small>Systems, data, customers, and jurisdictions mapped live.</small></span></li>
         </ol>
       </div>
     </section>
 
-    <footer class="foot"><strong>Join the design partner program.</strong><span>inaisec.ai</span></footer>
+    <footer class="foot"><strong>Join design partner program</strong><span>inaisec.ai</span></footer>
   </main>
 </body>
 </html>

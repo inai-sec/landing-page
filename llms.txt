@@ -1,33 +1,35 @@
 # InaiSec
 
-InaiSec is the identity-first IR layer for everything after an alert is confirmed. From security incident to disclosure-ready in minutes.
+Identity-first incident response, from evidence to customer impact. Keep the facts, open questions, and decisions together as the investigation changes.
 
 ## Positioning
 
-InaiSec picks up where detection stops. It collects evidence, traces compromised credentials across cloud, SaaS, identity, and data systems, maps blast radius, and prepares disclosure-ready notification evidence. Investigation tools collect logs. Compliance tools tell you who to notify after the fact. InaiSec converges both during the investigation.
+Trace the incident. Understand the impact.
 
-## What InaiSec does for an investigation
+When a credential is compromised, InaiSec helps you trace where it was used and which systems and customers may be affected. Keep the evidence and unanswered questions in one incident room as you respond.
 
-- Pulls the evidence needed for an active investigation from the systems involved, on demand.
-- Traces every identity, role, session, and system touched by the compromised credential.
-- Maps blast radius: which systems, which data, which customers, which jurisdictions.
-- Generates obligation timers and notification packets aligned with the regulations that apply.
-- Keeps every step audit-logged and ready for legal, executive, and regulator review.
+## What InaiSec is designed to do for an investigation
 
-## Outcomes
+- Pull case-scoped evidence on demand from the identity, cloud, SaaS, and data systems involved.
+- Trace compromised identities across roles, sessions, and systems, with missing or stale evidence visible.
+- Connect identity activity to systems, data, and customers that may be affected, distinguishing confirmed from potential impact.
+- Keep evidence and open questions available to the people deciding containment, customer impact, and disclosure.
+- Preserve the basis for response decisions as the investigation changes.
 
-- Hours of manual evidence stitching collapse into minutes.
-- Blast radius is known during the investigation, not after.
-- Legal and the CISO get disclosure-ready findings in stream with the investigation.
-- Credentials used during retrieval are read-only, scoped to the active case, and revocable at any time.
+## Outcomes InaiSec is being shaped around
+
+- What do we know? Source-linked evidence, confirmed facts, and missing or stale information.
+- How far did it spread? Systems, data, and customers that may be affected, with confirmed and potential impact kept distinct.
+- What must we decide next? Named owners review containment, customer impact, and disclosure with evidence attached.
+- Can we explain our response? A record of what was known, what remained uncertain, and why each decision was made.
 
 ## Founder
 
-Kishore Fernando. Founding security engineer at Databricks (2019–2025), where he built the multi-cloud SIEM and IR infrastructure that ran security operations through hypergrowth and was foundational to FedRAMP High and DoD IL5 authorizations. Previously Sr. Manager, Security Software Engineering at Capital One (2014–2019); co-inventor of 4 security patents. LinkedIn: https://www.linkedin.com/in/kishore-p-fernando
+Kishore Fernando, founder of InaiSec. Across more than a decade of security engineering at Capital One and Databricks, he built systems for high-stakes investigations, including the multi-cloud SIEM and incident response infrastructure that supported Databricks through hypergrowth. InaiSec addresses the difficulty of reconstructing identity activity across fragmented systems while teams are making containment and business decisions. LinkedIn: https://www.linkedin.com/in/kishore-p-fernando
 
 ## Design partner program
 
-InaiSec is seeking 3 to 5 paid design partners running real identity investigations. The first session is a discovery conversation about one closed identity-led incident, with no customer data. Any replay on partner data happens only after a written data-handling gate is agreed. Partners get direct founder contact, roadmap influence, and founding-partner commercial terms.
+InaiSec is seeking 3 to 5 paid design partners running real credential investigations. Start with the story of one closed identity-led incident. No customer data is needed in the first session. The conversation explores where evidence, ownership, and customer-impact decisions broke down, followed by a mutual decision about whether a gated replay on partner data would be useful and whether a paid design partnership is the right next step.
 
 ## Contact
 

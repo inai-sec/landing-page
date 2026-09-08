@@ -8,6 +8,7 @@
   const navLabel = document.querySelector("[data-nav-label]");
   const navMenu = document.querySelector("[data-nav-menu]");
   const themeToggle = document.querySelector("[data-theme-toggle]");
+  const themeLabel = document.querySelector("[data-theme-label]");
   const themeMeta = document.querySelector("#meta-theme-color");
   const form = document.querySelector("[data-contact-form]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -26,6 +27,7 @@
     const theme = root.getAttribute("data-theme") || "dark";
     const nextTheme = theme === "dark" ? "light" : "dark";
     if (themeToggle) themeToggle.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
+    if (themeLabel) themeLabel.textContent = `Switch to ${nextTheme} theme`;
     if (themeMeta) themeMeta.setAttribute("content", theme === "light" ? "#f9fafb" : "#0e1118");
   };
 
@@ -170,8 +172,6 @@
     story.style.removeProperty("--story-tilt");
     story.style.removeProperty("--story-shift");
     story.style.removeProperty("--story-depth-z");
-    story.style.removeProperty("--story-input-tilt");
-    story.style.removeProperty("--story-input-z");
     story.style.removeProperty("--story-input-opacity");
     story.style.removeProperty("--story-output-tilt");
     story.style.removeProperty("--story-output-z");
@@ -216,8 +216,6 @@
     story.style.setProperty("--story-tilt", `${(-9.6 * depth).toFixed(3)}deg`);
     story.style.setProperty("--story-shift", `${(1 * depth).toFixed(2)}px`);
     story.style.setProperty("--story-depth-z", `${(-6 * depth).toFixed(2)}px`);
-    story.style.setProperty("--story-input-tilt", `${(-8.5 * depth).toFixed(3)}deg`);
-    story.style.setProperty("--story-input-z", `${(-22 * depth).toFixed(2)}px`);
     story.style.setProperty("--story-input-opacity", (1 - (0.16 * depth)).toFixed(3));
     story.style.setProperty("--story-output-tilt", `${(0.75 * depth).toFixed(3)}deg`);
     story.style.setProperty("--story-output-z", `${(28 * depth).toFixed(2)}px`);
@@ -272,12 +270,14 @@
   const submit = form.querySelector("[data-submit]");
   const submitLabel = form.querySelector("[data-submit-label]");
   const status = form.querySelector("[data-form-status]");
+  const fallback = form.querySelector("[data-form-fallback]");
   const emailField = form.querySelector('[name="email"]');
   const messageField = form.querySelector('[name="message"]');
   const defaultLabel = submitLabel ? submitLabel.textContent : "Join design partner program";
   let invalidOwner = null;
 
   const setStatus = (kind, text) => {
+    if (fallback) fallback.hidden = true;
     if (!status) return;
     if (kind) status.dataset.kind = kind;
     else delete status.dataset.kind;
@@ -318,13 +318,18 @@
       website: String(data.get("website") || ""),
     };
 
-    if (!payload.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+    if (!payload.email || payload.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
       markInvalid(emailField, "Please enter a valid work email.");
       return;
     }
 
     if (payload.message.length < 10) {
       markInvalid(messageField, "Add a sentence of context (at least 10 characters).");
+      return;
+    }
+
+    if (payload.message.length > 4000) {
+      markInvalid(messageField, "Keep the context to 4,000 characters or fewer.");
       return;
     }
 
@@ -343,14 +348,23 @@
 
       if (!response.ok) {
         const detail = await response.json().catch(() => ({}));
-        throw new Error(detail.error || "Could not send right now. Please email hello@inaisec.ai.");
+        if (response.status === 429) {
+          throw new Error("Too many attempts. Please wait a few minutes before trying again.");
+        }
+        const message = response.status === 400 && typeof detail.error === "string"
+          ? detail.error
+          : "We couldn’t send your message. Please try again or email us.";
+        throw new Error(message);
       }
 
       form.reset();
       setStatus("success", "Thanks. Kishore will be in touch shortly.");
       if (submitLabel) submitLabel.textContent = "Sent";
     } catch (error) {
-      setStatus("error", error instanceof Error ? error.message : "Could not send right now. Please email hello@inaisec.ai.");
+      setStatus("error", error instanceof Error && !(error instanceof TypeError)
+        ? error.message
+        : "We couldn’t send your message. Please try again or email us.");
+      if (fallback) fallback.hidden = false;
       if (submitLabel) submitLabel.textContent = defaultLabel;
     } finally {
       if (submit) submit.disabled = false;
