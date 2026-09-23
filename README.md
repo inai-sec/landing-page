@@ -130,14 +130,20 @@ redesign decisions and evidence are recorded in [design-qa.md](design-qa.md).
 ## Contact form
 
 `api/contact.js` accepts `POST` requests, validates email syntax and message
-length, applies a honeypot check, and sends plain-text email through Resend.
+length, applies a honeypot check, checks the email domain with DISIFY, and sends
+eligible inquiries as plain-text email through Resend.
 HTML field limits, client validation, and the handler cap email at 254
 characters and the message at 4,000; messages require at least 10 characters.
 Configure these variables in the Vercel project:
 
+- `DISIFY_API_KEY`: server-only DISIFY account API key (required).
 - `RESEND_API_KEY`: Resend API key.
 - `CONTACT_FROM`: verified sender, for example `InaiSec <hello@inaisec.ai>`.
 - `CONTACT_TO`: destination inbox.
+
+Follow [EMAIL-VALIDATION-SETUP.md](EMAIL-VALIDATION-SETUP.md) for account setup,
+environment choices, redeployment, and verification. Run `npm test` for synthetic
+contact-handler tests; no live credentials are required.
 
 The form must retain visible labels, inline error text, a real pending state,
 and an unambiguous success state. A send failure reveals a clickable
