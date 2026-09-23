@@ -3,8 +3,43 @@
 //   RESEND_API_KEY  - API key from https://resend.com/api-keys
 //   CONTACT_FROM    - verified sender, e.g. "InaiSec <hello@inaisec.ai>"
 //   CONTACT_TO      - destination inbox, e.g. "hello@inaisec.ai"
+//   DISIFY_API_KEY  - server-only key from https://disify.com/account
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const DISIFY_TIMEOUT_MS = 4000;
+const CHECK_UNAVAILABLE = "We couldn’t check your email right now. Please try again shortly or email us directly.";
+
+// Domain-only request: never send the mailbox name or inquiry to DISIFY.
+async function checkWorkDomain(domain, apiKey) {
+  const response = await fetch("https://disify.com/api/domain", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Accept: "application/json",
+      "X-Api-Key": apiKey,
+    },
+    body: new URLSearchParams({ domain }),
+    signal: AbortSignal.timeout(DISIFY_TIMEOUT_MS),
+    redirect: "error",
+  });
+  if (response.status !== 200) throw new Error("Domain check unavailable");
+  const result = await response.json();
+  if (!result || typeof result.format !== "boolean") throw new Error("Incomplete domain check");
+  if (!result.format) return "Please enter a valid work email domain.";
+  if (["free", "disposable", "dns"].some(field => typeof result[field] !== "boolean")) {
+    throw new Error("Incomplete domain check");
+  }
+  const signals = result.signals === undefined ? [] : result.signals;
+  if (!Array.isArray(signals) || !signals.every(signal => typeof signal === "string")) {
+    throw new Error("Incomplete domain check");
+  }
+  if (result.free || result.disposable) {
+    return "Please use your company work email. Personal and disposable email providers aren’t accepted.";
+  }
+  if (signals.includes("dns_indeterminate")) throw new Error("Domain check inconclusive");
+  if (!result.dns) return "We couldn’t find mail service for that domain. Please check your work email.";
+  return null;
+}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -40,12 +75,28 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Message must be between 10 and 4000 characters." });
   }
 
+  const domain = email.split("@")[1].toLowerCase();
+  if (domain === "gmail.com") {
+    return res.status(400).json({ error: "Please use your company work email. Personal Gmail addresses aren’t accepted." });
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_FROM;
   const to = process.env.CONTACT_TO;
   if (!apiKey || !from || !to) {
     console.error("Missing RESEND_API_KEY / CONTACT_FROM / CONTACT_TO env vars.");
     return res.status(500).json({ error: "Contact endpoint is not configured." });
+  }
+
+  const disifyKey = process.env.DISIFY_API_KEY?.trim();
+  if (!disifyKey) return res.status(503).json({ error: CHECK_UNAVAILABLE });
+  try {
+    const rejection = await checkWorkDomain(domain, disifyKey);
+    if (rejection) return res.status(400).json({ error: rejection });
+  } catch {
+    // Never log vendor payloads, request details, or credentials.
+    console.error("DISIFY domain check unavailable or inconclusive.");
+    return res.status(503).json({ error: CHECK_UNAVAILABLE });
   }
 
   const subject = "InaiSec design partner program";
