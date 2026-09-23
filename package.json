@@ -4,6 +4,7 @@
   "private": true,
   "description": "Standalone static landing page for InaiSec.",
   "scripts": {
+    "test": "node --test tests/*.test.mjs",
     "start": "npx serve . -l 4173",
     "serve": "npx serve . -l 4173"
   },
