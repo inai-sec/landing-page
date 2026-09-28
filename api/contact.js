@@ -7,7 +7,6 @@
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DISIFY_TIMEOUT_MS = 4000;
-const CHECK_UNAVAILABLE = "We couldn’t check your email right now. Please try again shortly or email us directly.";
 
 // Domain-only request: never send the mailbox name or inquiry to DISIFY.
 async function checkWorkDomain(domain, apiKey) {
@@ -25,7 +24,7 @@ async function checkWorkDomain(domain, apiKey) {
   if (response.status !== 200) throw new Error("Domain check unavailable");
   const result = await response.json();
   if (!result || typeof result.format !== "boolean") throw new Error("Incomplete domain check");
-  if (!result.format) return "Please enter a valid work email domain.";
+  if (!result.format) return { error: "Please enter a valid work email domain." };
   if (["free", "disposable", "dns"].some(field => typeof result[field] !== "boolean")) {
     throw new Error("Incomplete domain check");
   }
@@ -33,12 +32,12 @@ async function checkWorkDomain(domain, apiKey) {
   if (!Array.isArray(signals) || !signals.every(signal => typeof signal === "string")) {
     throw new Error("Incomplete domain check");
   }
-  if (result.free || result.disposable) {
-    return "Please use your company work email. Personal and disposable email providers aren’t accepted.";
+  if (result.disposable) {
+    return { error: "Please use your company work email. Personal and disposable email providers aren’t accepted." };
   }
   if (signals.includes("dns_indeterminate")) throw new Error("Domain check inconclusive");
-  if (!result.dns) return "We couldn’t find mail service for that domain. Please check your work email.";
-  return null;
+  if (!result.dns) return { error: "We couldn’t find mail service for that domain. Please check your work email." };
+  return { personal: result.free };
 }
 
 export default async function handler(req, res) {
@@ -76,9 +75,6 @@ export default async function handler(req, res) {
   }
 
   const domain = email.split("@")[1].toLowerCase();
-  if (domain === "gmail.com") {
-    return res.status(400).json({ error: "Please use your company work email. Personal Gmail addresses aren’t accepted." });
-  }
 
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_FROM;
@@ -89,18 +85,26 @@ export default async function handler(req, res) {
   }
 
   const disifyKey = process.env.DISIFY_API_KEY?.trim();
-  if (!disifyKey) return res.status(503).json({ error: CHECK_UNAVAILABLE });
+  let subjectPrefix = "";
+  let notice = "";
   try {
-    const rejection = await checkWorkDomain(domain, disifyKey);
-    if (rejection) return res.status(400).json({ error: rejection });
+    if (!disifyKey) throw new Error("Missing DISIFY key");
+    const result = await checkWorkDomain(domain, disifyKey);
+    if (result.error) return res.status(400).json({ error: result.error });
+    if (result.personal) {
+      subjectPrefix = "[personal email] ";
+      notice = `Personal email provider (${domain}).`;
+    }
   } catch {
     // Never log vendor payloads, request details, or credentials.
     console.error("DISIFY domain check unavailable or inconclusive.");
-    return res.status(503).json({ error: CHECK_UNAVAILABLE });
+    subjectPrefix = "[email not verified] ";
+    notice = "Email not verified: the domain check was unavailable.";
   }
 
-  const subject = "InaiSec design partner program";
+  const subject = subjectPrefix + "InaiSec design partner program";
   const text = [
+    ...(notice ? [notice, ""] : []),
     "New design partner inquiry from inaisec.ai",
     "",
     `Work email: ${email}`,

@@ -8,15 +8,16 @@ const core = { format: true, domain: 'acme.test', disposable: false, dns: true,
 const inquiry = { email: 'Founder+partner@acme.test', message: 'Synthetic test inquiry only.', website: '' };
 
 async function submit(t, { body = inquiry, verdict = core, status = 200,
-  failure, missingKey = false, method = 'POST', resendStatus = 200 } = {}) {
+  failure, missingKey = false, absentKey = false, method = 'POST', resendStatus = 200 } = {}) {
   for (const [key, value] of Object.entries({ RESEND_API_KEY: 'resend-test-key',
     CONTACT_FROM: 'sender@acme.test', CONTACT_TO: 'owner@acme.test', DISIFY_API_KEY: missingKey ? '' : 'disify-test-key' })) {
     const old = process.env[key];
-    process.env[key] = value;
+    if (key === 'DISIFY_API_KEY' && absentKey) delete process.env[key];
+    else process.env[key] = value;
     t.after(() => { if (old === undefined) delete process.env[key]; else process.env[key] = old; });
   }
   const calls = [];
-  t.mock.method(console, 'error', () => {});
+  const errors = t.mock.method(console, 'error', () => {});
   t.mock.method(globalThis, 'fetch', async (url, options) => {
     calls.push({ url, options });
     if (url === 'https://api.resend.com/emails') return new Response('{}', { status: resendStatus });
@@ -27,33 +28,56 @@ async function submit(t, { body = inquiry, verdict = core, status = 200,
   const res = { headers: {}, setHeader(k, v) { this.headers[k] = v; },
     status(code) { this.code = code; return this; }, json(data) { this.data = data; return this; } };
   await handler({ method, body }, res);
-  return { res, calls, sends: calls.filter(c => c.url === 'https://api.resend.com/emails') };
+  return { res, calls, errors, sends: calls.filter(c => c.url === 'https://api.resend.com/emails') };
+}
+
+function assertForwarded({ res, sends }, prefix = '', firstLine = 'New design partner inquiry from inaisec.ai') {
+  assert.equal(res.code, 200);
+  assert.deepEqual(res.data, { ok: true });
+  assert.equal(sends.length, 1);
+  const sent = JSON.parse(sends[0].options.body);
+  assert.equal(sent.subject, prefix + 'InaiSec design partner program');
+  assert.equal(sent.text.split('\n')[0], firstLine);
+}
+function assertUnverified(result) {
+  assertForwarded(result, '[email not verified] ', 'Email not verified: the domain check was unavailable.');
+  assert.deepEqual(result.errors.mock.calls.map(call => call.arguments),
+    [['DISIFY domain check unavailable or inconclusive.']]);
+}
+function assertPersonal(result, domain) {
+  assertForwarded(result, '[personal email] ', `Personal email provider (${domain}).`);
+  assert.equal(result.calls[0].options.body.toString(), 'domain=' + domain);
 }
 
 for (const [name, verdict, code] of [
-  ['personal provider', { ...core, domain: 'outlook.com', free: true, whitelist: true }, 400],
+  ['personal provider', { ...core, domain: 'outlook.com', free: true, whitelist: true }, 200],
   ['disposable provider', { ...core, disposable: true, dns: false, signals: ['keyword_match', 'no_mx_records'] }, 400],
   ['invalid domain', { format: false }, 400],
   ['no mail DNS', { ...core, dns: false, signals: ['no_mx_records'] }, 400],
-  ['indeterminate DNS', { ...core, dns: false, signals: ['dns_indeterminate'] }, 503],
-  ['indeterminate signal with DNS true', { ...core, signals: ['dns_indeterminate'] }, 503],
-  ['missing free', { ...core, free: undefined }, 503],
-  ['missing disposable', { ...core, disposable: undefined }, 503],
-  ['missing DNS', { ...core, dns: undefined }, 503],
-  ['missing format', { ...core, format: undefined }, 503],
-  ['string boolean', { ...core, free: 'false' }, 503],
-  ['unknown DNS', { ...core, dns: null }, 503],
-  ['malformed signals', { ...core, signals: 'dns_indeterminate' }, 503],
-  ['null signals', { ...core, signals: null }, 503],
-  ['non-string signal', { ...core, signals: [null] }, 503],
-  ['null response', null, 503],
-]) test(name + ' never reaches Resend', async t => {
+  ['indeterminate DNS', { ...core, dns: false, signals: ['dns_indeterminate'] }, 200],
+  ['indeterminate signal with DNS true', { ...core, signals: ['dns_indeterminate'] }, 200],
+  ['missing free', { ...core, free: undefined }, 200],
+  ['missing disposable', { ...core, disposable: undefined }, 200],
+  ['missing DNS', { ...core, dns: undefined }, 200],
+  ['missing format', { ...core, format: undefined }, 200],
+  ['string boolean', { ...core, free: 'false' }, 200],
+  ['unknown DNS', { ...core, dns: null }, 200],
+  ['malformed signals', { ...core, signals: 'dns_indeterminate' }, 200],
+  ['null signals', { ...core, signals: null }, 200],
+  ['non-string signal', { ...core, signals: [null] }, 200],
+  ['null response', null, 200],
+]) test(name + (code === 400 ? ' never reaches Resend' : ' forwards marked'), async t => {
   const body = name === 'personal provider' ? { ...inquiry, email: 'synthetic@outlook.com' } : inquiry;
-  const { res, sends } = await submit(t, { body, verdict });
-  assert.equal(res.code, code);
-  assert.equal(sends.length, 0);
-  assert.equal(typeof res.data.error, 'string');
-  if (code === 503) assert.match(res.data.error, /try again/i);
+  const result = await submit(t, { body, verdict });
+  if (code === 400) {
+    assert.equal(result.res.code, 400);
+    assert.equal(result.sends.length, 0);
+    assert.equal(typeof result.res.data.error, 'string');
+  } else if (name === 'personal provider') {
+    assertPersonal(result, 'outlook.com');
+  } else {
+    assertUnverified(result);
+  }
 });
 
 for (const mx of ['aspmx.l.google.com', 'acme-test.mail.protection.outlook.com']) {
@@ -69,20 +93,20 @@ for (const mx of ['aspmx.l.google.com', 'acme-test.mail.protection.outlook.com']
     assert.ok(calls[0].options.signal instanceof AbortSignal);
     assert.equal(sends.length, 1);
     const sent = JSON.parse(sends[0].options.body);
+    assertForwarded({ res, sends });
     assert.equal(sent.reply_to, 'Founder+partner@Acme.test');
     assert.ok(sent.text.includes(inquiry.message));
   });
 }
 test('full multi-label domain is retained', async t => {
-  const { res, calls } = await submit(t, { body: { ...inquiry, email: 'a+b@team.acme.co.uk' },
+  const { res, calls, sends } = await submit(t, { body: { ...inquiry, email: 'a+b@team.acme.co.uk' },
     verdict: { ...core, domain: 'team.acme.co.uk' } });
   assert.equal(res.code, 200);
   assert.equal(calls[0].options.body.toString(), 'domain=team.acme.co.uk');
+  assertForwarded({ res, sends });
 });
-for (const status of [401, 403, 429, 500, 502, 302]) test('DISIFY HTTP ' + status + ' blocks sending', async t => {
-  const { res, sends } = await submit(t, { status });
-  assert.equal(res.code, 503);
-  assert.equal(sends.length, 0);
+for (const status of [401, 403, 429, 500, 502, 302]) test('DISIFY HTTP ' + status + ' forwards unverified', async t => {
+  assertUnverified(await submit(t, { status }));
 });
 for (const [name, failure] of [
   ['network error', async () => { throw new TypeError('Network failure'); }],
@@ -93,21 +117,19 @@ for (const [name, failure] of [
   ['timeout while reading body', async options => ({ status: 200, ok: true, json: () => new Promise((resolve, reject) => {
     options.signal.addEventListener('abort', () => reject(options.signal.reason), { once: true });
   }) })],
-]) test(name + ' blocks sending', async t => {
+]) test(name + ' forwards unverified', async t => {
   // Keep the event loop alive: AbortSignal.timeout intentionally uses an unref timer.
   const keepAlive = setInterval(() => {}, 1000);
   try {
     const started = Date.now();
-    const { res, sends } = await submit(t, { failure });
-    assert.equal(res.code, 503);
-    assert.equal(sends.length, 0);
+    assertUnverified(await submit(t, { failure }));
     assert.ok(Date.now() - started < 6000);
   } finally { clearInterval(keepAlive); }
 });
-test('missing DISIFY key blocks sending without anonymous fallback', async t => {
-  const { res, calls } = await submit(t, { missingKey: true });
-  assert.equal(res.code, 503);
-  assert.equal(calls.length, 0);
+test('empty DISIFY key forwards unverified without anonymous fallback', async t => {
+  const result = await submit(t, { missingKey: true });
+  assertUnverified(result);
+  assert.equal(result.calls.length, 1);
 });
 test('honeypot pretends success without either vendor', async t => {
   const { res, calls } = await submit(t, { body: { website: 'spam' }, missingKey: true });
@@ -137,17 +159,14 @@ test('Resend failure is still a failure after eligibility check', async t => {
 });
 
 for (const email of ['synthetic@gmail.com', '  Synthetic+partner@GMAIL.COM  ']) {
-  test('Gmail is rejected before either service: ' + email, async t => {
-    const { res, calls } = await submit(t, { body: { ...inquiry, email } });
-    assert.equal(res.code, 400);
-    assert.match(res.data.error, /work email/i);
-    assert.equal(calls.length, 0);
+  test('Gmail forwards as personal email: ' + email, async t => {
+    assertPersonal(await submit(t, { body: { ...inquiry, email },
+      verdict: { ...core, domain: 'gmail.com', free: true } }), 'gmail.com');
   });
 }
-test('Gmail rejection does not require a DISIFY key', async t => {
-  const { res, calls } = await submit(t, { body: { ...inquiry, email: 'synthetic@gmail.com' }, missingKey: true });
-  assert.equal(res.code, 400);
-  assert.equal(calls.length, 0);
+test('Gmail uses the DISIFY personal-provider verdict', async t => {
+  assertPersonal(await submit(t, { body: { ...inquiry, email: 'synthetic@gmail.com' },
+    verdict: { ...core, domain: 'gmail.com', free: true } }), 'gmail.com');
 });
 for (const domain of ['gmail.com.acme.test', 'notgmail.com', 'mail.gmail.com']) {
   test('Gmail check uses exact domain equality: ' + domain, async t => {
@@ -158,3 +177,29 @@ for (const domain of ['gmail.com.acme.test', 'notgmail.com', 'mail.gmail.com']) 
     assert.equal(calls.length, 2);
   });
 }
+
+test('absent DISIFY_API_KEY forwards unverified', async t => {
+  const result = await submit(t, { absentKey: true });
+  assertUnverified(result);
+  assert.equal(result.calls.length, 1);
+});
+test('DISIFY timeout forwards unverified within six seconds', async t => {
+  const keepAlive = setInterval(() => {}, 1000);
+  try {
+    const started = Date.now();
+    assertUnverified(await submit(t, { failure: options => new Promise((resolve, reject) => {
+      options.signal.addEventListener('abort', () => reject(options.signal.reason), { once: true });
+    }) }));
+    assert.ok(Date.now() - started < 6000);
+  } finally { clearInterval(keepAlive); }
+});
+test('non-disposable outlook.com forwards as personal email', async t => {
+  assertPersonal(await submit(t, { body: { ...inquiry, email: 'synthetic@outlook.com' },
+    verdict: { ...core, domain: 'outlook.com', free: true, disposable: false } }), 'outlook.com');
+});
+test('mixed-case padded Gmail forwards with normalized personal marking', async t => {
+  const result = await submit(t, { body: { ...inquiry, email: '  Synthetic+partner@GMAIL.COM  ' },
+    verdict: { ...core, domain: 'gmail.com', free: true } });
+  assertPersonal(result, 'gmail.com');
+  assert.equal(JSON.parse(result.sends[0].options.body).reply_to, 'Synthetic+partner@GMAIL.COM');
+});
