@@ -39,3 +39,5 @@ test-results/
 # Local tool workspaces and generated design snapshots
 .gemini/
 .superdesign/
+# graphify: local knowledge graph, never committed
+graphify-out/
