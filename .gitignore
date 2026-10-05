@@ -41,3 +41,5 @@ test-results/
 .superdesign/
 # graphify: local knowledge graph, never committed
 graphify-out/
+.claude/
+qa/
