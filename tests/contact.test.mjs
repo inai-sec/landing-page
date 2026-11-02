@@ -36,7 +36,7 @@ function assertForwarded({ res, sends }, prefix = '', firstLine = 'New design pa
   assert.deepEqual(res.data, { ok: true });
   assert.equal(sends.length, 1);
   const sent = JSON.parse(sends[0].options.body);
-  assert.equal(sent.subject, prefix + 'InaiSec design partner program');
+  assert.equal(sent.subject, prefix + 'Tacitus design partner program');
   assert.equal(sent.text.split('\n')[0], firstLine);
 }
 function assertUnverified(result) {

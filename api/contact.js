@@ -1,7 +1,7 @@
 // Vercel serverless function that forwards contact-form submissions via Resend.
 // Required environment variables (set in the Vercel project settings):
 //   RESEND_API_KEY  - API key from https://resend.com/api-keys
-//   CONTACT_FROM    - verified sender, e.g. "InaiSec <hello@inaisec.ai>"
+//   CONTACT_FROM    - verified sender, e.g. "Tacitus <hello@inaisec.ai>"
 //   CONTACT_TO      - destination inbox, e.g. "hello@inaisec.ai"
 //   DISIFY_API_KEY  - server-only key from https://disify.com/account
 
@@ -102,7 +102,7 @@ export default async function handler(req, res) {
     notice = "Email not verified: the domain check was unavailable.";
   }
 
-  const subject = subjectPrefix + "InaiSec design partner program";
+  const subject = subjectPrefix + "Tacitus design partner program";
   const text = [
     ...(notice ? [notice, ""] : []),
     "New design partner inquiry from inaisec.ai",

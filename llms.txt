@@ -1,4 +1,4 @@
-# InaiSec
+# Tacitus
 
 Identity-first incident response, from evidence to customer impact. Keep the facts, open questions, and decisions together as the investigation changes.
 
@@ -6,9 +6,9 @@ Identity-first incident response, from evidence to customer impact. Keep the fac
 
 Trace the incident. Understand the impact.
 
-When a credential is compromised, InaiSec helps you trace where it was used and which systems and customers may be affected. Keep the evidence and unanswered questions in one incident room as you respond.
+When a credential is compromised, Tacitus helps you trace where it was used and which systems and customers may be affected. Keep the evidence and unanswered questions in one incident room as you respond.
 
-## What InaiSec is designed to do for an investigation
+## What Tacitus is designed to do for an investigation
 
 - Pull case-scoped evidence on demand from the identity, cloud, SaaS, and data systems involved.
 - Trace compromised identities across roles, sessions, and systems, with missing or stale evidence visible.
@@ -16,7 +16,7 @@ When a credential is compromised, InaiSec helps you trace where it was used and 
 - Keep evidence and open questions available to the people deciding containment, customer impact, and disclosure.
 - Preserve the basis for response decisions as the investigation changes.
 
-## Outcomes InaiSec is being shaped around
+## Outcomes Tacitus is being shaped around
 
 - What do we know? Source-linked evidence, confirmed facts, and missing or stale information.
 - How far did it spread? Systems, data, and customers that may be affected, with confirmed and potential impact kept distinct.
@@ -25,11 +25,11 @@ When a credential is compromised, InaiSec helps you trace where it was used and 
 
 ## Founder
 
-Kishore Fernando, founder of InaiSec. Across more than a decade of security engineering at Capital One and Databricks, he built systems for high-stakes investigations, including the multi-cloud SIEM and incident response infrastructure that supported Databricks through hypergrowth. InaiSec addresses the difficulty of reconstructing identity activity across fragmented systems while teams are making containment and business decisions. LinkedIn: https://www.linkedin.com/in/kishore-p-fernando
+Kishore Fernando, founder of Tacitus. Across more than a decade of security engineering at Capital One and Databricks, he built systems for high-stakes investigations, including the multi-cloud SIEM and incident response infrastructure that supported Databricks through hypergrowth. Tacitus addresses the difficulty of reconstructing identity activity across fragmented systems while teams are making containment and business decisions. LinkedIn: https://www.linkedin.com/in/kishore-p-fernando
 
 ## Design partner program
 
-InaiSec is seeking 3 to 5 paid design partners running real credential investigations. Start with the story of one closed identity-led incident. No customer data is needed in the first session. The conversation explores where evidence, ownership, and customer-impact decisions broke down, followed by a mutual decision about whether a gated replay on partner data would be useful and whether a paid design partnership is the right next step.
+Tacitus is seeking 3 to 5 paid design partners running real credential investigations. Start with the story of one closed identity-led incident. No customer data is needed in the first session. The conversation explores where evidence, ownership, and customer-impact decisions broke down, followed by a mutual decision about whether a gated replay on partner data would be useful and whether a paid design partnership is the right next step.
 
 ## Contact
 
