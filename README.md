@@ -1,6 +1,6 @@
-# InaiSec Landing Page
+# Tacitus Landing Page
 
-`landing-page` is the current public brand and design-partner site for InaiSec.
+`landing-page` is the current public brand and design-partner site for Tacitus.
 The presentation layer is static HTML, CSS, and JavaScript; the contact form
 uses a Vercel serverless function to send inquiries through Resend.
 
@@ -75,7 +75,7 @@ responsive prose token: 16–18px at the default root size, with 1.6 line height
 Compact card descriptions and supporting/footer text use 16px with the same
 line-height ratio. Sticky scenes and short viewports must not independently
 shrink section prose. The Incident Room bridge is a separate paragraph with
-only “InaiSec” bolded.
+only “Tacitus” bolded.
 
 ### Content contract
 
@@ -138,7 +138,7 @@ Configure these variables in the Vercel project:
 
 - `DISIFY_API_KEY`: server-only DISIFY account API key (required).
 - `RESEND_API_KEY`: Resend API key.
-- `CONTACT_FROM`: verified sender, for example `InaiSec <hello@inaisec.ai>`.
+- `CONTACT_FROM`: verified sender, for example `Tacitus <hello@inaisec.ai>`.
 - `CONTACT_TO`: destination inbox.
 
 Follow [EMAIL-VALIDATION-SETUP.md](EMAIL-VALIDATION-SETUP.md) for account setup,
